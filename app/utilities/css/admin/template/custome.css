@@ -1,0 +1,88 @@
+/* CSS Document */
+
+
+.table_icon{
+	font-size:20px;
+}
+
+.half_size{
+	width:50%;
+}
+
+.centered{
+	text-align:center;
+}
+
+
+.rightered{
+	text-align:right;
+}
+.red_row th{
+	background:#F60;
+}
+
+.green_row th{
+	background:#0C6;
+}
+
+.red{
+	color:#900;	
+}
+
+.dash_box{
+	width:250px;
+	height:200px;
+	float:left;
+	margin:0 20px 40px 20px;
+	box-shadow: 0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.01) !important;
+}
+
+.dash_icon{
+	font-size:50px;
+	color:#1f4068;
+}
+
+.highlighted{
+	color:#ff560f;
+}
+
+.page_tab{
+	float:left;
+	padding:15px;
+	min-width:100px;
+	text-align:center;
+	background:#999;
+	margin-right:5px;
+	color:#fff;
+	cursor:pointer;
+}
+
+.selected_tab{
+	background:#CCC;
+	color:#1f4068;
+	cursor:default;
+}
+.tab_content{
+	display:none;
+}
+
+.small_control{
+	width:150px;
+	display:inline-block;
+}
+
+.tabs_link{
+	padding:5px 20px;
+	border:1px solid #999;
+	margin-left:5px;
+	background:#ccc;
+	text-decoration:none;
+}
+.tabs_link_on{
+	border-bottom:1px solid #fff;
+	background:#fff;
+}
+.tabs_under{
+	border-top: 1px solid #CCC;
+    margin-top: 5px;
+}

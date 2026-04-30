@@ -1,0 +1,20 @@
+{
+  "env": {
+    "MAX_THINKING_TOKENS": "8000"
+  },
+  "permissions": {
+    "allow": [
+      "Bash(xargs cat *)",
+      "Bash(python3 *)",
+      "Bash(grep -v \"^--$\")",
+      "Bash(sort -u -t: -k3)",
+      "PowerShell(& \"D:\\\\PROJECTS\\\\CASINO\\\\rebuild_ui.ps1\")",
+      "Bash(powershell -Command ' *)",
+      "Bash(docker exec *)",
+      "Bash(grep -l '\\\\$_api->' 'D:/PROJECTS/CASINO/app/utilities/games/*/action.php')",
+      "Bash(git init *)",
+      "Bash(git remote *)",
+      "Bash(git add *)"
+    ]
+  }
+}

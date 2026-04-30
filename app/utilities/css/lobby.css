@@ -1,0 +1,121 @@
+body {
+	background:url(../images/lobby_back.jpg) #000;
+}
+body,td,th {
+	font-family: Arial, Helvetica, sans-serif;
+	color: #CCC;
+}
+
+.top_bar{
+	padding:10px 20px;
+	background:#000;
+	margin-bottom:50px;
+}
+
+.balance_box{
+	float:right;
+	color:#999;
+}
+
+.game_box{
+	float: left;
+    margin: 30px;
+    text-align: center;
+    cursor: pointer;
+    max-width: 300px;
+	height:320px;
+    /*width: 300px;*/
+}
+
+.selected_balance{
+	color:#090;
+	font-weight:bold;	
+}
+
+.clickable{
+	cursor:pointer;
+}
+
+.cat_grp{
+	display:inline-block;
+	width:100%;
+	margin-bottom:20px;
+	border-bottom:1px solid #666;
+	padding-bottom: 70px;
+}
+
+.cat_title{
+	font-size:22px;
+	font-weight:bold;
+	padding:20px;
+	text-transform:uppercase;
+}
+
+.red-btn {
+    /* Button text styles */
+    color: white;
+    font-weight: bold;
+    
+    /* Button border styles */
+    border: 2px solid #8B0000; /* Darker red border */
+    border-radius:10px; /* Rounded corners */
+
+    /* Button background styles */
+    background-image: linear-gradient(to bottom, #FF6347, #8B0000); /* Red gradient background */
+    
+    /* Other button styles */
+    padding: 10px 20px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none; /* Remove default link underline */
+    display: inline-block;
+	margin-left:30px;
+	text-transform:uppercase;
+}
+
+/* Hover effect */
+.red-btn:hover {
+    background-image: linear-gradient(to bottom, #DC143C, #B22222); /* Darker red gradient background on hover */
+}
+
+.blue-btn {
+    /* Button text styles */
+    color: white;
+    font-weight: bold;
+    
+    /* Button border styles */
+    border: 2px solid #0d364e; /* Darker red border */
+    border-radius:10px; /* Rounded corners */
+
+    /* Button background styles */
+    background-image: linear-gradient(to bottom, #15618c, #1e87c4); /* Red gradient background */
+    
+    /* Other button styles */
+    padding: 10px 20px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none; /* Remove default link underline */
+    display: inline-block;
+	margin-left:30px;
+	text-transform:uppercase;
+}
+
+/* Hover effect */
+.blue-btn:hover {
+    background-image: linear-gradient(to bottom, #4da0d0, #3781ac); /* Darker red gradient background on hover */
+}
+
+@media only screen and (max-width: 600px) {
+	.head_btns{
+		display: block;
+		width:100%;
+		text-align:center;
+		margin:5px 0;
+	}
+	
+	.balance_box{
+		float:none;
+		margin-top:10px;
+	}
+}
+

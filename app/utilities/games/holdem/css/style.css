@@ -1,0 +1,250 @@
+body,td,th {
+	font-family: Arial, Helvetica, sans-serif;
+}
+body {
+	background-color: #000;
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+}
+canvas {
+   display: inline;
+}
+#spacer{
+	position:absolute;
+}
+
+
+.lobby_box{
+	position:absolute;
+	right:0px;
+	padding:5px;
+	z-index:10;	
+}
+
+
+.btn_box{
+	z-index:10;
+	position:absolute;
+	left: 0;
+	right: 0;
+	margin-left: auto;
+	margin-right: auto;
+	text-align:center;
+}
+
+.btn{
+	border:none;
+	box-shadow: 5px 5px 10px black;
+	display:none;
+	-webkit-appearance: none;
+}
+
+.balance_box{
+	border-radius:10px 10px 0 0;
+	position:absolute; 
+	z-index:10; 
+	border:1px solid black; 
+	color:red;  
+	width:200px;
+	box-shadow: 5px 5px 10px black;
+	display:none;
+}
+
+.blanace_title{
+	padding:7px;
+	border-radius:10px 10px 0 0;
+	z-index:10;
+	background-image: linear-gradient(#333, #666);
+	color:#fff;
+	font-size:14px;
+	text-align:center;
+}
+
+.balance_amount{
+	padding:7px;
+	background:#CCC;
+	color:#333;
+	font-size:14px;
+	text-align:center;
+	font-weight:bold;
+}
+
+.game_msg{
+	z-index:10;
+	background-color: rgba(3,3,3,.7);
+	color:#FFF;
+	position:absolute;
+	box-shadow: 5px 5px 10px black;
+	left: 0;
+	right: 0;
+	margin-left: auto;
+	margin-right: auto;
+	text-align:center;
+	display:none;
+}
+
+.game_msg h1{
+	margin:0px;
+}
+
+.btn_box{
+	z-index:10;
+	position:absolute;
+	left: 0;
+	right: 0;
+	margin-left: auto;
+	margin-right: auto;
+	text-align:center;
+}
+
+.btn{
+	border:none;
+	box-shadow: 5px 5px 10px black;
+	display:none;
+	-webkit-appearance: none;
+}
+
+.msg_btn{
+	display:inline-block !important;
+	min-width:50px !important;
+	padding:7px !important;
+	margin-top:10px !important;
+}
+
+
+
+@media only screen and (max-width: 799px) {
+
+.btn{
+	font-size:13px;
+	min-width:75px;
+	padding:2px 5px;
+	border-radius:5px;
+	margin:0 5px;
+}
+
+.game_msg{
+	font-size:14px;
+	padding:5px 10px;
+	border-radius:5px;
+	min-width:150px;
+	max-width:200px;
+	display:none;
+}
+
+.balance_box{
+	border-radius:7px 7px 0 0;
+	width:120px;
+	display:none;
+}
+
+.blanace_title{
+	padding:5px;
+	border-radius:7px 7px 0 0;
+	font-size:12px;
+}
+
+.balance_amount{
+	padding:5px;
+	font-size:12px;
+}
+
+}
+
+
+@media only screen and (min-width: 800px) {
+
+.btn{
+	font-size:16px;
+	min-width:120px;
+	padding:5px 10px;
+	margin:0 7px;
+	border-radius:7px;
+}
+
+.game_msg{
+	font-size:18px;
+	padding:7px 14px;
+	border-radius:7px;
+	min-width:200px;
+	max-width:250px;
+	display:none;
+}
+
+}
+
+
+
+@media only screen and (min-width: 1500px) {
+
+.btn{
+	font-size:20px;
+	min-width:150px;
+	padding:10px 20px;
+	margin:0 10px;
+	border-radius:10px;
+}
+
+.game_msg{
+	font-size:25px;
+	padding:10px 20px;
+	border-radius:10px;
+	min-width:250px;
+	max-width:300px;
+	display:none;
+}
+
+}
+
+.orange{
+	background-image: linear-gradient(#F60, #F90);
+	color:#fff;
+}
+
+.red{
+	background-image: linear-gradient(#F00, #C00);
+	color:#fff;
+}
+
+.gray{
+	background-image: linear-gradient(#333, #666);
+	color:#fff;
+}
+
+.green{
+	background-image: linear-gradient(#363, #393);
+	color:#fff;
+}
+
+.blue{
+	background-image: linear-gradient(#039, #069);
+	color:#fff;
+}
+
+.purple{
+	background-image: linear-gradient(#603, #636);
+	color:#fff;
+}
+
+.lobby_box{
+	position:absolute;
+	right:0px;
+	padding:5px;
+	z-index:10;	
+}
+
+.shadow{
+	position:fixed;
+    padding:0;
+    margin:0;
+
+    top:0;
+    left:0;
+
+    width: 100%;
+    height: 100%;
+    background:rgba(0,0,0,0.5);
+	z-index:1000;
+}

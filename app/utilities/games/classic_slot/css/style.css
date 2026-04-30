@@ -1,0 +1,141 @@
+body,td,th {
+	font-family: Arial, Helvetica, sans-serif;
+}
+body {
+	background-color: #000;
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+}
+canvas {
+   display: inline;
+}
+#spacer{
+	position:absolute;
+}
+
+.btn_big{
+	position: absolute;	
+	z-index:100;
+}
+.betone{
+	/*background:#f00; */
+}
+.bettwo{
+	/*background:#0C0; */
+}
+.betmax{
+	/*background:#969; */
+}
+
+.btn_small{
+	position: absolute;	
+	z-index:100;
+}
+
+.betplus{
+	/*background:#FF0; */
+	margin-left: 40%;
+}
+.betmin{
+	/*background:#06C; */
+	margin-left: 29%;
+}
+
+.machine_text{
+	color:#F00;
+	position: absolute;	
+	margin-top: 38.2%;
+	display:none;
+}
+
+.balance_txt{
+	margin-left: 35%;	
+}
+
+.total_txt{
+	margin-left: 47.5%;	
+}
+
+.win_txt{
+	margin-left: 61%;	
+}
+
+.bet_txt{
+	margin-left: 35.5%;	
+	margin-top: 41.7%;
+}
+
+.btn{
+	border:none;
+	box-shadow: 5px 5px 10px black;
+	display:none;
+	-webkit-appearance: none;
+}
+
+@media only screen and (max-width: 799px) {
+
+.btn{
+	font-size:13px;
+	min-width:75px;
+	padding:2px 5px;
+	border-radius:5px;
+	margin:0 5px;
+}
+
+}
+
+
+@media only screen and (min-width: 800px) {
+
+.btn{
+	font-size:16px;
+	min-width:120px;
+	padding:5px 10px;
+	margin:0 7px;
+	border-radius:7px;
+}
+
+}
+
+
+
+@media only screen and (min-width: 1500px) {
+
+.btn{
+	font-size:20px;
+	min-width:150px;
+	padding:10px 20px;
+	margin:0 10px;
+	border-radius:10px;
+}
+
+
+}
+
+.red{
+	background-image: linear-gradient(#F00, #C00);
+	color:#fff;
+}
+
+.blue{
+	background-image: linear-gradient(#069, #09F);
+	color:#fff;
+}
+
+.green{
+	background-image: linear-gradient(#363, #393);
+	color:#fff;
+}
+
+.lobby_box{
+	/*position:absolute;
+	right:0px;*/
+	padding:5px;
+	z-index:10;	
+}
+.btn{
+	margin-bottom:5px;
+}
+

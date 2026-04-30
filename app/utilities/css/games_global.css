@@ -1,0 +1,167 @@
+
+.red{
+	background-image: linear-gradient(#F00, #C00);
+	color:#fff;
+}
+
+.blue{
+	background-image: linear-gradient(#069, #09F);
+	color:#fff;
+}
+
+.green{
+	background-image: linear-gradient(#363, #393);
+	color:#fff;
+}
+
+.purple{
+	background-image: linear-gradient(#78017c, #9e30a2);
+	color:#fff;
+}
+
+.black{
+	background-image: linear-gradient(#333,#999);
+	color:#fff;
+}
+
+.left_btn_solo{
+	position:absolute;
+	top:5px;
+	left:0.5%;
+}
+
+.top_spacer{
+	padding:25px;	
+}
+
+.pfbox{
+	padding:10px;
+	color:#FFF;
+	position:absolute;
+	width: 30%;
+    
+    z-index: 1000000;
+	background-color:rgba(0, 0, 0, 0.7);
+	border:1px solid #fff;
+	margin:10px 0 0 10px;
+	border-radius:10px;
+	text-align: left;
+	-webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.23);
+	-moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.23);
+	box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.23);
+	font-family: 'Roboto', sans-serif;
+}
+
+.balance_amount{
+	padding:7px;
+	background:#CCC;
+	color:#333;
+	font-size:14px;
+	text-align:center;
+	font-weight:bold;
+}
+.balance_box{
+	border-radius:10px 10px 0 0;
+	position:absolute; 
+	z-index:10; 
+	border:1px solid black; 
+	color:red;  
+	width:200px;
+	box-shadow: 5px 5px 10px black;
+	display:none;
+}
+
+.blanace_title{
+	padding:7px;
+	border-radius:10px 10px 0 0;
+	z-index:10;
+	background-image: linear-gradient(#333, #666);
+	color:#fff;
+	font-size:14px;
+	text-align:center;
+}
+
+@media only screen and (max-width: 799px) {
+
+.balance_amount{
+	padding:5px;
+	font-size:12px;
+}
+
+.balance_box{
+	border-radius:7px 7px 0 0;
+	width:120px;
+	display:none;
+}
+
+.blanace_title{
+	padding:5px;
+	border-radius:7px 7px 0 0;
+	font-size:12px;
+}
+
+}
+
+.pflimiter{	
+	overflow-x: scroll;
+}
+
+.pfhiw{
+	float:right;
+	margin-top:-20px;	
+}
+
+.code_string{
+	border:1px solid #0C0;
+	color:#0C0;
+}
+
+.tcol{
+	display:inline-table;
+	width:100px;
+}
+
+.pfrox{
+	margin:5px 0;
+}
+
+.freeplay {
+	background:#093 !important;
+}
+
+.freeplay a{
+	color:#fff;
+	text-decoration:none;
+}
+
+.main_color_btn{
+	display:block !important;
+	float: right;
+}
+
+.balance_msg{
+	z-index:10;
+	background-color:#A60004;
+	color:#FFF;
+	position:absolute;
+	box-shadow: 5px 5px 10px black;
+	left: 0;
+	right: 0;
+	margin-left: auto;
+	margin-right: auto;
+	text-align:center;
+	display:none;
+	top: 40%;
+    padding:20px 10px 10px 10px;
+    width: 300px;
+	font-weight:bold;
+	text-transform:uppercase;
+	z-index: 10000;
+	border: 2px #fff solid;
+}
+
+.balance_msg_btns{
+	margin:10px 0;	
+}
+
+

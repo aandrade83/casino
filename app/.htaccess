@@ -1,0 +1,8 @@
+RewriteEngine On
+
+# Evitar tocar archivos reales
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Enviar todo a control/index.php
+RewriteRule ^(.*)$ /control/index.php [QSA,L]

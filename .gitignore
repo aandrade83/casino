@@ -1,0 +1,11 @@
+app/config.php
+app/sftp-config.json
+app/log.txt
+app/*.log
+app/_notes/
+app/test.php
+app/test_db.php
+app/test_slot.php
+app/test_wheel.php
+app/*.rar
+app/*.zip

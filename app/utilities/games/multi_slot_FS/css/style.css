@@ -1,0 +1,174 @@
+body,td,th {
+	font-family: Arial, Helvetica, sans-serif;
+	text-align:center;
+}
+body {
+	background-color: #000;
+	background-image:url(../imgs/body.jpg?v=3);
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+}
+
+canvas {
+   display: inline;
+}
+#spacer{
+	position:absolute;
+}
+
+.building{
+	background:url(../imgs/building.png?v=2) no-repeat top center;
+	background-size:  100% 80%;
+	position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: -100;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+
+input[type="image"]
+{
+    border: none;
+    outline:none;
+}
+
+.btn_big{
+	/*position: absolute;	*/
+	z-index:100;
+	display:none;
+}
+.betone{
+	/*background:#f00; */
+}
+.bettwo{
+	/*background:#0C0; */
+}
+.betmax{
+	/*background:#969; */
+}
+
+.btn_small{
+	/*position: absolute;*/
+	z-index:100;
+	cursor:pointer;
+	display:none;
+}
+
+.game_btns_box{
+	position:absolute;
+	z-index:100;
+	width: 99%;
+}
+
+.sub_btn_box{
+	width:500px;
+	margin:0 auto;
+	text-align:left;	
+}
+
+
+.betplus{
+	/*background:#FF0; */
+	margin-left: 40%;
+}
+.coin_value{
+	/*background:#06C;*/ 
+}
+
+.machine_text{
+	color:#F00;
+	position: absolute;	
+	margin-top: 38.2%;
+	display:none;
+}
+
+.balance_txt{
+	margin-left: 35%;	
+}
+
+.total_txt{
+	margin-left: 47.5%;	
+}
+
+.win_txt{
+	margin-left: 61%;	
+}
+
+.bet_txt{
+	margin-left: 35.5%;	
+	margin-top: 41.7%;
+}
+
+.btn{
+	border:none;
+	box-shadow: 5px 5px 10px black;
+	display:none;
+	-webkit-appearance: none;
+}
+
+@media only screen and (max-width: 799px) {
+
+.btn{
+	font-size:13px;
+	min-width:75px;
+	padding:2px 5px;
+	border-radius:5px;
+	margin:0 5px;
+}
+
+}
+
+
+@media only screen and (min-width: 800px) {
+
+.btn{
+	font-size:16px;
+	min-width:120px;
+	padding:5px 10px;
+	margin:0 7px;
+	border-radius:7px;
+}
+
+}
+
+
+
+@media only screen and (min-width: 1500px) {
+
+.btn{
+	font-size:20px;
+	min-width:150px;
+	padding:10px 20px;
+	margin:0 10px;
+	border-radius:10px;
+}
+
+
+}
+
+.red{
+	background-image: linear-gradient(#F00, #C00);
+	color:#fff;
+}
+
+.blue{
+	background-image: linear-gradient(#069, #09F);
+	color:#fff;
+}
+
+.lobby_box{
+	position:absolute;
+	right:0px;
+	padding:5px;
+	z-index:10;	
+}
