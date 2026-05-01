@@ -1,7 +1,7 @@
 app/config.php
 app/sftp-config.json
-app/log.txt
-app/*.log
+**/log.txt
+**/*.log
 app/_notes/
 app/test.php
 app/test_db.php
