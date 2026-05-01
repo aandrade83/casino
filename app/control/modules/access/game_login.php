@@ -4,6 +4,14 @@ header("Access-Control-Allow-Credentials: true");
 
 
 if (session_status() === PHP_SESSION_NONE) {
+    session_set_cookie_params([
+        'lifetime' => 0,
+        'path'     => '/',
+        'domain'   => 'casino.vrbmarketing.com',
+        'secure'   => true,
+        'httponly' => true,
+        'samesite' => 'None',
+    ]);
     session_start();
 }
 

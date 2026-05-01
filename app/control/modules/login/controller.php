@@ -1,4 +1,14 @@
 <?php
+
+session_set_cookie_params([
+    'lifetime' => 0,
+    'path' => '/',
+    'domain' => 'casino.vrbmarketing.com',
+    'secure' => true,
+    'httponly' => true,
+    'samesite' => 'None'
+]);
+
 while (ob_get_level() > 0) ob_end_clean();
 header('Content-Type: application/json');
 
