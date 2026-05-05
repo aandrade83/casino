@@ -1,4 +1,4 @@
-﻿
+
 //Set game vars
 var core_url = 'https://play.casinogamesonline.com/utilities/games/roulette/action.php?gid='+gid+'&';
 
@@ -124,32 +124,32 @@ function preload (){
 	
 	//Load elements
 	//Images
-	this.load.image('background', '/utilities/games/roulette/imgs/back.jpg?v3');
-	this.load.image('wheel', '/utilities/games/roulette/imgs/wheel.png');
-	this.load.image('numeric_wheel', '/utilities/games/roulette/imgs/numeric_wheel.png');
-	this.load.image('ball', '/utilities/games/roulette/imgs/ball.png');
-	this.load.image('chip0.25', '/utilities/images/games/chips/chip0.25.png');
-	this.load.image('chip1', '/utilities/images/games/chips/chip1.png');
-	this.load.image('chip5', '/utilities/images/games/chips/chip5.png');	
-	this.load.image('chip25', '/utilities/images/games/chips/chip25.png');
-	this.load.image('chip100', '/utilities/images/games/chips/chip100.png');
-	this.load.image('chip500', '/utilities/images/games/chips/chip500.png');
-	this.load.image('area', '/utilities/games/roulette/imgs/blank_area.png');
-	this.load.image('marker', '/utilities/games/roulette/imgs/marker.png?v3');
+	this.load.image('background', 'utilities/games/roulette/imgs/back.jpg?v3');
+	this.load.image('wheel', 'utilities/games/roulette/imgs/wheel.png');
+	this.load.image('numeric_wheel', 'utilities/games/roulette/imgs/numeric_wheel.png');
+	this.load.image('ball', 'utilities/games/roulette/imgs/ball.png');
+	this.load.image('chip0.25', 'utilities/images/games/chips/chip0.25.png');
+	this.load.image('chip1', 'utilities/images/games/chips/chip1.png');
+	this.load.image('chip5', 'utilities/images/games/chips/chip5.png');	
+	this.load.image('chip25', 'utilities/images/games/chips/chip25.png');
+	this.load.image('chip100', 'utilities/images/games/chips/chip100.png');
+	this.load.image('chip500', 'utilities/images/games/chips/chip500.png');
+	this.load.image('area', 'utilities/games/roulette/imgs/blank_area.png');
+	this.load.image('marker', 'utilities/games/roulette/imgs/marker.png?v3');
 	
 	//Sounds
-	this.load.audio('ball_spin', '/utilities/games/roulette/sounds/ball_spin.mp3');
-	this.load.audio('ball_droping', '/utilities/games/roulette/sounds/ball_droping.mp3');
-	this.load.audio('ball_final', '/utilities/games/roulette/sounds/ball_final.mp3');
-	this.load.audio('no_more_bets', '/utilities/games/roulette/sounds/f_NoMoreBets.mp3');
-	this.load.audio('place_bets', '/utilities/games/roulette/sounds/f_PlaceYourBets.mp3');
-	this.load.audio('black', '/utilities/games/roulette/sounds/f_Black.mp3');
-	this.load.audio('red', '/utilities/games/roulette/sounds/f_Red.mp3');
-	this.load.audio('twenty', '/utilities/games/roulette/sounds/f_Twenty.mp3');
-	this.load.audio('thirty', '/utilities/games/roulette/sounds/f_Thirty.mp3');
-	this.load.audio('win', '/utilities/games/roulette/sounds/f_YouWin.mp3');
+	this.load.audio('ball_spin', 'utilities/games/roulette/sounds/ball_spin.mp3');
+	this.load.audio('ball_droping', 'utilities/games/roulette/sounds/ball_droping.mp3');
+	this.load.audio('ball_final', 'utilities/games/roulette/sounds/ball_final.mp3');
+	this.load.audio('no_more_bets', 'utilities/games/roulette/sounds/f_NoMoreBets.mp3');
+	this.load.audio('place_bets', 'utilities/games/roulette/sounds/f_PlaceYourBets.mp3');
+	this.load.audio('black', 'utilities/games/roulette/sounds/f_Black.mp3');
+	this.load.audio('red', 'utilities/games/roulette/sounds/f_Red.mp3');
+	this.load.audio('twenty', 'utilities/games/roulette/sounds/f_Twenty.mp3');
+	this.load.audio('thirty', 'utilities/games/roulette/sounds/f_Thirty.mp3');
+	this.load.audio('win', 'utilities/games/roulette/sounds/f_YouWin.mp3');
 	for(var i=0; i<20; i++){
-		this.load.audio('num'+i, '/utilities/games/roulette/sounds/f_'+i+'.mp3');
+		this.load.audio('num'+i, 'utilities/games/roulette/sounds/f_'+i+'.mp3');
 	}
 	
 }

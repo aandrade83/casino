@@ -176,6 +176,12 @@ class baccarat{
 			$total_bet += $parts[1];
 		}
 		
+
+        $bets_amounts["player"] = $bets_amounts["player"] ?? 0;
+		$bets_amounts["banker"] = $bets_amounts["banker"] ?? 0;
+		$bets_amounts["tie"]    = $bets_amounts["tie"] ?? 0;
+
+
 		if(is_numeric($bets_amounts[$winning_area]) && $bets_amounts[$winning_area] > 0){
 			$times = 0;
 			switch($winning_area){ 

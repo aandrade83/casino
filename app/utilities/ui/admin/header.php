@@ -87,9 +87,7 @@
             </li><?php */?>
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <? /*<i class="fa fa-user fa-fw"></i> <? echo $_admin ->vars["name"] ?> <b class="caret"></b> */?>
-                    <i class="fa fa-user fa-fw"></i> <? echo $_agent ->vars["name"] ?> <b class="caret"></b> 
-
+                    <i class="fa fa-user fa-fw"></i> <? echo $_admin ->vars["name"] ?> <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu dropdown-user">
                     <?php /*?><li><a href="#"><i class="fa fa-user fa-fw"></i> My Profile</a>

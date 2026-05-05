@@ -1,4 +1,4 @@
-﻿//Set game vars
+//Set game vars
 var core_url = 'https://play.casinogamesonline.com/utilities/games/multi_slot_crypto/action.php?gid='+gid+'&';
 
 //general vars
@@ -116,44 +116,44 @@ function preload (){
 	
 	//Load elements
 	//Images
-	this.load.image('background', '/utilities/games/multi_slot_crypto/imgs/back.png?vx2'); 
-	this.load.image('reel_back', '/utilities/games/multi_slot_crypto/imgs/reel_back.png?x1'); 
-	this.load.image('pay_table', '/utilities/games/multi_slot_crypto/imgs/pay_table.png?x=41');
-	this.load.image('info', '/utilities/games/multi_slot_crypto/imgs/info.png');
+	this.load.image('background', 'utilities/games/multi_slot_crypto/imgs/back.png?vx2'); 
+	this.load.image('reel_back', 'utilities/games/multi_slot_crypto/imgs/reel_back.png?x1'); 
+	this.load.image('pay_table', 'utilities/games/multi_slot_crypto/imgs/pay_table.png?x=41');
+	this.load.image('info', 'utilities/games/multi_slot_crypto/imgs/info.png');
 	
-	this.load.image('reel1', '/utilities/games/multi_slot_crypto/imgs/reel1.png?x1'); 
-	this.load.image('reel2', '/utilities/games/multi_slot_crypto/imgs/reel2.png?x1');
-	this.load.image('reel3', '/utilities/games/multi_slot_crypto/imgs/reel3.png?x1');
-	this.load.image('reel4', '/utilities/games/multi_slot_crypto/imgs/reel4.png?x1');
-	this.load.image('reel5', '/utilities/games/multi_slot_crypto/imgs/reel5.png?x1'); 
+	this.load.image('reel1', 'utilities/games/multi_slot_crypto/imgs/reel1.png?x1'); 
+	this.load.image('reel2', 'utilities/games/multi_slot_crypto/imgs/reel2.png?x1');
+	this.load.image('reel3', 'utilities/games/multi_slot_crypto/imgs/reel3.png?x1');
+	this.load.image('reel4', 'utilities/games/multi_slot_crypto/imgs/reel4.png?x1');
+	this.load.image('reel5', 'utilities/games/multi_slot_crypto/imgs/reel5.png?x1'); 
 	
 	
 	for(var i=1; i<= 13; i++){
-		this.load.image('figure'+i, '/utilities/games/multi_slot_crypto/imgs/figures/fig'+i+'.png?vx1'); 
+		this.load.image('figure'+i, 'utilities/games/multi_slot_crypto/imgs/figures/fig'+i+'.png?vx1'); 
 	}
 	
-	this.load.image('line_screen', '/utilities/games/multi_slot_crypto/imgs/line_screen.png?x1');
+	this.load.image('line_screen', 'utilities/games/multi_slot_crypto/imgs/line_screen.png?x1');
 	for(var i=1; i<=25; i++){
-		this.load.image('line_'+i, '/utilities/games/multi_slot_crypto/imgs/lines/'+i+'.png');
+		this.load.image('line_'+i, 'utilities/games/multi_slot_crypto/imgs/lines/'+i+'.png');
 	}
 	
 	//Animations
 	for(var i=2; i<=50; i+=2){
-		this.load.image('animation_'+i, '/utilities/games/multi_slot_crypto/imgs/animation1/Cryptoland_Big_Win_Animation_000'+i+'.png');
+		this.load.image('animation_'+i, 'utilities/games/multi_slot_crypto/imgs/animation1/Cryptoland_Big_Win_Animation_000'+i+'.png');
 	}
 	
 	//disabled for speed
 	for(var i=0; i<=40; i+=2){
-		//this.load.image('fmist_'+i, '/utilities/games/multi_slot_crypto/imgs/mist1/Mist_Front0'+i+'.png');
+		//this.load.image('fmist_'+i, 'utilities/games/multi_slot_crypto/imgs/mist1/Mist_Front0'+i+'.png');
 	}
 	
 	
 	//Sounds
-	this.load.audio('pin', '/utilities/games/multi_slot_crypto/sounds/reel_stop.wav');
-	this.load.audio('spin', '/utilities/games/multi_slot_crypto/sounds/roll.wav');
-	this.load.audio('win1', '/utilities/games/multi_slot_crypto/sounds/line_win.wav');
-	this.load.audio('win2', '/utilities/games/multi_slot_crypto/sounds/line_win2.wav');
-	this.load.audio('big_win', '/utilities/games/multi_slot_crypto/sounds/win.wav');
+	this.load.audio('pin', 'utilities/games/multi_slot_crypto/sounds/reel_stop.wav');
+	this.load.audio('spin', 'utilities/games/multi_slot_crypto/sounds/roll.wav');
+	this.load.audio('win1', 'utilities/games/multi_slot_crypto/sounds/line_win.wav');
+	this.load.audio('win2', 'utilities/games/multi_slot_crypto/sounds/line_win2.wav');
+	this.load.audio('big_win', 'utilities/games/multi_slot_crypto/sounds/win.wav');
 	
 }
 

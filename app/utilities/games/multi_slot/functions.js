@@ -1,4 +1,4 @@
-﻿//Set game vars
+//Set game vars
 var core_url = 'https://play.casinogamesonline.com/utilities/games/multi_slot/action.php?gid='+gid+'&';
 
 //general vars
@@ -107,46 +107,46 @@ function preload (){
 	
 	//Load elements
 	//Images
-	this.load.image('background', '/utilities/games/multi_slot/imgs/back.png?v8');
-	//this.load.image('back_top', '/utilities/games/multi_slot/imgs/back_top.jpg');
-	this.load.image('back_down', '/utilities/games/multi_slot/imgs/back_down.png');
-	this.load.image('pay_table', '/utilities/games/multi_slot/imgs/pay_table.jpg?v=12');
-	this.load.image('info', '/utilities/games/multi_slot/imgs/info.png');
+	this.load.image('background', 'utilities/games/multi_slot/imgs/back.png?v8');
+	//this.load.image('back_top', 'utilities/games/multi_slot/imgs/back_top.jpg');
+	this.load.image('back_down', 'utilities/games/multi_slot/imgs/back_down.png');
+	this.load.image('pay_table', 'utilities/games/multi_slot/imgs/pay_table.jpg?v=12');
+	this.load.image('info', 'utilities/games/multi_slot/imgs/info.png');
 	
-	this.load.image('reel1', '/utilities/games/multi_slot/imgs/reel1.png?v8');
-	this.load.image('reel2', '/utilities/games/multi_slot/imgs/reel2.png?v8');
-	this.load.image('reel3', '/utilities/games/multi_slot/imgs/reel3.png?v8');
-	this.load.image('reel4', '/utilities/games/multi_slot/imgs/reel4.png?v8');
-	this.load.image('reel5', '/utilities/games/multi_slot/imgs/reel5.png?v8');
+	this.load.image('reel1', 'utilities/games/multi_slot/imgs/reel1.png?v8');
+	this.load.image('reel2', 'utilities/games/multi_slot/imgs/reel2.png?v8');
+	this.load.image('reel3', 'utilities/games/multi_slot/imgs/reel3.png?v8');
+	this.load.image('reel4', 'utilities/games/multi_slot/imgs/reel4.png?v8');
+	this.load.image('reel5', 'utilities/games/multi_slot/imgs/reel5.png?v8');
 	
-	this.load.image('figure_beetle', '/utilities/games/multi_slot/imgs/figures/beetle.png');
-	this.load.image('figure_cross', '/utilities/games/multi_slot/imgs/figures/cross.png');
-	this.load.image('figure_eye', '/utilities/games/multi_slot/imgs/figures/eye.png');
-	this.load.image('figure_pyramid', '/utilities/games/multi_slot/imgs/figures/pyramid.png');
-	this.load.image('figure_tuta', '/utilities/games/multi_slot/imgs/figures/tuta.png');
-	this.load.image('figure_vessel', '/utilities/games/multi_slot/imgs/figures/vessel.png');
-	this.load.image('figure_J', '/utilities/games/multi_slot/imgs/figures/J.png?v1');
-	this.load.image('figure_Q', '/utilities/games/multi_slot/imgs/figures/Q.png?v2');
-	this.load.image('figure_K', '/utilities/games/multi_slot/imgs/figures/K.png?v1');
-	this.load.image('figure_A', '/utilities/games/multi_slot/imgs/figures/A.png?v1');
+	this.load.image('figure_beetle', 'utilities/games/multi_slot/imgs/figures/beetle.png');
+	this.load.image('figure_cross', 'utilities/games/multi_slot/imgs/figures/cross.png');
+	this.load.image('figure_eye', 'utilities/games/multi_slot/imgs/figures/eye.png');
+	this.load.image('figure_pyramid', 'utilities/games/multi_slot/imgs/figures/pyramid.png');
+	this.load.image('figure_tuta', 'utilities/games/multi_slot/imgs/figures/tuta.png');
+	this.load.image('figure_vessel', 'utilities/games/multi_slot/imgs/figures/vessel.png');
+	this.load.image('figure_J', 'utilities/games/multi_slot/imgs/figures/J.png?v1');
+	this.load.image('figure_Q', 'utilities/games/multi_slot/imgs/figures/Q.png?v2');
+	this.load.image('figure_K', 'utilities/games/multi_slot/imgs/figures/K.png?v1');
+	this.load.image('figure_A', 'utilities/games/multi_slot/imgs/figures/A.png?v1');
 	
-	this.load.image('line_screen', '/utilities/games/multi_slot/imgs/line_screen.png?v1');
+	this.load.image('line_screen', 'utilities/games/multi_slot/imgs/line_screen.png?v1');
 	for(var i=1; i<=25; i++){
-		this.load.image('line_'+i, '/utilities/games/multi_slot/imgs/lines/'+i+'.png');
+		this.load.image('line_'+i, 'utilities/games/multi_slot/imgs/lines/'+i+'.png');
 	}
 	
 	//Animation
 	for(var i=0; i<=72; i+=2){
-		this.load.image('animation_'+i, '/utilities/games/multi_slot/imgs/animation1/Egypt-Animation'+i+'.png');
+		this.load.image('animation_'+i, 'utilities/games/multi_slot/imgs/animation1/Egypt-Animation'+i+'.png');
 	}
 		
 	
 	//Sounds
-	this.load.audio('pin', '/utilities/games/multi_slot/sounds/pin.wav');
-	this.load.audio('spin', '/utilities/games/multi_slot/sounds/spin_sound.wav?v3');
-	this.load.audio('win1', '/utilities/games/multi_slot/sounds/win1.wav');
-	this.load.audio('win2', '/utilities/games/multi_slot/sounds/win2.wav');
-	this.load.audio('big_win', '/utilities/games/multi_slot/sounds/magic.mp3');
+	this.load.audio('pin', 'utilities/games/multi_slot/sounds/pin.wav');
+	this.load.audio('spin', 'utilities/games/multi_slot/sounds/spin_sound.wav?v3');
+	this.load.audio('win1', 'utilities/games/multi_slot/sounds/win1.wav');
+	this.load.audio('win2', 'utilities/games/multi_slot/sounds/win2.wav');
+	this.load.audio('big_win', 'utilities/games/multi_slot/sounds/magic.mp3');
 	
 	
 	

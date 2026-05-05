@@ -1,10 +1,10 @@
-﻿//Set game vars
+//Set game vars
 var selected_chip = 1;
 var unselected_chip_alpha = 0.4;
-var core_url = 'http://localhost/utilities/games/blackjack/action.php?gid='+gid+'&';
+var core_url = 'http://casino.sportsbettingonline.ag/utilities/games/blackjack/action.php?gid='+gid+'&';
 var table_text_style = { font:"16px Arial", fill: "#f1f400", align: "center" };
-var chip_speed = 2000;
-var card_speed = 3500;
+var chip_speed = 1000;
+var card_speed = 2000;
 var chips_values = [1,5,25,100,500];
 var original_card_width = 200;
 
@@ -110,26 +110,26 @@ function preload (){
 	
 	//Load elements
 	//Background
-	this.load.image('background', '/utilities/games/blackjack/imgs/back.jpg');
+	this.load.image('background', 'utilities/games/blackjack/imgs/back.jpg');
 	//chips
-	this.load.image('chip1', '/utilities/images/games/chips/chip1.png');
-	this.load.image('chip5', '/utilities/images/games/chips/chip5.png');	
-	this.load.image('chip25', '/utilities/images/games/chips/chip25.png');
-	this.load.image('chip100', '/utilities/images/games/chips/chip100.png');
-	this.load.image('chip500', '/utilities/images/games/chips/chip500.png');
+	this.load.image('chip1', 'utilities/images/games/chips/chip1.png');
+	this.load.image('chip5', 'utilities/images/games/chips/chip5.png');	
+	this.load.image('chip25', 'utilities/images/games/chips/chip25.png');
+	this.load.image('chip100', 'utilities/images/games/chips/chip100.png');
+	this.load.image('chip500', 'utilities/images/games/chips/chip500.png');
 	//delimeter
-	this.load.image('delimeter', '/utilities/images/games/line_delimeter.jpg')
-	this.load.image('hdelimeter', '/utilities/images/games/h_delimeter.jpg')
+	this.load.image('delimeter', 'utilities/images/games/line_delimeter.jpg')
+	this.load.image('hdelimeter', 'utilities/images/games/h_delimeter.jpg')
 	//cards
-	this.load.image('card_back', '/utilities/images/games/cards/card_back.png')
-	this.load.image('card_flip', '/utilities/images/games/cards/card_back_flip.png')
+	this.load.image('card_back', 'utilities/images/games/cards/card_back.png')
+	this.load.image('card_flip', 'utilities/images/games/cards/card_back_flip.png')
 	for(var i = 0; i < deck.length; i++){
-		this.load.image('card_'+deck[i], '/utilities/images/games/cards/'+deck[i]+'.png')
+		this.load.image('card_'+deck[i], 'utilities/images/games/cards/'+deck[i]+'.png')
 	}
 	//Others
-	this.load.image('arrow', '/utilities/games/blackjack/imgs/green_arrow.png');
+	this.load.image('arrow', 'utilities/games/blackjack/imgs/green_arrow.png');
 	//sounds
-	this.load.audio('card_flip_fx', '/utilities/games/blackjack/sounds/cardflip.wav');
+	this.load.audio('card_flip_fx', 'utilities/games/blackjack/sounds/cardflip.wav');
 	
 }
 
@@ -838,10 +838,10 @@ function deal(){
 				//deal cards
 				var temp_player_cards = data.player_hand.split(",");
 				setTimeout('dealing_cards.push({card:"'+temp_player_cards[0]+'", type:"player", delimeter:pcard_delimeter1, flip:1});',1);
-				setTimeout('dealing_cards.push({card:"back", type:"dealer", delimeter:dcard_delimeter1, flip:1});',300);
-				setTimeout('dealing_cards.push({card:"'+temp_player_cards[1]+'", type:"player", delimeter:pcard_delimeter1, flip:1});',600);
-				setTimeout('dealing_cards.push({card:"'+data.dealer_hand+'", type:"dealer", delimeter:dcard_delimeter1, flip:1});',900);
-				setTimeout('player_hand_text.text = "'+data.player_hand_value+'";',1200);
+				setTimeout('dealing_cards.push({card:"back", type:"dealer", delimeter:dcard_delimeter1, flip:1});',500); //simulate flip to place card in same place as flipped ones
+				setTimeout('dealing_cards.push({card:"'+temp_player_cards[1]+'", type:"player", delimeter:pcard_delimeter1, flip:1});',1000);
+				setTimeout('dealing_cards.push({card:"'+data.dealer_hand+'", type:"dealer", delimeter:dcard_delimeter1, flip:1});',1500);
+				setTimeout('player_hand_text.text = "'+data.player_hand_value+'";',2000);
 				
 				
 				game_status = data.status;
@@ -849,38 +849,38 @@ function deal(){
 				
 				switch (game_status) {
 				  case 'player_blackjack':
-						setTimeout('show_message("PLAYER BLACKJACK<br /> You win '+currency_symbol + data.win_amount+'");',1400);
-						setTimeout('reveal_dealer_card("'+data.dealer_hidden_card+'");',1400);
-						setTimeout('dealer_hand_text.text = "'+data.dealer_hand_value+'";',1400);
-						setTimeout('credit_chips('+data.win_amount+');',1400);
-						setTimeout('update_balance_box();',1400);
-						setTimeout('display_end_btns();',1900);
+						setTimeout('show_message("PLAYER BLACKJACK<br /> You win '+currency_symbol + data.win_amount+'");',2000);
+						setTimeout('reveal_dealer_card("'+data.dealer_hidden_card+'");',2000);
+						setTimeout('dealer_hand_text.text = "'+data.dealer_hand_value+'";',2000);
+						setTimeout('credit_chips('+data.win_amount+');',2000);
+						setTimeout('update_balance_box();',2000);
+						setTimeout('display_end_btns();',2500);				
 				  break;
 				  case 'push_blackjack':
-						setTimeout('reveal_dealer_card("'+data.dealer_hidden_card+'");',1400);
-						setTimeout('dealer_hand_text.text = "'+data.dealer_hand_value+'";',1400);
-						setTimeout('show_message("BLACKJACK PUSH");',1400);
-						setTimeout('display_end_btns();',1400);
-						setTimeout('update_balance_box();',1400);
+						setTimeout('reveal_dealer_card("'+data.dealer_hidden_card+'");',2000);
+						setTimeout('dealer_hand_text.text = "'+data.dealer_hand_value+'";',2000);
+						setTimeout('show_message("BLACKJACK PUSH");',2000);
+						setTimeout('display_end_btns();',2000);
+						setTimeout('update_balance_box();',2000);
 				  break;
 				  case 'dealer_blackjack':
-						setTimeout('reveal_dealer_card("'+data.dealer_hidden_card+'");',1400);
-						setTimeout('dealer_hand_text.text = "'+data.dealer_hand_value+'";',1400);
-						setTimeout('show_message("HOUSE BLACKJACK<br /> You lose '+currency_symbol + current_bet+'");',1400);
-						setTimeout('update_balance_box();',1400);
-						setTimeout('clear_bets(false)',2200);
-						setTimeout('display_end_btns();',2700);
+						setTimeout('reveal_dealer_card("'+data.dealer_hidden_card+'");',2000);
+						setTimeout('dealer_hand_text.text = "'+data.dealer_hand_value+'";',2000);
+						setTimeout('show_message("HOUSE BLACKJACK<br /> You lose '+currency_symbol + current_bet+'");',2000);
+						setTimeout('update_balance_box();',2000);
+						setTimeout('clear_bets(false)',3000);
+						setTimeout('display_end_btns();',3500);
 				  break;
 				  case 'ask_insurance':
-						setTimeout("$('#insurance').slideDown(500);",1400);
+						setTimeout("$('#insurance').slideDown(500);",2000);
 				  break;
 				  default:
 				  	if(game_finished){
-						setTimeout('finish_game("'+data.dealer_hidden_card+'", "'+data.dealer_hand_value+'", "'+data.dealer_full_hand+'", "'+data.win_amount+'", '+data.balance+', 0, 0, 0);',1400);
+						setTimeout('finish_game("'+data.dealer_hidden_card+'", "'+data.dealer_hand_value+'", "'+data.dealer_full_hand+'", "'+data.win_amount+'", '+data.balance+', 0, 0, 0);',2000);
 					}else{
-						setTimeout('display_dealed_btns('+data.can_split+');',1400);
+						setTimeout('display_dealed_btns('+data.can_split+');',2000);
 					}
-
+				  	
 				  break;
 				}
 				

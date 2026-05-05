@@ -12,7 +12,8 @@ class _codex{
 	function _codex($text){
 		$this->secretkey = $text;
 	}
-function encrypt($text) {
+
+	function encrypt($text) {
 
     $secret = (string) ($this->secretkey ?? '');
 
@@ -40,6 +41,8 @@ function decrypt($text) {
 
     return trim(openssl_decrypt($decoded, 'AES-128-ECB', $key, OPENSSL_RAW_DATA));
 }
+
+
 	/*
     function encrypt($text) {
         $data = mcrypt_encrypt(MCRYPT_RIJNDAEL_128, $this->secretkey, $text, MCRYPT_MODE_ECB, 'keee');
@@ -49,7 +52,10 @@ function decrypt($text) {
         $text = base64_decode($text);
         return trim(mcrypt_decrypt(MCRYPT_RIJNDAEL_128, $this->secretkey, $text, MCRYPT_MODE_ECB, 'keee'));
     }
+
+
 	*/
+	
 	function encode_number($number){
 		$number = str_replace("1","H",$number);
 		$number = str_replace("2","y",$number);
@@ -143,18 +149,18 @@ class _player extends _DB_ELEMENT{
 	}
 	function get_allowed_game($gid){
 		global $_company;
-		// Access is gated solely by game_by_company (visible = 1). game_by_person does NOT restrict access.
-		$game = get_game_by_company($gid, $_company->vars["id"], true);
-		if (is_null($game)) { return null; }
-
-		// Limits: player-specific overrides from game_by_person take precedence, otherwise use company defaults.
+		$game = get_game_by_company($gid, $_company ->vars["id"],true);
 		$custom_games = get_player_games_limits($this);
-		$game_data    = $custom_games["games"][$game->vars["id"]] ?? null;
-		$min = ($game_data && $game_data["min"] > 0) ? $game_data["min"] : $game->vars["min_amount"];
-		$max = ($game_data && $game_data["max"] > 0) ? $game_data["max"] : $game->vars["max_amount"];
-		$game->vars["min_amount"] = $min ?: 1;
-		$game->vars["max_amount"] = $max ?: 1000;
-		return $game;
+		$allowed_game = NULL;
+		
+		if($custom_games["games"][$game ->vars["id"]]["active"]){
+			$game ->vars["min_amount"] = $custom_games["games"][$game ->vars["id"]]["min"];
+			$game ->vars["max_amount"] = $custom_games["games"][$game ->vars["id"]]["max"];
+			$allowed_game = $game;
+		}
+		
+		return $allowed_game;
+		
 	}
 	
 	function in_between_limits($bet){
@@ -165,17 +171,11 @@ class _player extends _DB_ELEMENT{
 		$day_settle = get_player_settle($this ->vars["id"], date("Y-m-d"), date("Y-m-d",strtotime(date("Y-m-d") . "+ 1 day")));
 		$week_settle = get_player_settle($this ->vars["id"], $days["Monday"], date("Y-m-d",strtotime($days["Sunday"] . "+ 1 day")));
 		
-		// Treat 0 as unlimited — a limit of 0 means no restriction is configured yet.
-		$day_win_ok   = $wl_limits["day_max_win"]   == 0 || ($day_settle["total"]  + $bet) <= $wl_limits["day_max_win"];
-		$day_loss_ok  = $wl_limits["day_max_loss"]  == 0 || ($day_settle["total"]  - $bet) >= $wl_limits["day_max_loss"] * -1;
-		$week_win_ok  = $wl_limits["week_max_win"]  == 0 || ($week_settle["total"] + $bet) <= $wl_limits["week_max_win"];
-		$week_loss_ok = $wl_limits["week_max_loss"] == 0 || ($week_settle["total"] - $bet) >= $wl_limits["week_max_loss"] * -1;
-
-		if($day_win_ok && $day_loss_ok && $week_win_ok && $week_loss_ok){$is = 1;}
+		if( ($day_settle["total"] - $bet) >= $wl_limits["day_max_loss"]*-1 && ($day_settle["total"] + $bet) <= $wl_limits["day_max_win"] && ($week_settle["total"] - $bet) >= $wl_limits["week_max_loss"]*-1 && ($week_settle["total"] + $bet) <= $wl_limits["week_max_win"] ){$is = 1;}
 
 		return $is;
 	}
-
+	
 	function in_between_limits2($bet){
 		$is = 0;
 		$wl_limits = get_logged_player_limits();
@@ -495,6 +495,9 @@ class _transactions extends _DB_ELEMENT{
 	var $table = "transactions";
 }
 
+class _game_by_person extends _DB_ELEMENT{
+	var $table = "game_by_person";
+}
 
 
 

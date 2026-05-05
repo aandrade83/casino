@@ -5,14 +5,17 @@ header("Access-Control-Allow-Credentials: true");
 
 include($_SERVER['DOCUMENT_ROOT'] ."/utilities/includes.php");
 
+$is_https = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off');
+
 //for session to work on iframes
 session_set_cookie_params([
     'lifetime' => 86400,         // Session duration (1 day)
     'path' => '/',               // Available for all paths on domain2.com
     'domain' => '',              // Empty to allow subdomains (optional)
-    'secure' => true,            // Required for SameSite=None (must use HTTPS)
-    'httponly' => true,          // Prevent JavaScript access to cookies
-    'samesite' => 'None'         // Required to allow cookies in iframes
+    'secure' => $is_https,
+    'httponly' => true,
+    'samesite' => $is_https ? 'None' : 'Lax'
+	
 ]);
 //-----------------------------
 
@@ -29,10 +32,76 @@ $cashier_code = param("cshcd");
 $cashier_link = get_cashier_link($cashier_code);
 if($cashier_link == ""){$cashier_code = "";}//if not valid code, clear code
 
-$_company = get_validated_comany($comapny_id,$password);
+//$_company = get_validated_comany($comapny_id,$password);
 
 
-if(!is_null($_company) ){include($_SERVER['DOCUMENT_ROOT'] ."/utilities/api/". $_company ->vars["path"] ."/connect.php");}
+//if(!is_null($_company) ){include($_SERVER['DOCUMENT_ROOT'] ."/utilities/api/". $_company ->vars["path"] ."/connect.php");}
+
+
+//  PRIORIDAD: SESSION (standalone)
+if(isset($_SESSION['company'])){
+
+    $_company = get_company($_SESSION['company']);
+
+    if(!is_null($_company)){
+        include($_SERVER['DOCUMENT_ROOT'] ."/utilities/api/". $_company->vars["path"] ."/connect.php");
+    }
+
+} else {
+
+    // fallback: modo DGS (URL)
+    $_company = get_validated_comany($comapny_id, $password);
+
+
+	//test
+
+// 🔥 FAKE DGS MODE (TEST ONLY)
+if($player_token === "FAKE_TOKEN_123"){
+    
+    $_player = get_company_player($player_account, $_company->vars["id"]);
+
+    if(is_null($_player)){
+        $_player = new _player();
+        $_player->vars["account"] = $player_account;
+        $_player->vars["company"] = $_company->vars["id"];
+        $_player->insert();
+    }
+
+    session_regenerate_id(true);
+    $_SESSION['player'] = $_player->vars["id"];
+    $_SESSION['player_token'] = $player_token;
+    $_SESSION['company'] = $_company->vars["id"];
+    $_SESSION['cshcd'] = "";
+
+    return; // 🔥 corta flujo real DGS
+}
+
+	//tes fake
+
+    if(!is_null($_company)){
+        include($_SERVER['DOCUMENT_ROOT'] ."/utilities/api/". $_company->vars["path"] ."/connect.php");
+    }
+}
+
+
+//  STANDALONE MODE (SESSION)
+if(isset($_SESSION['player']) && isset($_SESSION['company'])){
+
+    $_company = get_company($_SESSION['company']);
+    $_player = get_player($_SESSION['player']);
+
+    $player_token = $_SESSION['player_token'];
+
+    if(!is_null($_company) && !is_null($_player)){
+        $_using_free_play = $_player->vars["using_free_play"];
+    } else {
+        echo "Session invalid";
+        exit;
+    }
+
+}
+
+
 
 if(!is_null($_company) && $player_account != "" && $player_token != ""){
 	
@@ -55,18 +124,22 @@ if(!is_null($_company) && $player_account != "" && $player_token != ""){
 			$_player ->insert();
 			
 		}else{
-			$_agent = get_agent($_player ->vars["agent"]);
-			if($_agent ->vars["account"] != $info["agent"]){
+			if($_player ->vars["agent"]){
+			 $_agent = get_agent($_player ->vars["agent"]);
+			 if($_agent ->vars["account"] != $info["agent"]){
 				$_agent = insert_agents($info["agents_list"]);	
 				$_player ->vars["agent"] = $_agent ->vars["id"];
 				$_player->update("agent");
+			 }
 			}
 		}
 		
-		$_game = $_player->get_allowed_game($game_id);
-	
-		$_max_amount = round($_game ->vars["max_amount"],2);
-		$_min_amount = round($_game ->vars["min_amount"],2);
+		
+		if($game_id){
+		 $_game = $_player->get_allowed_game($game_id);
+		 $_max_amount = round($_game ->vars["max_amount"],2);
+		 $_min_amount = round($_game ->vars["min_amount"],2);
+		}
 	
 	}else{
 		$_player = NULL; //URL account is different from API account

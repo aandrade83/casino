@@ -1,4 +1,4 @@
-﻿
+
 //Set game vars
 var core_url = 'https://play.casinogamesonline.com/utilities/games/craps/action.php?gid='+gid+'&';
 
@@ -124,45 +124,45 @@ function preload (){
 	
 	//Load elements
 	//Images
-	this.load.image('background', '/utilities/games/craps/imgs/back.jpg?v6');
-	this.load.image('chip0.25', '/utilities/images/games/chips/chip0.25.png');
-	this.load.image('chip1', '/utilities/images/games/chips/chip1.png');
-	this.load.image('chip5', '/utilities/images/games/chips/chip5.png');	
-	this.load.image('chip25', '/utilities/images/games/chips/chip25.png');
-	this.load.image('chip100', '/utilities/images/games/chips/chip100.png');
-	this.load.image('chip500', '/utilities/images/games/chips/chip500.png');
-	this.load.image('marker', '/utilities/games/craps/imgs/marker_off.png');
-	this.load.image('marker_on', '/utilities/games/craps/imgs/marker_on.png');
-	this.load.spritesheet('dice', '/utilities/games/craps/imgs/dice_sheet.png?v8', { frameWidth: 70, frameHeight: 70 });
-	this.load.image('area', '/utilities/games/craps/imgs/blank_area.png');
-	//this.load.image('area', '/utilities/games/craps/imgs/area.jpg');
+	this.load.image('background', 'utilities/games/craps/imgs/back.jpg?v6');
+	this.load.image('chip0.25', 'utilities/images/games/chips/chip0.25.png');
+	this.load.image('chip1', 'utilities/images/games/chips/chip1.png');
+	this.load.image('chip5', 'utilities/images/games/chips/chip5.png');	
+	this.load.image('chip25', 'utilities/images/games/chips/chip25.png');
+	this.load.image('chip100', 'utilities/images/games/chips/chip100.png');
+	this.load.image('chip500', 'utilities/images/games/chips/chip500.png');
+	this.load.image('marker', 'utilities/games/craps/imgs/marker_off.png');
+	this.load.image('marker_on', 'utilities/games/craps/imgs/marker_on.png');
+	this.load.spritesheet('dice', 'utilities/games/craps/imgs/dice_sheet.png?v8', { frameWidth: 70, frameHeight: 70 });
+	this.load.image('area', 'utilities/games/craps/imgs/blank_area.png');
+	//this.load.image('area', 'utilities/games/craps/imgs/area.jpg');
 	
 	
 	//Sounds
-	this.load.audio('dice1', '/utilities/games/craps/sounds/dice.mp3');
-	this.load.audio('dice2', '/utilities/games/craps/sounds/dicelow.mp3');
-	this.load.audio('dice3', '/utilities/games/craps/sounds/dicelow2.mp3');
-	this.load.audio('craps', '/utilities/games/craps/sounds/f_Craps.mp3');
-	this.load.audio('comming_out', '/utilities/games/craps/sounds/f_ComingOut.mp3');
-	this.load.audio('craps_out', '/utilities/games/craps/sounds/f_CrapsOut.mp3');
-	this.load.audio('easy10', '/utilities/games/craps/sounds/f_Easy10.mp3');
-	this.load.audio('easy4', '/utilities/games/craps/sounds/f_Easy4.mp3');
-	this.load.audio('easy6', '/utilities/games/craps/sounds/f_Easy6.mp3');
-	this.load.audio('easy8', '/utilities/games/craps/sounds/f_Easy8.mp3');
-	this.load.audio('hard10', '/utilities/games/craps/sounds/f_Hard10.mp3');
-	this.load.audio('hard4', '/utilities/games/craps/sounds/f_Hard4.mp3');
-	this.load.audio('hard6', '/utilities/games/craps/sounds/f_Hard6.mp3');
-	this.load.audio('hard8', '/utilities/games/craps/sounds/f_Hard8.mp3');
-	this.load.audio('point_is', '/utilities/games/craps/sounds/f_PointIs.mp3');
-	this.load.audio('seven_out', '/utilities/games/craps/sounds/f_SevenOut.mp3');
-	this.load.audio('winner', '/utilities/games/craps/sounds/f_Winner.mp3');
-	this.load.audio('yoleven', '/utilities/games/craps/sounds/f_YoLeven.mp3');
-	this.load.audio('roll_is', '/utilities/games/craps/sounds/f_TheRollIs.mp3');
-	this.load.audio('12', '/utilities/games/craps/sounds/f_12.mp3');
-	this.load.audio('2', '/utilities/games/craps/sounds/f_2.mp3');
-	this.load.audio('5', '/utilities/games/craps/sounds/f_5.mp3');
-	this.load.audio('9', '/utilities/games/craps/sounds/f_9.mp3');
-	this.load.audio('3', '/utilities/games/craps/sounds/f_3.mp3');
+	this.load.audio('dice1', 'utilities/games/craps/sounds/dice.mp3');
+	this.load.audio('dice2', 'utilities/games/craps/sounds/dicelow.mp3');
+	this.load.audio('dice3', 'utilities/games/craps/sounds/dicelow2.mp3');
+	this.load.audio('craps', 'utilities/games/craps/sounds/f_Craps.mp3');
+	this.load.audio('comming_out', 'utilities/games/craps/sounds/f_ComingOut.mp3');
+	this.load.audio('craps_out', 'utilities/games/craps/sounds/f_CrapsOut.mp3');
+	this.load.audio('easy10', 'utilities/games/craps/sounds/f_Easy10.mp3');
+	this.load.audio('easy4', 'utilities/games/craps/sounds/f_Easy4.mp3');
+	this.load.audio('easy6', 'utilities/games/craps/sounds/f_Easy6.mp3');
+	this.load.audio('easy8', 'utilities/games/craps/sounds/f_Easy8.mp3');
+	this.load.audio('hard10', 'utilities/games/craps/sounds/f_Hard10.mp3');
+	this.load.audio('hard4', 'utilities/games/craps/sounds/f_Hard4.mp3');
+	this.load.audio('hard6', 'utilities/games/craps/sounds/f_Hard6.mp3');
+	this.load.audio('hard8', 'utilities/games/craps/sounds/f_Hard8.mp3');
+	this.load.audio('point_is', 'utilities/games/craps/sounds/f_PointIs.mp3');
+	this.load.audio('seven_out', 'utilities/games/craps/sounds/f_SevenOut.mp3');
+	this.load.audio('winner', 'utilities/games/craps/sounds/f_Winner.mp3');
+	this.load.audio('yoleven', 'utilities/games/craps/sounds/f_YoLeven.mp3');
+	this.load.audio('roll_is', 'utilities/games/craps/sounds/f_TheRollIs.mp3');
+	this.load.audio('12', 'utilities/games/craps/sounds/f_12.mp3');
+	this.load.audio('2', 'utilities/games/craps/sounds/f_2.mp3');
+	this.load.audio('5', 'utilities/games/craps/sounds/f_5.mp3');
+	this.load.audio('9', 'utilities/games/craps/sounds/f_9.mp3');
+	this.load.audio('3', 'utilities/games/craps/sounds/f_3.mp3');
 	
 }
 

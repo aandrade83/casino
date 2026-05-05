@@ -1,7 +1,7 @@
 //Set game vars
 var selected_chip = 1;
 var unselected_chip_alpha = 0.4;
-var core_url = 'http://localhost/utilities/games/blackjack_contest/action.php?gid='+gid+'&';
+var core_url = 'https://play.casinogamesonline.com/utilities/games/blackjack_contest/action.php?gid='+gid+'&';
 var table_text_style = { font:"16px Arial", fill: "#f1f400", align: "center" };
 var chip_speed = 2000;
 var card_speed = 2000;
@@ -124,27 +124,27 @@ function preload (){
 	
 	//Load elements
 	//Background
-	this.load.image('background', '/utilities/games/blackjack_contest/imgs/back.jpg');
+	this.load.image('background', 'utilities/games/blackjack_contest/imgs/back.jpg');
 	//chips
-	this.load.image('chip0.25', '/utilities/images/games/chips/chip0.25.png');
-	this.load.image('chip1', '/utilities/images/games/chips/chip1.png');
-	this.load.image('chip5', '/utilities/images/games/chips/chip5.png');	
-	this.load.image('chip25', '/utilities/images/games/chips/chip25.png');
-	this.load.image('chip100', '/utilities/images/games/chips/chip100.png');
-	this.load.image('chip500', '/utilities/images/games/chips/chip500.png');
+	this.load.image('chip0.25', 'utilities/images/games/chips/chip0.25.png');
+	this.load.image('chip1', 'utilities/images/games/chips/chip1.png');
+	this.load.image('chip5', 'utilities/images/games/chips/chip5.png');	
+	this.load.image('chip25', 'utilities/images/games/chips/chip25.png');
+	this.load.image('chip100', 'utilities/images/games/chips/chip100.png');
+	this.load.image('chip500', 'utilities/images/games/chips/chip500.png');
 	//delimeter
-	this.load.image('delimeter', '/utilities/images/games/line_delimeter.jpg')
-	this.load.image('hdelimeter', '/utilities/images/games/h_delimeter.jpg')
+	this.load.image('delimeter', 'utilities/images/games/line_delimeter.jpg')
+	this.load.image('hdelimeter', 'utilities/images/games/h_delimeter.jpg')
 	//cards
-	this.load.image('card_back', '/utilities/images/games/cards/card_back.png')
-	this.load.image('card_flip', '/utilities/images/games/cards/card_back_flip.png')
+	this.load.image('card_back', 'utilities/images/games/cards/card_back.png')
+	this.load.image('card_flip', 'utilities/images/games/cards/card_back_flip.png')
 	for(var i = 0; i < deck.length; i++){
-		this.load.image('card_'+deck[i], '/utilities/images/games/cards/'+deck[i]+'.png?v=2')
+		this.load.image('card_'+deck[i], 'utilities/images/games/cards/'+deck[i]+'.png?v=2')
 	}
 	//Others
-	this.load.image('arrow', '/utilities/games/blackjack_contest/imgs/green_arrow.png');
+	this.load.image('arrow', 'utilities/games/blackjack_contest/imgs/green_arrow.png');
 	//sounds
-	this.load.audio('card_flip_fx', '/utilities/games/blackjack_contest/sounds/cardflip.wav');
+	this.load.audio('card_flip_fx', 'utilities/games/blackjack_contest/sounds/cardflip.wav');
 	
 }
 
@@ -320,7 +320,7 @@ function update (){
 	}
 	
 	if(load_contest_logo){
-		this.load.image(contest_logo_name, '/utilities/images/contests/'+contest_logo_name);
+		this.load.image(contest_logo_name, 'utilities/images/contests/'+contest_logo_name);
 		this.load.start();		
 		contest_logo_name = "";
 		load_contest_logo = false;

@@ -1,4 +1,4 @@
-﻿//Set game vars
+//Set game vars
 var core_url = 'https://play.casinogamesonline.com/utilities/games/holdem/action.php?gid='+gid+'&';
 
 //general vars
@@ -108,24 +108,24 @@ function preload (){
 	
 	//Load elements
 	//Images
-	this.load.image('background', '/utilities/games/holdem/imgs/back.jpg?v1');
+	this.load.image('background', 'utilities/games/holdem/imgs/back.jpg?v1');
 	
-	this.load.image('chip0.25', '/utilities/images/games/chips/chip0.25.png');
-	this.load.image('chip1', '/utilities/images/games/chips/chip1.png');
-	this.load.image('chip5', '/utilities/images/games/chips/chip5.png');	
-	this.load.image('chip25', '/utilities/images/games/chips/chip25.png');
-	this.load.image('chip100', '/utilities/images/games/chips/chip100.png');
-	this.load.image('chip500', '/utilities/images/games/chips/chip500.png');
-	this.load.image('area', '/utilities/games/baccarat/imgs/blank_area.png');
+	this.load.image('chip0.25', 'utilities/images/games/chips/chip0.25.png');
+	this.load.image('chip1', 'utilities/images/games/chips/chip1.png');
+	this.load.image('chip5', 'utilities/images/games/chips/chip5.png');	
+	this.load.image('chip25', 'utilities/images/games/chips/chip25.png');
+	this.load.image('chip100', 'utilities/images/games/chips/chip100.png');
+	this.load.image('chip500', 'utilities/images/games/chips/chip500.png');
+	this.load.image('area', 'utilities/games/baccarat/imgs/blank_area.png');
 	
 	//cards
-	this.load.image('card_back', '/utilities/images/games/cards/card_back.png')
-	this.load.image('card_flip', '/utilities/images/games/cards/card_back_flip.png')
+	this.load.image('card_back', 'utilities/images/games/cards/card_back.png')
+	this.load.image('card_flip', 'utilities/images/games/cards/card_back_flip.png')
 	for(var i = 0; i < deck.length; i++){
-		this.load.image('card_'+deck[i], '/utilities/images/games/cards/'+deck[i]+'.png');
+		this.load.image('card_'+deck[i], 'utilities/images/games/cards/'+deck[i]+'.png');
 	}
 	//Sounds
-	this.load.audio('card_flip_fx', '/utilities/games/holdem/sounds/cardflip.wav');
+	this.load.audio('card_flip_fx', 'utilities/games/holdem/sounds/cardflip.wav');
 	
 	
 	

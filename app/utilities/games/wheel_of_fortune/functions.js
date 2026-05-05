@@ -1,4 +1,4 @@
-﻿//Set game vars
+//Set game vars
 var core_url = 'https://play.casinogamesonline.com/utilities/games/wheel_of_fortune/action.php?gid='+gid+'&';
 
 //general vars
@@ -117,23 +117,23 @@ function preload (){
 	
 	//Load elements
 	//Images
-	this.load.image('background', '/utilities/games/wheel_of_fortune/imgs/back.png?v=5'); 
-	this.load.image('lights', '/utilities/games/wheel_of_fortune/imgs/lights.png?vx2'); 
-	this.load.image('pin1', '/utilities/games/wheel_of_fortune/imgs/pin.png?vx2'); 
-	this.load.image('pin2', '/utilities/games/wheel_of_fortune/imgs/pin2.png?vx2'); 
-	this.load.image('wheel1', '/utilities/games/wheel_of_fortune/imgs/wheel.png?v=4'); 
-	this.load.image('wheel2', '/utilities/games/wheel_of_fortune/imgs/wheel2.png?vx2'); 
-	this.load.image('area', '/utilities/games/wheel_of_fortune/imgs/blank_area.png');
+	this.load.image('background', 'utilities/games/wheel_of_fortune/imgs/back.png?v=5'); 
+	this.load.image('lights', 'utilities/games/wheel_of_fortune/imgs/lights.png?vx2'); 
+	this.load.image('pin1', 'utilities/games/wheel_of_fortune/imgs/pin.png?vx2'); 
+	this.load.image('pin2', 'utilities/games/wheel_of_fortune/imgs/pin2.png?vx2'); 
+	this.load.image('wheel1', 'utilities/games/wheel_of_fortune/imgs/wheel.png?v=4'); 
+	this.load.image('wheel2', 'utilities/games/wheel_of_fortune/imgs/wheel2.png?vx2'); 
+	this.load.image('area', 'utilities/games/wheel_of_fortune/imgs/blank_area.png');
 	
 	
 	//Sounds
-	this.load.audio('music', '/utilities/games/wheel_of_fortune/sounds/music.mp3');
-	this.load.audio('pin', '/utilities/games/wheel_of_fortune/sounds/pin.wav');
-	this.load.audio('spin', '/utilities/games/wheel_of_fortune/sounds/wheel.wav');
-	this.load.audio('win1', '/utilities/games/wheel_of_fortune/sounds/win1.wav');
-	this.load.audio('win2', '/utilities/games/wheel_of_fortune/sounds/win2.wav');
-	this.load.audio('win3', '/utilities/games/wheel_of_fortune/sounds/win3.mp3');
-	this.load.audio('no_win', '/utilities/games/wheel_of_fortune/sounds/no_win.wav');
+	this.load.audio('music', 'utilities/games/wheel_of_fortune/sounds/music.mp3');
+	this.load.audio('pin', 'utilities/games/wheel_of_fortune/sounds/pin.wav');
+	this.load.audio('spin', 'utilities/games/wheel_of_fortune/sounds/wheel.wav');
+	this.load.audio('win1', 'utilities/games/wheel_of_fortune/sounds/win1.wav');
+	this.load.audio('win2', 'utilities/games/wheel_of_fortune/sounds/win2.wav');
+	this.load.audio('win3', 'utilities/games/wheel_of_fortune/sounds/win3.mp3');
+	this.load.audio('no_win', 'utilities/games/wheel_of_fortune/sounds/no_win.wav');
 	
 }
 

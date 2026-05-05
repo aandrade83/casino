@@ -30,7 +30,7 @@ switch ($ac) {
         }
 
         $player = get_company_player($account, $_SESSION['company']);
-
+       
         // 🔹 SI NO EXISTE → CREAR
         if (!$player) {
 
@@ -43,14 +43,38 @@ switch ($ac) {
 
             // 🔥 recargar desde DB (seguro)
             $player = get_company_player($account, $_SESSION['company']);
+            
+            // Ingresamos permisos de company al player
+
+            $games = get_all_company_games($player->vars['company']);
+
+              foreach($games as $g){
+
+                $insert = new _game_by_person();
+                $insert->vars['person']     = $player->vars['id'];
+                $insert->vars['game']       = $g->vars['game'];
+                $insert->vars['visible']    = $g->vars['visible'];
+                $insert->vars['min_amount'] = $g->vars['min_amount'];
+                $insert->vars['max_amount'] = $g->vars['max_amount'];
+                $insert->vars['is_agent']   = 0;
+                $insert->insert();
+               }
+
         }
+
+  
 
         // 🔹 SESSION COMPLETA
         $_SESSION['player']  = $player->vars['id'];
         $_SESSION['account'] = $player->vars['account'];
         $_SESSION['company'] = $_SESSION['company'] ?? $player->vars['company'];
-        $_SESSION['b_real']  = $player->vars["balance_real"];
-        $_SESSION['b_free']  = $player->vars["balance_free"];
+        //$_SESSION['b_real']  = $player->vars["balance_real"];
+        //$_SESSION['b_free']  = $player->vars["balance_free"];
+
+        //  TOKEN STANDALONE
+        $_SESSION["player_token"] = base64_encode("standalone_" . $player->vars['id'] . "_" . time());
+        //  HASH (igual que security espera)
+        $_SESSION["hash"] = md5($_SERVER['HTTP_USER_AGENT']);
 
         session_write_close(); // flush session to disk before response
 
@@ -105,7 +129,7 @@ switch ($ac) {
 
         session_write_close();
 
-        header('Location: /control/modules/access/index.php');
+       // header('Location: /control/modules/access/index.php');
         exit;
 
         break;

@@ -28,6 +28,24 @@ if($open_total["total"] == 0){
     <?	
 }
 
-?> <script type="text/javascript">location.href = '<? echo get_lobby_url()."&game=".$game ?>';</script> <?
+/*?> <script type="text/javascript">location.href = '<? echo get_lobby_url()."&game=".$game ?>';</script> <?*/
 
 ?>
+<?php
+    // 🔥 Construimos URL base
+    $url = get_lobby_url();
+
+    // 🔥 FIX: evitar index.php&game=10
+    // Si ya hay parámetros → usamos &
+    // Si no hay → usamos ?
+    if(strpos($url, '?') !== false){
+        $url .= "&game=".$game;
+    }else{
+        $url .= "?game=".$game;
+    }
+?>
+
+<script type="text/javascript">
+    location.href = '<? echo $url ?>';
+</script>
+

@@ -12,7 +12,6 @@ if(!is_null($agent)){
 	session_regenerate_id(true);
 	$_SESSION['hash'] = md5($_CODEX->encrypt($_SERVER['HTTP_USER_AGENT']));
 	$_SESSION['agent'] = $agent->vars["id"];
-	
 	header("Location: ../../admin/dash.php");
 }else{
 	session_destroy();

@@ -68,7 +68,18 @@
     <? 
 	
 	//$link = "https://play.casinogamesonline.com/game_box.php?cid=".$_company ->vars["id"]."&cps=".$_company ->vars["password"]."&token=".urlencode($player_token)."&cshcd=".$cashier_code."&account=".$_player ->vars["account"]."&game=";
-	$link = "https://play.casinogamesonline.com/?cid=".$_company ->vars["id"]."&cps=".$_company ->vars["password"]."&token=".urlencode($player_token)."&cshcd=".$cashier_code."&account=".$_player ->vars["account"]."&game=";
+	//$link = "https://play.casinogamesonline.com/?cid=".$_company ->vars["id"]."&cps=".$_company ->vars["password"]."&token=".urlencode($player_token)."&cshcd=".$cashier_code."&account=".$_player ->vars["account"]."&game=";
+
+    $link = CASINO_BASE_URL .
+    "/index.php?cid=" . $_company->vars["id"] .
+    "&cps=" . $_company->vars["password"] .
+    "&token=" . urlencode($player_token) .
+    "&cshcd=" . $cashier_code .
+    "&account=" . $_player->vars["account"] .
+    "&game=";
+
+
+
 	$categories = get_all_categories();
 	?>
     

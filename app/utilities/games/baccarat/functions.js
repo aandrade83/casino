@@ -1,8 +1,5 @@
-﻿//Set game vars
-var core_url =
-  "https://play.casinogamesonline.com/utilities/games/baccarat/action.php?gid=" +
-  gid +
-  "&";
+//Set game vars
+var core_url = "/utilities/games/baccarat/action.php?gid=" + gid + "&";
 
 //general vars
 var current_bet = 0;
@@ -19,8 +16,8 @@ var bet_areas = new Array();
 var bet_areas_data = new Array();
 var selected_chip = 1;
 var unselected_chip_alpha = 0.4;
-var chip_speed = 2000;
-var cards_speed = 3000;
+var chip_speed = 1000;
+var cards_speed = 1500;
 var test_text = null;
 var area_bets_chip_count = new Array();
 var area_bets_amount = new Array();
@@ -112,76 +109,49 @@ function preload() {
 
   //Load elements
   //Images
-  this.load.image(
-    "background",
-    BASE_URL + "/utilities/games/baccarat/imgs/back.jpg?v3",
-  );
+  this.load.image("background", "utilities/games/baccarat/imgs/back.jpg?v3");
 
-  this.load.image(
-    "chip0.25",
-    BASE_URL + "/utilities/images/games/chips/chip0.25.png",
-  );
-  this.load.image(
-    "chip1",
-    BASE_URL + "/utilities/images/games/chips/chip1.png",
-  );
-  this.load.image(
-    "chip5",
-    BASE_URL + "/utilities/images/games/chips/chip5.png",
-  );
-  this.load.image(
-    "chip25",
-    BASE_URL + "/utilities/images/games/chips/chip25.png",
-  );
-  this.load.image(
-    "chip100",
-    BASE_URL + "/utilities/images/games/chips/chip100.png",
-  );
-  this.load.image(
-    "chip500",
-    BASE_URL + "/utilities/images/games/chips/chip500.png",
-  );
-  this.load.image(
-    "area",
-    BASE_URL + "/utilities/games/baccarat/imgs/blank_area.png",
-  );
+  this.load.image("chip0.25", "utilities/images/games/chips/chip0.25.png");
+  this.load.image("chip1", "utilities/images/games/chips/chip1.png");
+  this.load.image("chip5", "utilities/images/games/chips/chip5.png");
+  this.load.image("chip25", "utilities/images/games/chips/chip25.png");
+  this.load.image("chip100", "utilities/images/games/chips/chip100.png");
+  this.load.image("chip500", "utilities/images/games/chips/chip500.png");
+  this.load.image("area", "utilities/games/baccarat/imgs/blank_area.png");
 
   //cards
-  this.load.image(
-    "card_back",
-    BASE_URL + "/utilities/images/games/cards/card_back.png",
-  );
+  this.load.image("card_back", "utilities/images/games/cards/card_back.png");
   this.load.image(
     "card_flip",
-    BASE_URL + "/utilities/images/games/cards/card_back_flip.png",
+    "utilities/images/games/cards/card_back_flip.png",
   );
   for (var i = 0; i < deck.length; i++) {
     this.load.image(
       "card_" + deck[i],
-      BASE_URL + "/utilities/images/games/cards/" + deck[i] + ".png",
+      "utilities/images/games/cards/" + deck[i] + ".png",
     );
   }
 
   //Sounds
   this.load.audio(
     "card_flip_fx",
-    BASE_URL + "/utilities/games/baccarat/sounds/cardflip.wav",
+    "utilities/games/baccarat/sounds/cardflip.wav",
   );
   this.load.audio(
     "banker_wins",
-    BASE_URL + "/utilities/games/baccarat/sounds/m_BankerWins.mp3",
+    "utilities/games/baccarat/sounds/m_BankerWins.mp3",
   );
   this.load.audio(
     "card_to_banker",
-    BASE_URL + "/utilities/games/baccarat/sounds/m_Card2Banker.mp3",
+    "utilities/games/baccarat/sounds/m_Card2Banker.mp3",
   );
   this.load.audio(
     "card_to_player",
-    BASE_URL + "/utilities/games/baccarat/sounds/m_Card2Player.mp3",
+    "utilities/games/baccarat/sounds/m_Card2Player.mp3",
   );
   this.load.audio(
     "player_wins",
-    " BASE_URL + /utilities/games/baccarat/sounds/m_PlayerWins.mp3",
+    "utilities/games/baccarat/sounds/m_PlayerWins.mp3",
   );
 }
 
@@ -342,7 +312,6 @@ function create() {
 
   //sounds
   sound_flip = this.sound.add("card_flip_fx", {
-    //sound_flip = this.sound.add("banker_wins", {
     mute: false,
     volume: 1,
     rate: 1,
@@ -631,7 +600,7 @@ function update() {
   if (clear_chips_to != "") {
     if (clear_chips_to == "player") {
       for (var i = 0; i < placed_chips.length; i++) {
-        placed_chips[i].chip.y += game_width * 0.025;
+        placed_chips[i].chip.y += game_width * 0.01;
         if (
           placed_chips[i].chip.y >
           game_height + placed_chips[i].chip.displayHeight * 2
@@ -646,7 +615,7 @@ function update() {
     } else if (clear_chips_to == "dealer") {
       for (var i = 0; i < placed_chips.length; i++) {
         if (winning_areas != placed_chips[i].area) {
-          placed_chips[i].chip.y -= game_width * 0.025;
+          placed_chips[i].chip.y -= game_width * 0.01;
           if (
             placed_chips[i].chip.y <
             placed_chips[i].chip.displayHeight * -2
@@ -765,35 +734,35 @@ function deal() {
           );
           setTimeout(
             "deal_card(1,'card_" + data.game_result.banker_hand[0] + "');",
-            300,
+            500,
           );
 
           setTimeout(
             "deal_card(2,'card_" + data.game_result.player_hand[1] + "');",
-            800,
+            1500,
           );
           setTimeout(
             "player_cards_text.text = '" +
               data.game_result.player_value1 +
               "';",
-            1300,
+            2200,
           );
 
           setTimeout(
             "deal_card(3,'card_" + data.game_result.banker_hand[1] + "');",
-            1100,
+            2000,
           );
           setTimeout(
             "dealer_cards_text.text = '" +
               data.game_result.banker_value1 +
               "';",
-            1500,
+            2500,
           );
 
-          var timer = 1800;
+          var timer = 3000;
 
           if (data.game_result.player_hand[2]) {
-            timer += 600;
+            timer += 1000;
             setTimeout(
               "deal_card(4,'card_" +
                 data.game_result.player_hand[2] +
@@ -804,13 +773,13 @@ function deal() {
               "player_cards_text.text = '" +
                 data.game_result.player_value2 +
                 "';",
-              timer + 400,
+              timer + 700,
             );
-            timer += 600;
+            timer = 4500;
           }
 
           if (data.game_result.banker_hand[2]) {
-            timer += 600;
+            timer += 1000;
             setTimeout(
               "deal_card(5,'card_" +
                 data.game_result.banker_hand[2] +
@@ -821,9 +790,9 @@ function deal() {
               "dealer_cards_text.text = '" +
                 data.game_result.banker_value2 +
                 "';",
-              timer + 400,
+              timer + 500,
             );
-            timer += 400;
+            timer = timer + 500;
           }
 
           setTimeout(
@@ -834,7 +803,7 @@ function deal() {
               "," +
               data.balance +
               ");",
-            timer + 600,
+            timer + 1000,
           );
         } else {
           alert("There was a problem: " + data.msg);

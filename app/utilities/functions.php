@@ -390,6 +390,8 @@ function upload_multiple_file($id, $path, $index, $name = ""){
 }
 
 
+
+
 function redirection(){
 	$url = curPageURL();
 	if(!contains($url,"www.")){	
@@ -477,6 +479,129 @@ function insert_agents($agents_list){
 }
 
 function get_logged_player_limits($player = NULL){
+
+    global $_company;
+
+    // 🔥 asegurar $_player válido
+    if(!is_null($player)){
+        $_player = $player;
+    } else {
+        global $_player;
+    }
+
+    // 🔥 fallback si no hay player
+    if(empty($_player) || empty($_player->vars)){
+        return [
+            "day_max_win"  => $_company->vars["day_max_win"]  ?? 0,
+            "day_max_loss" => $_company->vars["day_max_loss"] ?? 0,
+            "week_max_win" => $_company->vars["week_max_win"] ?? 0,
+            "week_max_loss"=> $_company->vars["week_max_loss"]?? 0,
+            "origin"       => "Casino"
+        ];
+    }
+
+    $limits = [
+        "day_max_win"  => null,
+        "day_max_loss" => null,
+        "week_max_win" => null,
+        "week_max_loss"=> null,
+        "origin"       => null
+    ];
+
+    // 🔥 TEMP LIMITS
+    if(
+        isset($_player->vars["temp_day_max_win"], $_player->vars["temp_day_max_loss"],
+              $_player->vars["temp_week_max_win"], $_player->vars["temp_week_max_loss"],
+              $_player->vars["temp_limit_expiration"])
+        &&
+        $_player->vars["temp_day_max_win"] >= 0 &&
+        $_player->vars["temp_day_max_loss"] >= 0 &&
+        $_player->vars["temp_week_max_win"] >= 0 &&
+        $_player->vars["temp_week_max_loss"] >= 0 &&
+        strtotime($_player->vars["temp_limit_expiration"]) > time()
+    ){
+        $limits["day_max_win"]  = $_player->vars["temp_day_max_win"];
+        $limits["day_max_loss"] = $_player->vars["temp_day_max_loss"];
+        $limits["week_max_win"] = $_player->vars["temp_week_max_win"];
+        $limits["week_max_loss"]= $_player->vars["temp_week_max_loss"];
+        $limits["origin"]       = "Temp Limit";
+    }
+
+    // 🔥 PLAYER LIMITS
+    else if(
+        isset($_player->vars["day_max_win"], $_player->vars["day_max_loss"],
+              $_player->vars["week_max_win"], $_player->vars["week_max_loss"])
+        &&
+        $_player->vars["day_max_win"] >= 0 &&
+        $_player->vars["day_max_loss"] >= 0 &&
+        $_player->vars["week_max_win"] >= 0 &&
+        $_player->vars["week_max_loss"] >= 0
+    ){
+        $limits["day_max_win"]  = $_player->vars["day_max_win"];
+        $limits["day_max_loss"] = $_player->vars["day_max_loss"];
+        $limits["week_max_win"] = $_player->vars["week_max_win"];
+        $limits["week_max_loss"]= $_player->vars["week_max_loss"];
+        $limits["origin"]       = "Player";
+    }
+
+    // 🔥 AGENT LIMITS
+    if(
+        !is_numeric($limits["day_max_win"]) ||
+        !is_numeric($limits["day_max_loss"]) ||
+        !is_numeric($limits["week_max_win"]) ||
+        !is_numeric($limits["week_max_loss"])
+    ){
+
+        $next_id = $_player->vars["agent"] ?? 0;
+
+        while($next_id > 0){
+
+            $temp_agent = get_agent($next_id);
+
+            if(empty($temp_agent) || empty($temp_agent->vars)){
+                break;
+            }
+
+            if(
+                isset($temp_agent->vars["day_max_win"], $temp_agent->vars["day_max_loss"],
+                      $temp_agent->vars["week_max_win"], $temp_agent->vars["week_max_loss"])
+                &&
+                $temp_agent->vars["day_max_win"] >= 0 &&
+                $temp_agent->vars["day_max_loss"] >= 0 &&
+                $temp_agent->vars["week_max_win"] >= 0 &&
+                $temp_agent->vars["week_max_loss"] >= 0
+            ){
+                $limits["day_max_win"]  = $temp_agent->vars["day_max_win"];
+                $limits["day_max_loss"] = $temp_agent->vars["day_max_loss"];
+                $limits["week_max_win"] = $temp_agent->vars["week_max_win"];
+                $limits["week_max_loss"]= $temp_agent->vars["week_max_loss"];
+                $limits["origin"]       = "Agent ".$temp_agent->vars["account"];
+                break;
+            }
+
+            $next_id = $temp_agent->vars["parent"] ?? 0;
+        }
+    }
+
+    // 🔥 COMPANY LIMITS FINAL
+    if(
+        !is_numeric($limits["day_max_win"]) ||
+        !is_numeric($limits["day_max_loss"]) ||
+        !is_numeric($limits["week_max_win"]) ||
+        !is_numeric($limits["week_max_loss"])
+    ){
+        $limits["day_max_win"]  = $_company->vars["day_max_win"]  ?? 0;
+        $limits["day_max_loss"] = $_company->vars["day_max_loss"] ?? 0;
+        $limits["week_max_win"] = $_company->vars["week_max_win"] ?? 0;
+        $limits["week_max_loss"]= $_company->vars["week_max_loss"]?? 0;
+        $limits["origin"]       = "Casino";
+    }
+
+    return $limits;
+}
+
+/*
+function get_logged_player_limits($player = NULL){
 	global $_company;
 	if(!is_null($player)){
 		$_player = $player;	
@@ -535,7 +660,7 @@ function get_logged_player_limits($player = NULL){
 	return $limits;
 	
 }
-
+*/
 
 function get_agent_limits($agent){
 	global $_company;
@@ -648,22 +773,11 @@ function get_player_games_limits($player){
 															"min"=>$player_games[$game ->vars["id"]]->vars["min_amount"]*1,
 															"max"=>$player_games[$game ->vars["id"]]->vars["max_amount"]*1);
 		}else{
-			// Agent-based limit system temporarily disabled. The agent hierarchy needs to be
-			// restructured — until then, players fall back to company-level limits directly.
-			// Re-enable the block below once the agent admin is rebuilt.
-			/*
 			$pagent = get_agent($player ->vars["agent"]);
 			$limits = get_agent_games_limits($pagent);
 			if($limits["origin"] == "Agent"){
 				$limits["origin"] = "Agent ".$pagent ->vars["account"];
 			}
-			*/
-			$limits["origin"] = "Casino";
-			$limits["games"][$game ->vars["id"]] = array(
-				"active" => $game ->vars["visible"],
-				"min"    => $game ->vars["min_amount"] > 0 ? $game ->vars["min_amount"] : 1,
-				"max"    => $game ->vars["max_amount"] > 0 ? $game ->vars["max_amount"] : 1000
-			);
 		}
 			
 	}
@@ -1034,12 +1148,34 @@ function sum_multi_nums($list1, $list2, $del = ",", $top = ""){
 	return implode($del,$nums_res);
 	
 }
-
 function get_lobby_url(){
-    $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
-    $host = $_SERVER['HTTP_HOST'];
-    return $protocol . '://' . $host . '/control/modules/access/index.php';
+
+
+//var_dump($_SESSION);
+//exit;
+
+    global $_company, $player_token, $_player, $cashier_code;
+
+    // 🔥 BASE URL DINÁMICA
+    $base = defined("CASINO_BASE_URL")
+        ? CASINO_BASE_URL
+        : (isset($_SERVER['HTTP_HOST']) ? "http://".$_SERVER['HTTP_HOST'] : "");
+
+    // 🔹 STANDALONE
+    if($_company->vars["provider_system_id"] == 3){
+        return $base . "/index.php";
+    }
+
+    // 🔹 DGS / ASIS (MISMO FORMATO PERO MISMO HOST)
+    return $base . "/index.php?cid=".$_company->vars["id"]
+        ."&cps=".$_company->vars["password"]
+        ."&token=".urlencode($player_token)
+        ."&cshcd=".$cashier_code
+        ."&account=".$_player->vars["account"];
 }
+
+
+
 
 function seed_shuffle($array, $seed){
 	mt_srand($seed);
@@ -1101,6 +1237,36 @@ function get_cashier_link($cashier_code){
 	
 	return $link;
 }
+
+function record_transaction(
+    $player_id,
+    $type,
+    $amount,
+    $balance_before,
+    $balance_after,
+    $game_id = null,
+    $round_id = null,
+    $reference = null,
+    $currency = "USD",
+    $provider = "standalone"
+){
+    $trans = new _transactions();
+
+    $trans->vars['player_id']      = intval($player_id);
+    $trans->vars['type']           = $type;
+    $trans->vars['amount']         = round(floatval($amount), 2);
+    $trans->vars['balance_before'] = round(floatval($balance_before), 2);
+    $trans->vars['balance_after']  = round(floatval($balance_after), 2);
+    $trans->vars['game']           = $game_id ? intval($game_id) : null;
+    $trans->vars['round_id']       = $round_id ?: null;
+    $trans->vars['reference']      = $reference ?: null;
+    $trans->vars['currency']       = $currency;
+    $trans->vars['provider']       = $provider;
+
+    $trans->insert();
+}
+
+
 
 
 ?>

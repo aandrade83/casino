@@ -1,4 +1,4 @@
-﻿//Set game vars
+//Set game vars
 var core_url = 'https://play.casinogamesonline.com/utilities/games/video_poker/action.php?gid='+gid+'&';
 
 //general vars
@@ -81,19 +81,19 @@ function preload (){
 	
 	//Load elements
 	//Images
-	this.load.image('background', '/utilities/games/video_poker/imgs/back.jpg?v2');
-	this.load.image('card_back', '/utilities/games/video_poker/imgs/card_back.png');
-	this.load.image('hold_off', '/utilities/games/video_poker/imgs/hold_off.png');
-	this.load.image('hold_on', '/utilities/games/video_poker/imgs/hold_on.png?v4');
-	this.load.image('coin_light', '/utilities/games/video_poker/imgs/coin_light.png');
-	this.load.image('prize_light', '/utilities/games/video_poker/imgs/prize_light.png?v2');
+	this.load.image('background', 'utilities/games/video_poker/imgs/back.jpg?v2');
+	this.load.image('card_back', 'utilities/games/video_poker/imgs/card_back.png');
+	this.load.image('hold_off', 'utilities/games/video_poker/imgs/hold_off.png');
+	this.load.image('hold_on', 'utilities/games/video_poker/imgs/hold_on.png?v4');
+	this.load.image('coin_light', 'utilities/games/video_poker/imgs/coin_light.png');
+	this.load.image('prize_light', 'utilities/games/video_poker/imgs/prize_light.png?v2');
 	for(var i = 0; i < deck.length; i++){
-		this.load.image('card_'+deck[i], '/utilities/images/games/cards/'+deck[i]+'.png');
+		this.load.image('card_'+deck[i], 'utilities/images/games/cards/'+deck[i]+'.png');
 	}
 	//Sounds
-	this.load.audio('background_sound', '/utilities/games/video_poker/sounds/sound_back.mp3');
-	this.load.audio('winning_sound', '/utilities/games/video_poker/sounds/win6.mp3');
-	this.load.audio('card_sound', '/utilities/games/video_poker/sounds/card.mp3');
+	this.load.audio('background_sound', 'utilities/games/video_poker/sounds/sound_back.mp3');
+	this.load.audio('winning_sound', 'utilities/games/video_poker/sounds/win6.mp3');
+	this.load.audio('card_sound', 'utilities/games/video_poker/sounds/card.mp3');
 	
 	
 	

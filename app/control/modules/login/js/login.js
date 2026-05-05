@@ -92,8 +92,8 @@ function callController(player) {
       console.log("[controller] response:", data);
 
       if (data.success) {
-        // 🔥 REDIRECCIÓN AL ACCESS
-        window.location.href = "/control/modules/access/index.php";
+        // REDIRECCIÓN AL INDEX
+        window.location.href = "/index.php";
       } else {
         alert("Login failed: " + (data.reason || "Unknown error"));
       }

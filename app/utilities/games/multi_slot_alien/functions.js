@@ -1,4 +1,4 @@
-﻿//Set game vars
+//Set game vars
 var core_url = 'https://play.casinogamesonline.com/utilities/games/multi_slot_alien/action.php?gid='+gid+'&';
 
 //general vars
@@ -112,44 +112,44 @@ function preload (){
 	
 	//Load elements
 	//Images
-	this.load.image('background', '/utilities/games/multi_slot_alien/imgs/back.png?v1');
-	this.load.image('pay_table', '/utilities/games/multi_slot_alien/imgs/pay_table.png?v=7');
-	this.load.image('info', '/utilities/games/multi_slot_alien/imgs/info.png');
-	this.load.image('main_btn', '/utilities/games/multi_slot_alien/imgs/bet_btn.png?v=2');
-	this.load.image('giant', '/utilities/games/multi_slot_alien/imgs/giant.png');
-	this.load.image('area', '/utilities/games/multi_slot_alien/imgs/blank_area.png');
-	//this.load.image('area', '/utilities/games/multi_slot_alien/imgs/area.jpg');
+	this.load.image('background', 'utilities/games/multi_slot_alien/imgs/back.png?v1');
+	this.load.image('pay_table', 'utilities/games/multi_slot_alien/imgs/pay_table.png?v=7');
+	this.load.image('info', 'utilities/games/multi_slot_alien/imgs/info.png');
+	this.load.image('main_btn', 'utilities/games/multi_slot_alien/imgs/bet_btn.png?v=2');
+	this.load.image('giant', 'utilities/games/multi_slot_alien/imgs/giant.png');
+	this.load.image('area', 'utilities/games/multi_slot_alien/imgs/blank_area.png');
+	//this.load.image('area', 'utilities/games/multi_slot_alien/imgs/area.jpg');
 	
 	
-	this.load.image('reel_back', '/utilities/games/multi_slot_crypto/imgs/reel_back.png');
-	this.load.image('reel1', '/utilities/games/multi_slot_alien/imgs/reel1.png?v1');
-	this.load.image('reel2', '/utilities/games/multi_slot_alien/imgs/reel2.png?v1');
-	this.load.image('reel3', '/utilities/games/multi_slot_alien/imgs/reel3.png?v1');
-	this.load.image('reel4', '/utilities/games/multi_slot_alien/imgs/reel4.png?v1');
-	this.load.image('reel5', '/utilities/games/multi_slot_alien/imgs/reel5.png?v1');
+	this.load.image('reel_back', 'utilities/games/multi_slot_crypto/imgs/reel_back.png');
+	this.load.image('reel1', 'utilities/games/multi_slot_alien/imgs/reel1.png?v1');
+	this.load.image('reel2', 'utilities/games/multi_slot_alien/imgs/reel2.png?v1');
+	this.load.image('reel3', 'utilities/games/multi_slot_alien/imgs/reel3.png?v1');
+	this.load.image('reel4', 'utilities/games/multi_slot_alien/imgs/reel4.png?v1');
+	this.load.image('reel5', 'utilities/games/multi_slot_alien/imgs/reel5.png?v1');
 	
 	for(var i=1; i<= 10; i++){
-		this.load.image('figure'+i, '/utilities/games/multi_slot_alien/imgs/figures/fig'+i+'.png?v=2?v=4'); 
+		this.load.image('figure'+i, 'utilities/games/multi_slot_alien/imgs/figures/fig'+i+'.png?v=2?v=4'); 
 	}
 	
 	for(var i=1; i<= 10; i++){
-		this.load.image('figure_on'+i, '/utilities/games/multi_slot_alien/imgs/figures_on/fig'+i+'.png?v=4'); 
+		this.load.image('figure_on'+i, 'utilities/games/multi_slot_alien/imgs/figures_on/fig'+i+'.png?v=4'); 
 	}
 	
 	//Animations
 	for(var i=1; i<=29; i++){
-		this.load.image('animation_'+i, '/utilities/games/multi_slot_alien/imgs/animation/'+i+'.png');
+		this.load.image('animation_'+i, 'utilities/games/multi_slot_alien/imgs/animation/'+i+'.png');
 	}
 		
 	
 	//Sounds
-	this.load.audio('pin', '/utilities/games/multi_slot_alien/sounds/pin.wav?v=1');
-	this.load.audio('spin', '/utilities/games/multi_slot_alien/sounds/spin_sound.wav?v=1');
-	this.load.audio('win1', '/utilities/games/multi_slot_alien/sounds/win1.wav?v=1');
-	this.load.audio('win2', '/utilities/games/multi_slot_alien/sounds/win2.wav?v=1');
-	this.load.audio('big_win', '/utilities/games/multi_slot_alien/sounds/big_win.wav?v=1');
-	this.load.audio('music', '/utilities/games/multi_slot_alien/sounds/music.mp3?v=1');
-	this.load.audio('scream', '/utilities/games/multi_slot_alien/sounds/scream.wav?v=1');
+	this.load.audio('pin', 'utilities/games/multi_slot_alien/sounds/pin.wav?v=1');
+	this.load.audio('spin', 'utilities/games/multi_slot_alien/sounds/spin_sound.wav?v=1');
+	this.load.audio('win1', 'utilities/games/multi_slot_alien/sounds/win1.wav?v=1');
+	this.load.audio('win2', 'utilities/games/multi_slot_alien/sounds/win2.wav?v=1');
+	this.load.audio('big_win', 'utilities/games/multi_slot_alien/sounds/big_win.wav?v=1');
+	this.load.audio('music', 'utilities/games/multi_slot_alien/sounds/music.mp3?v=1');
+	this.load.audio('scream', 'utilities/games/multi_slot_alien/sounds/scream.wav?v=1');
 	
 	
 	

@@ -1,4 +1,4 @@
-﻿//Set game vars
+//Set game vars
 var core_url = 'https://play.casinogamesonline.com/utilities/games/keno/action.php?gid='+gid+'&';
 
 //general vars
@@ -105,23 +105,23 @@ function preload (){
 	
 	//Load elements
 	//Images
-	this.load.image('area', '/utilities/games/keno/imgs/blank_area.png');
-	this.load.image('btn_play', '/utilities/games/keno/imgs/btn_play.png');
-	this.load.image('btn_stop', '/utilities/games/keno/imgs/btn_stop.png');
-	this.load.image('btn_auto', '/utilities/games/keno/imgs/btn_auto.png');
-	this.load.image('btn_clear', '/utilities/games/keno/imgs/btn_clear.png');
-	this.load.image('btn_pick', '/utilities/games/keno/imgs/btn_pick.png?v=3');
-	this.load.image('paytable_light', '/utilities/games/keno/imgs/paytable_light.png');
-	this.load.image('num_light_1', '/utilities/games/keno/imgs/num_light_1.png');
-	this.load.image('num_light_2', '/utilities/games/keno/imgs/num_light_2.png');
-	this.load.image('num_light_3', '/utilities/games/keno/imgs/num_light_3.png');
+	this.load.image('area', 'utilities/games/keno/imgs/blank_area.png');
+	this.load.image('btn_play', 'utilities/games/keno/imgs/btn_play.png');
+	this.load.image('btn_stop', 'utilities/games/keno/imgs/btn_stop.png');
+	this.load.image('btn_auto', 'utilities/games/keno/imgs/btn_auto.png');
+	this.load.image('btn_clear', 'utilities/games/keno/imgs/btn_clear.png');
+	this.load.image('btn_pick', 'utilities/games/keno/imgs/btn_pick.png?v=3');
+	this.load.image('paytable_light', 'utilities/games/keno/imgs/paytable_light.png');
+	this.load.image('num_light_1', 'utilities/games/keno/imgs/num_light_1.png');
+	this.load.image('num_light_2', 'utilities/games/keno/imgs/num_light_2.png');
+	this.load.image('num_light_3', 'utilities/games/keno/imgs/num_light_3.png');
 	
 	//Sounds
-	this.load.audio('music', '/utilities/games/keno/sounds/music.wav');
-	this.load.audio('bip', '/utilities/games/keno/sounds/bip.wav');
-	this.load.audio('bip_martch', '/utilities/games/keno/sounds/bip_martch.wav?v=2');
-	this.load.audio('click', '/utilities/games/keno/sounds/click.mp3');
-	this.load.audio('win', '/utilities/games/keno/sounds/win.wav');
+	this.load.audio('music', 'utilities/games/keno/sounds/music.wav');
+	this.load.audio('bip', 'utilities/games/keno/sounds/bip.wav');
+	this.load.audio('bip_martch', 'utilities/games/keno/sounds/bip_martch.wav?v=2');
+	this.load.audio('click', 'utilities/games/keno/sounds/click.mp3');
+	this.load.audio('win', 'utilities/games/keno/sounds/win.wav');
 	
 }
 

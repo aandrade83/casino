@@ -1,4 +1,4 @@
-﻿//Set game vars
+//Set game vars
 var core_url = 'https://play.casinogamesonline.com/utilities/games/multi_slot_FS2/action.php?gid='+gid+'&';
 
 //general vars
@@ -108,38 +108,38 @@ function preload (){
 	
 	//Load elements
 	//Images
-	this.load.image('background', '/utilities/games/multi_slot_FS2/imgs/back.png?v5');
-	this.load.image('pay_table', '/utilities/games/multi_slot_FS2/imgs/pay_table.png?v2');
-	this.load.image('info', '/utilities/games/multi_slot_FS2/imgs/info.png');
+	this.load.image('background', 'utilities/games/multi_slot_FS2/imgs/back.png?v5');
+	this.load.image('pay_table', 'utilities/games/multi_slot_FS2/imgs/pay_table.png?v2');
+	this.load.image('info', 'utilities/games/multi_slot_FS2/imgs/info.png');
 	
-	this.load.image('reel1', '/utilities/games/multi_slot_FS2/imgs/reel1.png?x2');
-	this.load.image('reel2', '/utilities/games/multi_slot_FS2/imgs/reel2.png?x2');
-	this.load.image('reel3', '/utilities/games/multi_slot_FS2/imgs/reel3.png?x2');
-	this.load.image('reel4', '/utilities/games/multi_slot_FS2/imgs/reel4.png?x2');
-	this.load.image('reel5', '/utilities/games/multi_slot_FS2/imgs/reel5.png?x2');
+	this.load.image('reel1', 'utilities/games/multi_slot_FS2/imgs/reel1.png?x2');
+	this.load.image('reel2', 'utilities/games/multi_slot_FS2/imgs/reel2.png?x2');
+	this.load.image('reel3', 'utilities/games/multi_slot_FS2/imgs/reel3.png?x2');
+	this.load.image('reel4', 'utilities/games/multi_slot_FS2/imgs/reel4.png?x2');
+	this.load.image('reel5', 'utilities/games/multi_slot_FS2/imgs/reel5.png?x2');
 	
 	
 	for(var i=1; i<= 13; i++){
-		this.load.image('figure'+i, '/utilities/games/multi_slot_FS2/imgs/figures/fig'+i+'.png?vx3');
+		this.load.image('figure'+i, 'utilities/games/multi_slot_FS2/imgs/figures/fig'+i+'.png?vx3');
 	}
 	
-	this.load.image('line_screen', '/utilities/games/multi_slot_FS2/imgs/line_screen.png?v1');
+	this.load.image('line_screen', 'utilities/games/multi_slot_FS2/imgs/line_screen.png?v1');
 	for(var i=1; i<=25; i++){
-		this.load.image('line_'+i, '/utilities/games/multi_slot_FS2/imgs/lines/'+i+'.png');
+		this.load.image('line_'+i, 'utilities/games/multi_slot_FS2/imgs/lines/'+i+'.png');
 	}
 	
 	//Animation
 	for(var i=0; i<=72; i+=2){
-		this.load.image('animation_'+i, '/utilities/games/multi_slot_FS2/imgs/animation1/Comp'+i+' copia.png');
+		this.load.image('animation_'+i, 'utilities/games/multi_slot_FS2/imgs/animation1/Comp'+i+' copia.png');
 	}
 	
 	
 	//Sounds
-	this.load.audio('pin', '/utilities/games/multi_slot_FS2/sounds/coin.wav');
-	this.load.audio('spin', '/utilities/games/multi_slot_FS2/sounds/waves_short.wav?v4');
-	this.load.audio('win1', '/utilities/games/multi_slot_FS2/sounds/coins.wav?v1');
-	this.load.audio('win2', '/utilities/games/multi_slot_FS2/sounds/laugh.wav?v3');
-	this.load.audio('big_win', '/utilities/games/multi_slot_FS2/sounds/winning_music_short.wav?v1');
+	this.load.audio('pin', 'utilities/games/multi_slot_FS2/sounds/coin.wav');
+	this.load.audio('spin', 'utilities/games/multi_slot_FS2/sounds/waves_short.wav?v4');
+	this.load.audio('win1', 'utilities/games/multi_slot_FS2/sounds/coins.wav?v1');
+	this.load.audio('win2', 'utilities/games/multi_slot_FS2/sounds/laugh.wav?v3');
+	this.load.audio('big_win', 'utilities/games/multi_slot_FS2/sounds/winning_music_short.wav?v1');
 	
 }
 

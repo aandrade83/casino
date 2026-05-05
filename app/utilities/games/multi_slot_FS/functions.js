@@ -1,4 +1,4 @@
-﻿//Set game vars
+//Set game vars
 var core_url = 'https://play.casinogamesonline.com/utilities/games/multi_slot_FS/action.php?gid='+gid+'&';
 
 //general vars
@@ -108,48 +108,48 @@ function preload (){
 	
 	//Load elements
 	//Images
-	this.load.image('background', '/utilities/games/multi_slot_FS/imgs/back.jpg?v1');
-	this.load.image('back_top', '/utilities/games/multi_slot_FS/imgs/back_top.jpg');
-	this.load.image('back_down', '/utilities/games/multi_slot_FS/imgs/back_down.jpg?v2');
-	this.load.image('pay_table', '/utilities/games/multi_slot_FS/imgs/pay_table.jpg?v=32');
-	this.load.image('info', '/utilities/games/multi_slot_FS/imgs/info.png');
-	this.load.image('logo', '/utilities/games/multi_slot_FS/imgs/slogo.png?v=2');
+	this.load.image('background', 'utilities/games/multi_slot_FS/imgs/back.jpg?v1');
+	this.load.image('back_top', 'utilities/games/multi_slot_FS/imgs/back_top.jpg');
+	this.load.image('back_down', 'utilities/games/multi_slot_FS/imgs/back_down.jpg?v2');
+	this.load.image('pay_table', 'utilities/games/multi_slot_FS/imgs/pay_table.jpg?v=32');
+	this.load.image('info', 'utilities/games/multi_slot_FS/imgs/info.png');
+	this.load.image('logo', 'utilities/games/multi_slot_FS/imgs/slogo.png?v=2');
 	
-	this.load.image('reel1', '/utilities/games/multi_slot_FS/imgs/reel1.png?v9');
-	this.load.image('reel2', '/utilities/games/multi_slot_FS/imgs/reel2.png?v9');
-	this.load.image('reel3', '/utilities/games/multi_slot_FS/imgs/reel3.png?v9');
-	this.load.image('reel4', '/utilities/games/multi_slot_FS/imgs/reel4.png?v9');
-	this.load.image('reel5', '/utilities/games/multi_slot_FS/imgs/reel5.png?v9');
+	this.load.image('reel1', 'utilities/games/multi_slot_FS/imgs/reel1.png?v9');
+	this.load.image('reel2', 'utilities/games/multi_slot_FS/imgs/reel2.png?v9');
+	this.load.image('reel3', 'utilities/games/multi_slot_FS/imgs/reel3.png?v9');
+	this.load.image('reel4', 'utilities/games/multi_slot_FS/imgs/reel4.png?v9');
+	this.load.image('reel5', 'utilities/games/multi_slot_FS/imgs/reel5.png?v9');
 	
-	this.load.image('figure_car', '/utilities/games/multi_slot_FS/imgs/figures/car.png');
-	this.load.image('figure_cash', '/utilities/games/multi_slot_FS/imgs/figures/cash.png');
-	this.load.image('figure_horses', '/utilities/games/multi_slot_FS/imgs/figures/horses.png');
-	this.load.image('figure_girl', '/utilities/games/multi_slot_FS/imgs/figures/girl.png');
-	this.load.image('figure_bookie', '/utilities/games/multi_slot_FS/imgs/figures/bookie.png');
-	this.load.image('figure_cigar', '/utilities/games/multi_slot_FS/imgs/figures/cigar.png');
-	this.load.image('figure_hockey', '/utilities/games/multi_slot_FS/imgs/figures/hockey.png?v1');
-	this.load.image('figure_basket', '/utilities/games/multi_slot_FS/imgs/figures/basket.png?v2');
-	this.load.image('figure_baseball', '/utilities/games/multi_slot_FS/imgs/figures/baseball.png?v1');
-	this.load.image('figure_football', '/utilities/games/multi_slot_FS/imgs/figures/football.png?v1');
-	this.load.image('figure_sheet', '/utilities/games/multi_slot_FS/imgs/figures/sheet.png?v2');
+	this.load.image('figure_car', 'utilities/games/multi_slot_FS/imgs/figures/car.png');
+	this.load.image('figure_cash', 'utilities/games/multi_slot_FS/imgs/figures/cash.png');
+	this.load.image('figure_horses', 'utilities/games/multi_slot_FS/imgs/figures/horses.png');
+	this.load.image('figure_girl', 'utilities/games/multi_slot_FS/imgs/figures/girl.png');
+	this.load.image('figure_bookie', 'utilities/games/multi_slot_FS/imgs/figures/bookie.png');
+	this.load.image('figure_cigar', 'utilities/games/multi_slot_FS/imgs/figures/cigar.png');
+	this.load.image('figure_hockey', 'utilities/games/multi_slot_FS/imgs/figures/hockey.png?v1');
+	this.load.image('figure_basket', 'utilities/games/multi_slot_FS/imgs/figures/basket.png?v2');
+	this.load.image('figure_baseball', 'utilities/games/multi_slot_FS/imgs/figures/baseball.png?v1');
+	this.load.image('figure_football', 'utilities/games/multi_slot_FS/imgs/figures/football.png?v1');
+	this.load.image('figure_sheet', 'utilities/games/multi_slot_FS/imgs/figures/sheet.png?v2');
 	
-	this.load.image('line_screen', '/utilities/games/multi_slot_FS/imgs/line_screen.png?v1');
+	this.load.image('line_screen', 'utilities/games/multi_slot_FS/imgs/line_screen.png?v1');
 	for(var i=1; i<=25; i++){
-		this.load.image('line_'+i, '/utilities/games/multi_slot_FS/imgs/lines/'+i+'.png');
+		this.load.image('line_'+i, 'utilities/games/multi_slot_FS/imgs/lines/'+i+'.png');
 	}
 	
 	//Animation
 	for(var i=1; i<=71; i+=2){
-		this.load.image('animation_'+i, '/utilities/games/multi_slot_FS/imgs/animation1/ANIMACION-BOOKIE'+i+'.png');
+		this.load.image('animation_'+i, 'utilities/games/multi_slot_FS/imgs/animation1/ANIMACION-BOOKIE'+i+'.png');
 	}
 	
 	
 	//Sounds
-	this.load.audio('pin', '/utilities/games/multi_slot_FS/sounds/click.mp3');
-	this.load.audio('spin', '/utilities/games/multi_slot_FS/sounds/spin_sound.wav?v3');
-	this.load.audio('win1', '/utilities/games/multi_slot_FS/sounds/win1.wav?v3');
-	this.load.audio('win2', '/utilities/games/multi_slot_FS/sounds/win2.wav?v3');
-	this.load.audio('big_win', '/utilities/games/multi_slot_FS/sounds/big_winner.wav');
+	this.load.audio('pin', 'utilities/games/multi_slot_FS/sounds/click.mp3');
+	this.load.audio('spin', 'utilities/games/multi_slot_FS/sounds/spin_sound.wav?v3');
+	this.load.audio('win1', 'utilities/games/multi_slot_FS/sounds/win1.wav?v3');
+	this.load.audio('win2', 'utilities/games/multi_slot_FS/sounds/win2.wav?v3');
+	this.load.audio('big_win', 'utilities/games/multi_slot_FS/sounds/big_winner.wav');
 	
 	
 	

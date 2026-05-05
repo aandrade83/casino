@@ -23,13 +23,4 @@ $_card_symbols = array("J","Q","K");
 
 $_currency_symbols = array("USD"=>"$","MicroBTC"=>"μ฿","satoshi"=>"sat ");
 
-
-$sattousd = $sattousd ?? 1;
-$show_contest = $show_contest ?? false;
-$snot_pf = $snot_pf ?? false;
-$_using_free_play = $_using_free_play ?? false;
-$cashier_link = $cashier_link ?? "";
-$_min_amount = $_min_amount ?? "";
-$_max_amount = $_max_amount ?? "";
-
 ?>

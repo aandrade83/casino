@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<script type="text/javascript" src="http://transfers.ezpay.com/utilities/js/jquery.js"></script>
+<script type="text/javascript" src="../utilities/js/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="js/phaser.js"></script>
 <title>VRB Game example</title>
 <style type="text/css">

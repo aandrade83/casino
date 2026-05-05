@@ -1,4 +1,4 @@
-﻿//Set game vars
+//Set game vars
 var core_url = 'https://play.casinogamesonline.com/utilities/games/multi_slot_sweet/action.php?gid='+gid+'&';
 
 //general vars
@@ -115,44 +115,44 @@ function preload (){
 	
 	//Load elements
 	//Images
-	this.load.image('background', '/utilities/games/multi_slot_sweet/imgs/back.png?v9'); 
-	this.load.image('reel_back', '/utilities/games/multi_slot_sweet/imgs/reel_back.png?v1'); 
-	this.load.image('pay_table', '/utilities/games/multi_slot_sweet/imgs/pay_table.png?v=32');
-	this.load.image('info', '/utilities/games/multi_slot_sweet/imgs/info.png');
+	this.load.image('background', 'utilities/games/multi_slot_sweet/imgs/back.png?v9'); 
+	this.load.image('reel_back', 'utilities/games/multi_slot_sweet/imgs/reel_back.png?v1'); 
+	this.load.image('pay_table', 'utilities/games/multi_slot_sweet/imgs/pay_table.png?v=32');
+	this.load.image('info', 'utilities/games/multi_slot_sweet/imgs/info.png');
 	
-	this.load.image('reel1', '/utilities/games/multi_slot_sweet/imgs/reel1.png?x3');
-	this.load.image('reel2', '/utilities/games/multi_slot_sweet/imgs/reel2.png?x3');
-	this.load.image('reel3', '/utilities/games/multi_slot_sweet/imgs/reel3.png?x3');
-	this.load.image('reel4', '/utilities/games/multi_slot_sweet/imgs/reel4.png?x3');
-	this.load.image('reel5', '/utilities/games/multi_slot_sweet/imgs/reel5.png?x3');
+	this.load.image('reel1', 'utilities/games/multi_slot_sweet/imgs/reel1.png?x3');
+	this.load.image('reel2', 'utilities/games/multi_slot_sweet/imgs/reel2.png?x3');
+	this.load.image('reel3', 'utilities/games/multi_slot_sweet/imgs/reel3.png?x3');
+	this.load.image('reel4', 'utilities/games/multi_slot_sweet/imgs/reel4.png?x3');
+	this.load.image('reel5', 'utilities/games/multi_slot_sweet/imgs/reel5.png?x3');
 	
 	
 	for(var i=1; i<= 13; i++){
-		this.load.image('figure'+i, '/utilities/games/multi_slot_sweet/imgs/figures/fig'+i+'.png?vx4');
+		this.load.image('figure'+i, 'utilities/games/multi_slot_sweet/imgs/figures/fig'+i+'.png?vx4');
 	}
 	
-	this.load.image('line_screen', '/utilities/games/multi_slot_sweet/imgs/line_screen.png?v1');
+	this.load.image('line_screen', 'utilities/games/multi_slot_sweet/imgs/line_screen.png?v1');
 	for(var i=1; i<=25; i++){
-		this.load.image('line_'+i, '/utilities/games/multi_slot_sweet/imgs/lines/'+i+'.png');
+		this.load.image('line_'+i, 'utilities/games/multi_slot_sweet/imgs/lines/'+i+'.png');
 	}
 	
 	//Animations
 	for(var i=2; i<=50; i+=2){
-		this.load.image('animation_'+i, '/utilities/games/multi_slot_sweet/imgs/animation1/Big Win Animation Glow'+i+'.png');
+		this.load.image('animation_'+i, 'utilities/games/multi_slot_sweet/imgs/animation1/Big Win Animation Glow'+i+'.png');
 	}
 	
 	//disabled for speed
 	for(var i=0; i<=40; i+=2){
-		//this.load.image('fmist_'+i, '/utilities/games/multi_slot_sweet/imgs/mist1/Mist_Front0'+i+'.png');
+		//this.load.image('fmist_'+i, 'utilities/games/multi_slot_sweet/imgs/mist1/Mist_Front0'+i+'.png');
 	}
 	
 	
 	//Sounds
-	this.load.audio('pin', '/utilities/games/multi_slot_sweet/sounds/candy_sound.wav');
-	this.load.audio('spin', '/utilities/games/multi_slot_sweet/sounds/roll.mp3');
-	this.load.audio('win1', '/utilities/games/multi_slot_sweet/sounds/squish.wav?v1');
-	this.load.audio('win2', '/utilities/games/multi_slot_sweet/sounds/box.wav?v3');
-	this.load.audio('big_win', '/utilities/games/multi_slot_sweet/sounds/winner.wav?v1');
+	this.load.audio('pin', 'utilities/games/multi_slot_sweet/sounds/candy_sound.wav');
+	this.load.audio('spin', 'utilities/games/multi_slot_sweet/sounds/roll.mp3');
+	this.load.audio('win1', 'utilities/games/multi_slot_sweet/sounds/squish.wav?v1');
+	this.load.audio('win2', 'utilities/games/multi_slot_sweet/sounds/box.wav?v3');
+	this.load.audio('big_win', 'utilities/games/multi_slot_sweet/sounds/winner.wav?v1');
 	
 }
 

@@ -1,4 +1,4 @@
-﻿//Set game vars
+//Set game vars
 var core_url = 'https://play.casinogamesonline.com/utilities/games/multi_slot_west/action.php?gid='+gid+'&';
 
 //general vars
@@ -111,39 +111,39 @@ function preload (){
 	
 	//Load elements
 	//Images
-	this.load.image('background', '/utilities/games/multi_slot_west/imgs/back.png?v2');
-	this.load.image('pay_table', '/utilities/games/multi_slot_west/imgs/pay_table.png?v=7');
-	this.load.image('info', '/utilities/games/multi_slot_west/imgs/info.png');
-	this.load.image('main_btn', '/utilities/games/multi_slot_west/imgs/bet_btn.png?v=3');
-	this.load.image('giant', '/utilities/games/multi_slot_west/imgs/giant.png');
-	this.load.image('area', '/utilities/games/multi_slot_west/imgs/blank_area.png');
-	//this.load.image('area', '/utilities/games/multi_slot_west/imgs/area.jpg');
+	this.load.image('background', 'utilities/games/multi_slot_west/imgs/back.png?v2');
+	this.load.image('pay_table', 'utilities/games/multi_slot_west/imgs/pay_table.png?v=7');
+	this.load.image('info', 'utilities/games/multi_slot_west/imgs/info.png');
+	this.load.image('main_btn', 'utilities/games/multi_slot_west/imgs/bet_btn.png?v=3');
+	this.load.image('giant', 'utilities/games/multi_slot_west/imgs/giant.png');
+	this.load.image('area', 'utilities/games/multi_slot_west/imgs/blank_area.png');
+	//this.load.image('area', 'utilities/games/multi_slot_west/imgs/area.jpg');
 	
 	
-	this.load.image('reel_back', '/utilities/games/multi_slot_crypto/imgs/reel_back.png');
-	this.load.image('reel1', '/utilities/games/multi_slot_west/imgs/reel1.png?v1');
-	this.load.image('reel2', '/utilities/games/multi_slot_west/imgs/reel2.png?v1');
-	this.load.image('reel3', '/utilities/games/multi_slot_west/imgs/reel3.png?v1');
-	this.load.image('reel4', '/utilities/games/multi_slot_west/imgs/reel4.png?v1');
-	this.load.image('reel5', '/utilities/games/multi_slot_west/imgs/reel5.png?v1');
+	this.load.image('reel_back', 'utilities/games/multi_slot_crypto/imgs/reel_back.png');
+	this.load.image('reel1', 'utilities/games/multi_slot_west/imgs/reel1.png?v1');
+	this.load.image('reel2', 'utilities/games/multi_slot_west/imgs/reel2.png?v1');
+	this.load.image('reel3', 'utilities/games/multi_slot_west/imgs/reel3.png?v1');
+	this.load.image('reel4', 'utilities/games/multi_slot_west/imgs/reel4.png?v1');
+	this.load.image('reel5', 'utilities/games/multi_slot_west/imgs/reel5.png?v1');
 	
 	for(var i=1; i<= 10; i++){
-		this.load.image('figure'+i, '/utilities/games/multi_slot_west/imgs/figures/fig'+i+'.png?v=2?v=4'); 
+		this.load.image('figure'+i, 'utilities/games/multi_slot_west/imgs/figures/fig'+i+'.png?v=2?v=4'); 
 	}
 	
 	for(var i=1; i<= 10; i++){
-		this.load.image('figure_on'+i, '/utilities/games/multi_slot_west/imgs/figures_on/fig'+i+'.png?v=4'); 
+		this.load.image('figure_on'+i, 'utilities/games/multi_slot_west/imgs/figures_on/fig'+i+'.png?v=4'); 
 	}
 	
 
 		
 	
 	//Sounds
-	this.load.audio('pin', '/utilities/games/multi_slot_west/sounds/pin.wav?v=3');
-	this.load.audio('spin', '/utilities/games/multi_slot_west/sounds/spin_sound.wav?v=3');
-	this.load.audio('win1', '/utilities/games/multi_slot_west/sounds/win1.wav?v=3');
-	this.load.audio('big_win', '/utilities/games/multi_slot_west/sounds/big_win.wav?v=3');
-	this.load.audio('music', '/utilities/games/multi_slot_west/sounds/music.mp3?v=3');
+	this.load.audio('pin', 'utilities/games/multi_slot_west/sounds/pin.wav?v=3');
+	this.load.audio('spin', 'utilities/games/multi_slot_west/sounds/spin_sound.wav?v=3');
+	this.load.audio('win1', 'utilities/games/multi_slot_west/sounds/win1.wav?v=3');
+	this.load.audio('big_win', 'utilities/games/multi_slot_west/sounds/big_win.wav?v=3');
+	this.load.audio('music', 'utilities/games/multi_slot_west/sounds/music.mp3?v=3');
 	
 	
 	

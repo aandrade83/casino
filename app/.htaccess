@@ -4,5 +4,8 @@ RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 
-# Enviar todo a control/index.php
+# 🔥 No tocar /app (ya logueado)
+RewriteCond %{REQUEST_URI} !^/app/
+
+# Redirigir todo lo demás a control
 RewriteRule ^(.*)$ /control/index.php [QSA,L]

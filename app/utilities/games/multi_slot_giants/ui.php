@@ -1,18 +1,10 @@
-﻿<? include($_SERVER['DOCUMENT_ROOT'] ."/utilities/ui/games/header.php");  ?>
+<? include($_SERVER['DOCUMENT_ROOT'] ."/utilities/ui/games/header.php");  ?> 
 
-<?php
-$config = require $_SERVER['DOCUMENT_ROOT'].'/config.php';
-$base_url = $config['app']['base_url'] ?? '';
-?>
-<script>
-    var BASE_URL = "<?= $base_url ?>";
-</script>
-<script src="/utilities/js/config.js"></script>
 <script type="text/javascript">
-var current_balance = <?= isset($balance["real"]) ? json_encode(round($balance["real"],2)) : 0 ?>;
-var min_amount = <?= isset($_min_amount) ? json_encode($_min_amount) : 0 ?>;
-var max_amount = <?= isset($_max_amount) ? json_encode($_max_amount) : 0 ?>;
-var currency_symbol = '<?= isset($_currency_symbols[$balance["currency"]]) ? $_currency_symbols[$balance["currency"]] : "" ?>';
+var current_balance = <? echo round($balance["amount"],2) ?>;
+var min_amount = <? echo $_min_amount ?>;
+var max_amount = <? echo $_max_amount ?>;
+var currency_symbol = '<? echo $_currency_symbols[$balance["currency"]]  ?>';
 var max_lines = 25;
 </script>
 <? $equal_on_top = true; //set USD equivalent balance on page top ?>

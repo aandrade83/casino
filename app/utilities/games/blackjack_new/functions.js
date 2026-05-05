@@ -1,4 +1,4 @@
-﻿//Set game vars
+//Set game vars
 var selected_chip = 1;
 var unselected_chip_alpha = 0.4;
 var core_url = 'https://play.casinogamesonline.com/utilities/games/blackjack_new/action.php?gid='+gid+'&';
@@ -120,26 +120,26 @@ function preload (){
 	
 	//Load elements
 	//Background
-	this.load.image('background', '/utilities/games/blackjack_new/imgs/back.jpg');
+	this.load.image('background', 'utilities/games/blackjack_new/imgs/back.jpg');
 	//chips
-	this.load.image('chip1', '/utilities/images/games/chips/chip1.png');
-	this.load.image('chip5', '/utilities/images/games/chips/chip5.png');	
-	this.load.image('chip25', '/utilities/images/games/chips/chip25.png');
-	this.load.image('chip100', '/utilities/images/games/chips/chip100.png');
-	this.load.image('chip500', '/utilities/images/games/chips/chip500.png');
+	this.load.image('chip1', 'utilities/images/games/chips/chip1.png');
+	this.load.image('chip5', 'utilities/images/games/chips/chip5.png');	
+	this.load.image('chip25', 'utilities/images/games/chips/chip25.png');
+	this.load.image('chip100', 'utilities/images/games/chips/chip100.png');
+	this.load.image('chip500', 'utilities/images/games/chips/chip500.png');
 	//delimeter
-	this.load.image('delimeter', '/utilities/images/games/line_delimeter.jpg')
-	this.load.image('hdelimeter', '/utilities/images/games/h_delimeter.jpg')
+	this.load.image('delimeter', 'utilities/images/games/line_delimeter.jpg')
+	this.load.image('hdelimeter', 'utilities/images/games/h_delimeter.jpg')
 	//cards
-	this.load.image('card_back', '/utilities/images/games/cards/card_back.png')
-	this.load.image('card_flip', '/utilities/images/games/cards/card_back_flip.png')
+	this.load.image('card_back', 'utilities/images/games/cards/card_back.png')
+	this.load.image('card_flip', 'utilities/images/games/cards/card_back_flip.png')
 	for(var i = 0; i < deck.length; i++){
-		this.load.image('card_'+deck[i], '/utilities/images/games/cards/'+deck[i]+'.png')
+		this.load.image('card_'+deck[i], 'utilities/images/games/cards/'+deck[i]+'.png')
 	}
 	//Others
-	this.load.image('arrow', '/utilities/games/blackjack_new/imgs/green_arrow.png');
+	this.load.image('arrow', 'utilities/games/blackjack_new/imgs/green_arrow.png');
 	//sounds
-	this.load.audio('card_flip_fx', '/utilities/games/blackjack_new/sounds/cardflip.wav');
+	this.load.audio('card_flip_fx', 'utilities/games/blackjack_new/sounds/cardflip.wav');
 	
 }
 

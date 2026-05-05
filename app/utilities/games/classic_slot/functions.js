@@ -1,4 +1,4 @@
-﻿//Set game vars
+//Set game vars
 var core_url = 'https://play.casinogamesonline.com/utilities/games/classic_slot/action.php?gid='+gid+'&';
 
 //general vars
@@ -83,15 +83,15 @@ function preload (){
 	
 	//Load elements
 	//Images
-	this.load.image('background', '/utilities/games/classic_slot/imgs/back.png?v4');
-	this.load.image('reel', '/utilities/games/classic_slot/imgs/reel.png?v2');
-	this.load.image('reel2', '/utilities/games/classic_slot/imgs/reel2.png?v2');
-	this.load.image('reel3', '/utilities/games/classic_slot/imgs/reel3.png?v2');
-	this.load.image('reel_back', '/utilities/games/classic_slot/imgs/reel_back.jpg?v2');
+	this.load.image('background', 'utilities/games/classic_slot/imgs/back.png?v4');
+	this.load.image('reel', 'utilities/games/classic_slot/imgs/reel.png?v2');
+	this.load.image('reel2', 'utilities/games/classic_slot/imgs/reel2.png?v2');
+	this.load.image('reel3', 'utilities/games/classic_slot/imgs/reel3.png?v2');
+	this.load.image('reel_back', 'utilities/games/classic_slot/imgs/reel_back.jpg?v2');
 	//Sounds
-	this.load.audio('spin_sound', '/utilities/games/classic_slot/sounds/Slot_Spin.mp3');
-	this.load.audio('winning_sound', '/utilities/games/classic_slot/sounds/winning.mp3');
-	this.load.audio('background_sound', '/utilities/games/classic_slot/sounds/sound_back.mp3');
+	this.load.audio('spin_sound', 'utilities/games/classic_slot/sounds/Slot_Spin.mp3');
+	this.load.audio('winning_sound', 'utilities/games/classic_slot/sounds/winning.mp3');
+	this.load.audio('background_sound', 'utilities/games/classic_slot/sounds/sound_back.mp3');
 	
 	
 	

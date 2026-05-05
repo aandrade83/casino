@@ -18,7 +18,8 @@
       "Bash(git rm *)",
       "Bash(git commit -m ' *)",
       "Bash(git push *)",
-      "Bash(git commit *)"
+      "Bash(git commit *)",
+      "PowerShell(Get-ChildItem -Path \"D:\\\\PROJECTS\\\\CASINO\" -Force | Where-Object { $_.Name -match \"env|config\" } | Select-Object FullName)"
     ]
   }
 }

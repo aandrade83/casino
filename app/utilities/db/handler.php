@@ -15,13 +15,6 @@ function get_company($cid){
 	return get($sql, "_company", true); 
 }
 
-function get_company_by_site($site){
-	db_connect("main");
-	$sql = "SELECT * FROM company WHERE site_url = '$site'";
-	return get($sql, "_company", true); 
-}
-
-
 function get_validated_comany($id, $password){
 	db_connect("main");
 	$sql = "SELECT * FROM company where id = '$id' AND password = '$password'";
@@ -38,13 +31,7 @@ function get_comany($id){
 function get_company_player($account, $company){
 	db_connect("main");
 	$sql = "select * from player where account = '$account' AND company = '$company'";
-	return get($sql, "_player", true);
-}
-
-function get_validated_player($account, $company, $encrypted_password){
-	db_connect("main");
-	$sql = "select * from player where account = '$account' AND company = '$company' AND password = '$encrypted_password'";
-	return get($sql, "_player", true);
+	return get($sql, "_player", true); 
 }
 
 function get_all_categories(){
@@ -122,6 +109,8 @@ function get_all_games(){
 
 function get_all_company_games($cid, $just_active = false, $category = ""){
 	db_connect("main");
+	$sql_ac ="";
+	$sql_category = "";
 	if($just_active){$sql_ac = " AND visible = 1 ";}
 	if($category != ""){$sql_category = " AND category = '$category' ";}
 	$sql = "select * from game as g, game_by_company as gc where g.id = gc.game and gc.company = '$cid' $sql_ac $sql_category ORDER BY position ASC";
@@ -130,6 +119,7 @@ function get_all_company_games($cid, $just_active = false, $category = ""){
 
 function get_games_by_agent($aid, $just_active = false){
 	db_connect("main");
+	$sql_ac ="";
 	if($just_active){$sql_ac = " AND visible = 1 ";}
 	$sql = "select * from game as g, game_by_person as gc where g.id = gc.game and gc.person = '$aid' $sql_ac AND is_agent = 1";
 	return get($sql, "_game", false, "game"); 
@@ -137,6 +127,7 @@ function get_games_by_agent($aid, $just_active = false){
 
 function get_games_by_player($pid, $just_active = false){
 	db_connect("main");
+	$sql_ac ="";
 	if($just_active){$sql_ac = " AND visible = 1 ";}
 	$sql = "select * from game as g, game_by_person as gc where g.id = gc.game and gc.person = '$pid' $sql_ac AND is_agent = 0";
 	return get($sql, "_game", false, "game"); 
@@ -418,7 +409,7 @@ function get_player_contest_team_history($cid, $pid){
 	$sql = "select * from contest_team_by_player where player = $pid AND contest = $cid order by id desc";			
 	return get_str($sql); 	
 }
-
+/*
 function count_casino_open_hands($pid){ //add games in here 
 	db_connect("main");
 	$sql = "SELECT (
@@ -430,6 +421,23 @@ function count_casino_open_hands($pid){ //add games in here
 ";			
 	return get_str($sql, true); 	
 }
+*/
+
+
+function count_casino_open_hands($pid){ //add games in here 
+    db_connect("main");
+    $sql = "SELECT (
+            (select COUNT(*) from blackjack_session where finished = 0 AND player = $pid) + 
+            (select COUNT(*) from craps_session where finished = 0 AND player = $pid) + 
+            (select COUNT(*) from poker_session where finished = 0 AND player = $pid) + 
+            (select COUNT(*) from video_poker_session where finished = 0 AND player = $pid)
+            ) as total
+";          
+    return get_str($sql, true);     
+}
+
+
+
 
 function get_avr_bet_by_player($pid, $from, $to){
 	db_connect("main");
@@ -467,8 +475,5 @@ function get_company_by_name($name, $password){
 
     return get($sql, "_company", true);
 }
-
-
-
 
 ?>

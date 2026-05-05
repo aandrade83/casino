@@ -1,4 +1,6 @@
-<? if($_company ->vars["prov_fair"]){ ?>
+<? 
+$pf_use_session = $pf_use_session ?? false;
+if($_company ->vars["prov_fair"]){ ?>
     
     <? if($sword == ""){$sword = "Spin";} ?>
     
@@ -8,7 +10,7 @@
             
             <h2 align="center">PROVABLY FAIR</h2>
             
-            <div class="pfhiw"><a href="https://play.casinogamesonline.com/provably_fair.php?gid=<? echo $_game ->vars["id"] ?>" style="color:#069;" target="_blank">How it works?</a></div>
+            <div class="pfhiw"><a href="<?php echo CASINO_BASE_URL; ?>/provably_fair.php?gid=<? echo $_game ->vars["id"] ?>" style="color:#069;" target="_blank">How it works?</a></div>
             
             <p>
             
