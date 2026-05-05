@@ -4,7 +4,9 @@ session_start();
 
 require_once($_SERVER['DOCUMENT_ROOT'] . "/utilities/includes.php");
 
-$request = $_SERVER['REQUEST_URI'];
+//$request = $_SERVER['REQUEST_URI'];
+$request = $_SERVER['HTTP_X_ORIGINAL_URI'] ?? $_SERVER['REQUEST_URI'];
+$request = parse_url($request, PHP_URL_PATH);
 
 // Limpiar query string
 $request = explode('?', $request)[0];
