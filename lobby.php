@@ -1,7 +1,7 @@
 <?php
 
 include($_SERVER['DOCUMENT_ROOT']."/control/security_control.php");
-require_once($_SERVER['DOCUMENT_ROOT'].'/control/modules/access/api_local.php');
+//require_once($_SERVER['DOCUMENT_ROOT'].'/control/modules/access/api_local.php');
 
 if(!$_logged){
     echo "Session expired";

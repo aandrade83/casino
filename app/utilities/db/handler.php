@@ -476,4 +476,28 @@ function get_company_by_name($name, $password){
     return get($sql, "_company", true);
 }
 
+function get_company_by_api_key($api_key){
+	 db_connect("main");
+
+    $sql = "SELECT * FROM company WHERE api_key  = '$api_key'";
+
+    return get($sql, "_company", true);
+}
+
+
+function get_company_by_site($site){
+	 db_connect("main");
+
+    $sql = "SELECT * FROM company WHERE site_url  = '$site'";
+
+    return get($sql, "_company", true);
+}
+
+function get_validated_player($account, $company, $encrypted_password){
+	db_connect("main");
+	$sql = "select * from player where account = '$account' AND company = '$company' AND password = '$encrypted_password'";
+	return get($sql, "_player", true);
+}
+
+
 ?>

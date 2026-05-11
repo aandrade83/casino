@@ -14,7 +14,7 @@ $not_pf = $not_pf ?? false;
 	if(param("popup")){
 		?> <input type="button" value="Back to Lobby" onclick="window.close();" class="btn red main_color_btn" /> <?
 	}else{
-		?> <input type="button" value="Back to Lobby" onclick="parent.location.href = '<? echo get_lobby_url(); ?>';" class="btn red main_color_btn" /> <?
+		?> <input type="button" value="Back to Lobby" onclick="window.location.href = '<? echo get_lobby_url(); ?>';" class="btn red main_color_btn" /> <?
 	}
 	?>
     

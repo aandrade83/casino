@@ -495,6 +495,10 @@ class _transactions extends _DB_ELEMENT{
 	var $table = "transactions";
 }
 
+class _token_session extends _DB_ELEMENT{
+	var $table = "token_session";
+}
+
 class _game_by_person extends _DB_ELEMENT{
 	var $table = "game_by_person";
 }

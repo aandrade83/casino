@@ -2,7 +2,8 @@
 class _api_connection{
 	var $user = "HTML5_Casino";
 	var $password = "K34JGSDKJ22S689DD";
-	var $api_url = "http://www.sportsbettingonline.ag/utilities/api/external_casino/";
+	//var $api_url = "http://www.sportsbettingonline.ag/utilities/api/external_casino/";
+	var $api_url = "/provider_wallet_api.php";
 	var $done = true;
 	var $error_msg = "";
 	function reset_error(){
