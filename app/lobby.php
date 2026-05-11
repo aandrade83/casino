@@ -11,30 +11,6 @@
 
 <body>
 
-<?php
-if(isset($_GET["logout"])){
-    session_start();
-    $_SESSION = [];
-    if (ini_get("session.use_cookies")) {
-        $params = session_get_cookie_params();
-        setcookie(
-            session_name(),
-            '',
-            time() - 42000,
-            $params["path"],
-            $params["domain"],
-            $params["secure"],
-            $params["httponly"]
-        );
-    }
-    session_destroy();
-    ?>
-    <script>location.href = '/';</script>
-    <?php
-    exit;
-}
-?>
-
 <div class="top_bar">
     <div class="top_bar_left">
         <div class="top_logo">&#9824; <?= htmlspecialchars($casino_name) ?></div>
@@ -81,7 +57,7 @@ if(isset($_GET["logout"])){
         </span>
 
         <span class="head_btns">
-            <a href="?logout=1" class="logout-btn"
+            <a href="/logout.php" class="logout-btn"
                style="background:#c00;color:#fff;padding:10px 15px;border-radius:5px;text-decoration:none;font-weight:bold;">
                 LOGOUT
             </a>

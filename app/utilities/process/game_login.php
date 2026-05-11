@@ -29,14 +29,16 @@ include($_SERVER['DOCUMENT_ROOT'] . "/utilities/includes.php");
  */
 $is_https = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off');
 
+
 session_set_cookie_params([
     'lifetime' => 86400,
     'path'     => '/',
-    'domain'   => '',
+    'domain'   => 'casino.vrbmarketing.com',
     'secure'   => $is_https,
     'httponly' => true,
     'samesite' => $is_https ? 'None' : 'Lax'
 ]);
+
 
 session_start();
 
