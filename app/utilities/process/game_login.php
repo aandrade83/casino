@@ -61,6 +61,13 @@ if($cashier_link == ""){ $cashier_code = ""; }
 $jwt_login = false;
 $jwt_data  = null;
 
+
+echo "<pre>";
+print_r($_SESSION);
+echo "</pre>";
+exit;
+
+
 /**
  * =========================================================
  * AUTH RESOLUTION (JWT HAS PRIORITY)

@@ -3,7 +3,6 @@ include($_SERVER['DOCUMENT_ROOT'] ."/utilities/process/game_login.php");
 
 $api = new _api_connection();
 
-
 $balance = $api->get_player_balance($player_token);
 
 if($api->done){

@@ -145,7 +145,6 @@ session_destroy();
         <div class="divider"></div>
         <p class="subtitle">Your session has ended successfully.</p>
         <p class="message">We hope you had a great time at our casino. Come back soon &mdash; the tables are always open.</p>
-        <a href="/" class="btn">Return to Home</a>
         <div class="footer">You have been securely logged out</div>
     </div>
 </body>
