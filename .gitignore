@@ -13,3 +13,4 @@ app/test_*.php
 *.bak
 app/composer-setup.php
 app/vendor/
+app/provider_launch_example.php

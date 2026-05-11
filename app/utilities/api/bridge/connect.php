@@ -16,9 +16,8 @@ class _api_connection{
      */
     
     //var $api_url = CASINO_BASE_URL . "/provider_wallet_api.php";
-    var $api_url =
-    "http://host.docker.internal:8080/provider_wallet_api.php";
-
+    var $api_url = "https://casino.vrbmarketing.com/provider_wallet_api.php";
+    
 
     var $done = true;
     var $error_msg = "";
