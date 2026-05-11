@@ -62,12 +62,12 @@ $jwt_login = false;
 $jwt_data  = null;
 
 
-echo "<pre>";
-print_r($_SESSION);
-echo "</pre>";
-exit;
-
-
+echo "<!-- DEBUG_SESSION ";
+echo "game=" . ($_GET['game'] ?? 'NO_GAME') . " ";
+echo "player=" . ($_SESSION['player'] ?? 'NO_PLAYER') . " ";
+echo "company=" . ($_SESSION['company'] ?? 'NO_COMPANY') . " ";
+echo "token=" . ($_SESSION['player_token'] ?? 'NO_TOKEN') . " ";
+echo "-->";
 /**
  * =========================================================
  * AUTH RESOLUTION (JWT HAS PRIORITY)
