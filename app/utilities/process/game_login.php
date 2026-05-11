@@ -61,13 +61,13 @@ if($cashier_link == ""){ $cashier_code = ""; }
 $jwt_login = false;
 $jwt_data  = null;
 
-
+/*
 echo "<!-- DEBUG_SESSION ";
 echo "game=" . ($_GET['game'] ?? 'NO_GAME') . " ";
 echo "player=" . ($_SESSION['player'] ?? 'NO_PLAYER') . " ";
 echo "company=" . ($_SESSION['company'] ?? 'NO_COMPANY') . " ";
 echo "token=" . ($_SESSION['player_token'] ?? 'NO_TOKEN') . " ";
-echo "-->";
+echo "-->"; */
 /**
  * =========================================================
  * AUTH RESOLUTION (JWT HAS PRIORITY)
@@ -240,7 +240,7 @@ if($game_id && !is_null($_player)){
  */
 if(!is_null($_company) && !is_null($_player)){
 
-    session_regenerate_id(true);
+    //session_regenerate_id(true);
 
     $_SESSION['player']       = $_player->vars["id"];
     $_SESSION['player_token'] = $player_token;
