@@ -74,7 +74,10 @@ $player_id = 800;
 
 $username = "MACTEST";
 
-$currency = "USD";
+/**
+ * Currency is owned by the casino (company.currency) and is NOT included in the JWT.
+ * It is agreed out-of-band at onboarding per cid.
+ */
 
 /**
  * Optional agent information
@@ -104,11 +107,6 @@ $payload = [
      * Provider username
      */
     "username" => strtoupper($username),
-
-    /**
-     * Currency
-     */
-    "currency" => $currency,
 
     /**
      * Optional agent info

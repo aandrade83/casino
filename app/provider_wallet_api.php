@@ -68,9 +68,28 @@ if($token == ""){
 $jwt_payload = [
     "cid" => 12,
     "player_id" => 800,
-    "username" => "MACTEST",
-    "currency" => "USD"
+    "username" => "MACTEST"
 ];
+
+/**
+ * =========================================================
+ * CURRENCY RESOLUTION
+ * =========================================================
+ *
+ * IMPORTANT:
+ * Currency is NOT carried by the JWT and NOT accepted from
+ * the request. The provider MUST derive currency from its
+ * own per-cid configuration (the value agreed with the
+ * casino at onboarding for this company).
+ *
+ * Replace this demo lookup with your real per-cid config.
+ */
+
+$provider_currency_by_cid = [
+    12 => "USD"
+];
+
+$currency = $provider_currency_by_cid[$jwt_payload["cid"]] ?? "USD";
 
 /**
  * =========================================================
@@ -96,7 +115,6 @@ if($jwt_payload["cid"] != 12){
 
 $player_id = $jwt_payload["player_id"];
 $username  = $jwt_payload["username"];
-$currency  = $jwt_payload["currency"];
 
 /**
  * =========================================================

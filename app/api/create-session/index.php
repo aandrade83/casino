@@ -98,7 +98,6 @@ $token = generate_jwt_token(
     $_company->vars['id'],
     $player_id,
     $username,
-    $currency,
     $agent_id,
     $agent_account
 );

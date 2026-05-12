@@ -13,7 +13,6 @@ function generate_jwt_token(
     $company_id,
     $player_id,
     $username,
-    $currency = "USD",
     $agent_id = 0,
     $agent_account = ""
 ){
@@ -24,6 +23,7 @@ function generate_jwt_token(
     $issuer = $config["jwt"]["issuer"];
     $expiration = $config["jwt"]["expiration"];
 
+    // currency is owned by the casino (company.currency) and is NOT included in the JWT
     $payload = [
         "iss" => $issuer,
         "iat" => time(),
@@ -32,7 +32,6 @@ function generate_jwt_token(
         "cid" => $company_id,
         "player_id" => $player_id,
         "username" => $username,
-        "currency" => $currency,
 
         "agent_id" => $agent_id,
         "agent_account" => $agent_account
