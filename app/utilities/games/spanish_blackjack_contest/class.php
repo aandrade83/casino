@@ -228,15 +228,15 @@ class blackjack_sp{
 		$this->session = $session;
 		
 		$this ->player = $session ->vars["player"];
-		$this ->player_hand = explode(",",$session ->vars["player_hand"]);
-		$this ->player_hand2 = explode(",",$session ->vars["player_hand2"]);
-		$this ->dealer_hand = explode(",",$session ->vars["dealer_hand"]);	
+		$this ->player_hand = array_filter(explode(",",$session ->vars["player_hand"] ?? ""));
+		$this ->player_hand2 = array_filter(explode(",",$session ->vars["player_hand2"] ?? ""));
+		$this ->dealer_hand = array_filter(explode(",",$session ->vars["dealer_hand"] ?? ""));	
 		$this ->game_status = $session ->vars["game_status"];
 		$this ->game_status2 = $session ->vars["game_status2"];
 		$this ->bet_amount = $session ->vars["bet_amount"];
 		$this ->bet_amount2 = $session ->vars["bet_amount2"];
 		if(!is_numeric($this ->bet_amount2)){$this ->bet_amount2 = 0;}
-		$this ->splited = $session ->vars["splited"];
+		$this ->splited = $session ->vars["splited"] ?? 0;
 		$this ->game_finished2 = $session ->vars["finished2"];
 		$this ->win_amount = $session ->vars["win_amount"];
 		if(!is_numeric($this ->win_amount)){$this ->win_amount = 0;}
@@ -263,7 +263,7 @@ class blackjack_sp{
 	
 	function close_game(){
 		global $game_id;
-		if($this->session ->vars["finished"] && (!$this->session ->vars["splited"] || $this->session ->vars["finished2"])){
+		if($this->session ->vars["finished"] && (!($this->session ->vars["splited"] ?? 0) || $this->session ->vars["finished2"])){
 			$log = new _settle_log();
 			$log ->vars["game"] = $game_id;
 			$log ->vars["player"] = $this ->player;

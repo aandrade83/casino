@@ -174,8 +174,9 @@ if($_logged){
 				$logic->load_data($session);
 				if($session ->vars["game_status"] == "dealed" || $session ->vars["game_status"] == "hitted"){
 					
+					$double_error = 0;
 					if($action == "double"){
-						
+
 						$balance = $_api->get_player_balance($player_token);
 						if($session ->vars["bet_amount"] <= $balance["amount"]){
 							
