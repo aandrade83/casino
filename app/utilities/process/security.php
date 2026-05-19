@@ -35,8 +35,13 @@ if(isset($_SESSION["company"]) && isset($_SESSION["player_token"]) && isset($_SE
 	
 	
 	if(!is_null($_company) && !is_null($_player)){
-		include($_SERVER['DOCUMENT_ROOT'] ."/utilities/api/". $_company ->vars["path"] ."/connect.php");
-		$_api = new _api_connection();	
+		if ($mock_mode) {
+			include_once($_SERVER['DOCUMENT_ROOT'] . "/utilities/mock/mock_api.php");
+			$_api = new _api_mock();
+		} else {
+			include($_SERVER['DOCUMENT_ROOT'] ."/utilities/api/". $_company ->vars["path"] ."/connect.php");
+			$_api = new _api_connection();
+		}
 		$_using_free_play = $_player ->vars["using_free_play"];
 	}else{
 		$result["error"] = 200;

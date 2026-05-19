@@ -32,8 +32,8 @@ if($_logged){
 					$result["cards"] = implode(",",$cards);		
 					$result["ante_bet"] = $logic ->session ->vars["ante_bet"];
 					$result["call_bet"] = $logic ->session ->vars["call_bet"];
-					$result["turn_bet"] = $logic ->session ->vars["turn_bet"];
-					$result["river_bet"] = $logic ->session ->vars["river_bet"];
+					$result["turn_bet"] = $logic ->session ->vars["turn_bet"] ?? null;
+					$result["river_bet"] = $logic ->session ->vars["river_bet"] ?? null;
 					$result["game_status"] = $logic ->session ->vars["status"];
 					
 					if($logic ->using_pf){
@@ -143,7 +143,7 @@ if($_logged){
 						$balance = $_api->get_player_balance($player_token);
 						if($bet_amount <= $balance["amount"]){				
 												
-							if(!$logic ->session ->vars["finished"]){
+							if(empty($logic ->session ->vars["finished"])){
 								
 								if($logic ->session ->vars["status"] == "dealed"){
 								
@@ -204,7 +204,7 @@ if($_logged){
 						$balance = $_api->get_player_balance($player_token);
 						if(!$bet || $bet_amount <= $balance["amount"]){				
 												
-							if(!$logic ->session ->vars["finished"]){
+							if(empty($logic ->session ->vars["finished"])){
 								
 								if($logic ->session ->vars["status"] == "called"){
 								
@@ -269,7 +269,7 @@ if($_logged){
 						$balance = $_api->get_player_balance($player_token);
 						if(!$bet || $bet_amount <= $balance["amount"]){				
 												
-							if(!$logic ->session ->vars["finished"]){
+							if(empty($logic ->session ->vars["finished"])){
 								
 								if($logic ->session ->vars["status"] == "turned"){
 								
@@ -357,7 +357,7 @@ if($_logged){
 				$session = get_poker_session_by_player($_player ->vars["id"],"holdem");
 				if(!is_null($session)){
 					$logic->load_data($session);					
-					if(!$logic ->session ->vars["finished"]){
+					if(empty($logic ->session ->vars["finished"])){
 						
 						if($logic ->session ->vars["status"] == "dealed"){
 						

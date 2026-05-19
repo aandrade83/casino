@@ -36,7 +36,7 @@ body {
 <div class="game_container">
 	<canvas id="myCanvas" width="200" height="100">Your browser does not support this game, please update ir or try anotherone.</canvas>
 </div>
-<input type="image" src="http://www.vrbmarketing.com/html5/imgs/btn_deal.png" onclick="deal();" id="deal_btn" class="main_btn" />
+<input type="image" src="https://casino.zytom-studios.com/html5/imgs/btn_deal.png" onclick="deal();" id="deal_btn" class="main_btn" />
 <script>
 //create canvas
 var canvas = document.getElementById("myCanvas");
@@ -60,7 +60,7 @@ $(".main_btn").show(1000);
 
 //create and set canvas background
 var background = new Image();
-background.src = "http://www.vrbmarketing.com/html5/imgs/back.jpg";
+background.src = "https://casino.zytom-studios.com/html5/imgs/back.jpg";
 background.onload = function(){
     ctx.drawImage(background,0,0,game_width,game_height);   
 }
@@ -71,7 +71,7 @@ function deal(){
 	
 	//deal player card 1
 	var card1 = new Image();
-	card1.src = "http://www.vrbmarketing.com/html5/imgs/cards/card1.png";
+	card1.src = "https://casino.zytom-studios.com/html5/imgs/cards/card1.png";
 	card1.onload = function(){
 		var start_x = game_width-36;
 		var start_y = 0;

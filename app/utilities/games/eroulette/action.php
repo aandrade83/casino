@@ -66,8 +66,7 @@ if($_logged){
 									if($_company ->vars["prov_fair"]){	
 										//provalby fair
 										$seed_data = discover_server_seed("rlt");
-										$pf_result = $seed_data["xnr"] + $player_num;
-										if($pf_result > 37){$pf_result -= 37;}
+										$pf_result = ($seed_data["xnr"] + $player_num) % 37;
 																		
 										$result["pf"]["lxhs"] = $seed_data["xhs"];
 										$result["pf"]["lsc1"] = $seed_data["xz1"];

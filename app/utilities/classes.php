@@ -101,22 +101,36 @@ class _DB_ELEMENT{
 	function initial(){}
 	
 	function insert(){
-		global $_using_free_play;
+		global $_using_free_play, $mock_mode;
+		if (!empty($mock_mode)) {
+			$this->vars['id'] = rand(1000, 9999);
+			if (!isset($_SESSION['mock_db'])) $_SESSION['mock_db'] = [];
+			if (!isset($_SESSION['mock_db'][$this->table])) $_SESSION['mock_db'][$this->table] = [];
+			$_SESSION['mock_db'][$this->table][$this->vars['id']] = $this->vars;
+			return;
+		}
 		db_connect('main');
-		
+
 		/*insert if is freeplay in some tables*/
 		$free_play_tables = array("settle_log","craps_session","baccarat_session","slot_session","blackjack_session","video_poker_session","roulette_session","poker_session","keno_session");
 		if(in_array($this ->table,$free_play_tables)){
 			$this ->vars["free_play"] = $_using_free_play;
 		}
 		/*----------------------------------*/
-		
+
 		$this->vars['id'] = insert($this, $this->table);
 	}
-	
-	
-	
+
+
+
 	function update($specific = NULL){
+		global $mock_mode;
+		if (!empty($mock_mode)) {
+			if (isset($this->vars['id']) && isset($_SESSION['mock_db'][$this->table][$this->vars['id']])) {
+				$_SESSION['mock_db'][$this->table][$this->vars['id']] = $this->vars;
+			}
+			return true;
+		}
 		if(!is_array($specific) && !is_null($specific)){$specific = explode(",",$specific);}
 		db_connect('main');
 		return update($this, $this->table, $specific);
@@ -352,7 +366,7 @@ class _baccarat_session extends _DB_ELEMENT{
 		return $str;
 	}
 	function get_bet_amount_detail(){
-		return $this ->vars["bet_amount"] + $this ->vars["bet_amount2"];	
+		return ($this->vars["bet_amount"] ?? 0) + ($this->vars["bet_amount2"] ?? 0);
 	}
 }
 

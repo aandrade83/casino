@@ -1,5 +1,5 @@
 //Set game vars
-var core_url = 'https://play.casinogamesonline.com/utilities/games/wheel_of_fortune/action.php?gid='+gid+'&';
+var core_url = '/utilities/games/wheel_of_fortune/action.php?gid='+gid+'&';
 
 //general vars
 var current_bet = 0;

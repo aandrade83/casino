@@ -15,8 +15,8 @@ class _api_connection{
      * ---------------------------------------------------------
      */
     
-    //var $api_url = CASINO_BASE_URL . "/provider_wallet_api.php";
-    var $api_url = "https://casino.vrbmarketing.com/provider_wallet_api.php";
+   var $api_url = CASINO_BASE_URL . "/provider_wallet_api.php";
+   // var $api_url = "https://casino.zytom-studios.com/provider_wallet_api.php";
     
 
     var $done = true;

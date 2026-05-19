@@ -342,7 +342,7 @@ class video_poker{
 		$is = false;
 		$counts = array_count_values($hand);
 		
-		if($counts["J"] == 2 || $counts["Q"] == 2 || $counts["K"] == 2 || $counts["A"] == 2){
+		if(($counts["J"] ?? 0) == 2 || ($counts["Q"] ?? 0) == 2 || ($counts["K"] ?? 0) == 2 || ($counts["A"] ?? 0) == 2){
 			$is = true;	
 		}		
 		

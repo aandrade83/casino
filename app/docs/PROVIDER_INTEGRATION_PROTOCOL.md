@@ -58,7 +58,7 @@ The VRB Casino Platform is a PHP-based gaming host that supports third-party spo
 | Algorithm | `HS256` (HMAC-SHA256) — **fixed, no negotiation** |
 | Header | `{ "typ": "JWT", "alg": "HS256" }` |
 | Secret distribution | Out-of-band, per-provider; stored in `config.php` under `jwt.secret` |
-| Issuer (`iss`) | Provider-supplied or `casino.vrbmarketing.com` |
+| Issuer (`iss`) | Provider-supplied or `casino.zytom-studios.com` |
 | Default lifetime | `3600` seconds (1 hour) |
 | Encoding library | `firebase/php-jwt` |
 | Transport | HTTPS query parameter `?token=<JWT>` on launch URL |
@@ -79,7 +79,7 @@ Clock skew tolerance: **0 seconds** (no leeway). Providers must keep their clock
 
 ```json
 {
-  "iss": "casino.vrbmarketing.com",
+  "iss": "casino.zytom-studios.com",
   "iat": 1746979200,
   "exp": 1746982800,
   "cid": 12,

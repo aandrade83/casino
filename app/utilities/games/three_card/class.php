@@ -15,6 +15,8 @@ class _three_card_poker{
 	var $player_best_hand = array();
 	var $dealer_best_hand = array();
 	
+	var $cards = array();
+
 	//SETTINGS
 	var $number_of_decks = 1;
 	
@@ -56,7 +58,7 @@ class _three_card_poker{
 		
 		$this->player_hand_level = $this->calculate_hand_level(explode(",",$this->session ->vars["player_hand"]));
 		
-		$removing_cards = explode(",",$session ->vars["player_hand"].",".$session ->vars["dealer_hand"].",".$session ->vars["table_cards"]);
+		$removing_cards = explode(",",$session ->vars["player_hand"].",".$session ->vars["dealer_hand"].",".($session ->vars["table_cards"] ?? ""));
 		foreach($removing_cards as $rcard){
 			$position = array_search($rcard,$this ->cards);
 			if(is_numeric($position)){array_splice($this ->cards, $position, 1);}
@@ -151,7 +153,7 @@ class _three_card_poker{
 		
 		$session ->insert();
 		
-		if($session ->vars["finished"]){
+		if(!empty($session ->vars["finished"])){
 			$this->session = $session;
 			$this->store_settle();	
 		}
@@ -298,8 +300,8 @@ class _three_card_poker{
 	
 	function break_tie(){
 		$winner = "tie";
-		$pall_cards = array_merge(explode(",",$this->session ->vars["table_cards"]),explode(",",$this->session ->vars["player_hand"]));
-		$dall_cards = array_merge(explode(",",$this->session ->vars["table_cards"]),explode(",",$this->session ->vars["dealer_hand"]));
+		$pall_cards = array_merge(explode(",",($this->session ->vars["table_cards"] ?? "")),explode(",",$this->session ->vars["player_hand"]));
+		$dall_cards = array_merge(explode(",",($this->session ->vars["table_cards"] ?? "")),explode(",",$this->session ->vars["dealer_hand"]));
 		switch($this->player_hand_level){ 
 			case 0:
 				//tie with no winning hands, get highst cards
@@ -563,8 +565,8 @@ class _three_card_poker{
 		$log = new _settle_log();
 		$log ->vars["game"] = $game_id;
 		$log ->vars["player"] = $this ->player;
-		$log ->vars["bet_amount"] = ($this->session ->vars["ante_bet"]+$this->session ->vars["call_bet"]+$this->session ->vars["turn_bet"]+$this->session ->vars["river_bet"]);
-		$log ->vars["win_amount"] = $this->session ->vars["win_amount"];
+		$log ->vars["bet_amount"] = (($this->session ->vars["ante_bet"] ?? 0)+($this->session ->vars["call_bet"] ?? 0)+($this->session ->vars["turn_bet"] ?? 0));
+		$log ->vars["win_amount"] = $this->session ->vars["win_amount"] ?? 0;
 		$log ->vars["settle"] = $this->session ->vars["settle"];
 		$log ->vars["ldate"] = date("Y-m-d H:i:s");
 		$log ->insert();

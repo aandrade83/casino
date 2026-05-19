@@ -1,5 +1,5 @@
 //Set game vars
-var core_url = 'https://play.casinogamesonline.com/utilities/games/video_poker_deuces/action.php?gid='+gid+'&';
+var core_url = '/utilities/games/video_poker_deuces/action.php?gid='+gid+'&';
 
 //general vars
 var current_bet = 0;
@@ -456,15 +456,20 @@ function deal(){
 					}
 					
 				}else{
-					alert("There was a problem: " + data.msg);
+					if(data.error == 400){
+						$.getJSON(core_url + "action=abandon", function(){ deal(); });
+					}else{
+						show_message("Error: " + data.msg);
+						setTimeout(function(){ hide_message(); }, 4000);
+					}
 				}
-			});	
-				
+			});
+
 		}else{
-			fire_not_enough_balance("Not enough balance");	
+			fire_not_enough_balance("Not enough balance");
 		}
 	}else{
-	
+
 		var holds = hold_btns_statuses.join(",");
 		$.getJSON(core_url + "action=draw&holds=" + holds ,function(data){
 				

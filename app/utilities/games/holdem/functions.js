@@ -1,5 +1,5 @@
 //Set game vars
-var core_url = 'https://play.casinogamesonline.com/utilities/games/holdem/action.php?gid='+gid+'&';
+var core_url = '/utilities/games/holdem/action.php?gid='+gid+'&';
 
 //general vars
 var is_dealed = false;
@@ -187,7 +187,7 @@ function create (){
 		bet_areas[bet_areas_data[i].id].displayWidth=bet_areas_data[i].w; 
 		bet_areas[bet_areas_data[i].id].displayHeight=bet_areas_data[i].h; 
 		bet_areas[bet_areas_data[i].id].alpha = 0.5;
-		if(bet_areas_data[i].id == "ante"){bet_areas[bet_areas_data[i].id].on('pointerup', function (pointer) { place_bet(this.name); });}
+		if(bet_areas_data[i].id == "ante"){bet_areas[bet_areas_data[i].id].on('pointerup', function (pointer) { console.log("ante clicked"); place_bet(this.name); });}
 	}
 	
 	clear_betareas_amounts();
@@ -468,7 +468,7 @@ function deal_card(position, card){
 }
 
 function place_bet(area){
-	
+	console.log("place_bet:", area, "playing:", playing, "open_bet_area:", open_bet_area, "selected_chip:", selected_chip, "balance:", current_balance, "max:", max_amount);
 	if((!playing || area != "ante") && (open_bet_area == area || loading_game)){
 		$("#btn_rebet").hide(); $("#btn_rebet_spin").hide();
 		if(/*current_bet+*/selected_chip <= current_balance){//not include current bet because current balance already have current bet deducted
@@ -483,7 +483,8 @@ function place_bet(area){
 				new_chips.push({value:selected_chip, area:area});
 			
 			}else{
-				alert("The maximum bet on this field is " + currency_symbol + max_amount);
+				show_message("Max bet: " + currency_symbol + max_amount);
+				setTimeout("hide_message();", 2000);
 			}
 		}else{
 			fire_not_enough_balance("Not enough balance");
@@ -589,7 +590,7 @@ function game_start(){
 					open_bet_area = "turn";
 					$("#btn_bet").show(500);
 					$("#btn_check").show(500);
-				}if(game_status == "turned"){
+				}else if(game_status == "turned"){
 					open_bet_area = "river";
 					$("#btn_bet").show(500);
 					$("#btn_check").show(500);
@@ -644,7 +645,8 @@ function deal(){
 			$(".game_btn").hide(500);
 					
 			//Provably fair
-			if($("#pf_player_num").val()){var player_number = $("#pf_player_num").val().replace(/[^\d,-]/g,'');}
+			var player_number = 0;
+			if($("#pf_player_num").val()){player_number = $("#pf_player_num").val().replace(/[^\d,-]/g,'');}
 			$("#pf_player_num").prop("readonly", true);
 			
 			$.getJSON(core_url + "action=deal&bet=" + current_bet + "&pnr="+player_number ,function(data){

@@ -18,7 +18,7 @@ $company_name = $parts[0] ?? null;
 $company_pass = $parts[1] ?? null;
 
 // 🔥 SI YA HAY SESSION, USARLA
-if(isset($_SESSION['company'])){
+if(isset($_SESSION['company']) && !$company_name){
     
     $_company = get_company($_SESSION['company']);
 

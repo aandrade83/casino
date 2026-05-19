@@ -11,7 +11,7 @@ if(($_GE["show_errors"] ?? false)){
 define("CASINO_BASE_URL", 
     ($_SERVER['HTTP_HOST'] == 'localhost:8080')
         ? "http://localhost:8080"
-        : "https://casino.vrbmarketing.com"
+        : "https://casino.zytom-studios.com"
 );
 
 

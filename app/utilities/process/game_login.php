@@ -33,7 +33,7 @@ $is_https = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off');
 session_set_cookie_params([
     'lifetime' => 86400,
     'path'     => '/',
-    'domain'   => 'casino.vrbmarketing.com',
+    'domain'   => 'casino.zytom-studios.com',
     'secure'   => $is_https,
     'httponly' => true,
     'samesite' => $is_https ? 'None' : 'Lax'

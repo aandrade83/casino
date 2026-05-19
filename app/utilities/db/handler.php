@@ -244,17 +244,47 @@ function get_craps_rolls_by_session($sid){
 
 
 function get_video_poker_session_by_player($pid, $type, $open = true){
+	global $mock_mode;
+	if (!empty($mock_mode)) {
+		$sessions = $_SESSION['mock_db']['video_poker_session'] ?? [];
+		krsort($sessions);
+		foreach ($sessions as $session_data) {
+			if ($session_data['player'] == $pid && $session_data['vp_type'] == $type) {
+				if (!$open || empty($session_data['finished'])) {
+					$session = new _vp_session();
+					$session->vars = $session_data;
+					return $session;
+				}
+			}
+		}
+		return null;
+	}
 	db_connect("main");
 	if($open){$sql_open = "AND finished = 0";}
 	$sql = "select TOP 1 * from video_poker_session where player = '$pid' $sql_open AND vp_type = '$type' ORDER BY id DESC";
-	return get($sql, "_vp_session", true); 
+	return get($sql, "_vp_session", true);
 }
 
 function get_poker_session_by_player($pid, $type, $open = true){
+	global $mock_mode;
+	if (!empty($mock_mode)) {
+		$sessions = $_SESSION['mock_db']['poker_session'] ?? [];
+		krsort($sessions);
+		foreach ($sessions as $session_data) {
+			if ($session_data['player'] == $pid && $session_data['poker_type'] == $type) {
+				if (!$open || empty($session_data['finished'])) {
+					$session = new _poker_session();
+					$session->vars = $session_data;
+					return $session;
+				}
+			}
+		}
+		return null;
+	}
 	db_connect("main");
 	if($open){$sql_open = "AND finished = 0";}
 	$sql = "select TOP 1 * from poker_session where player = '$pid' $sql_open AND poker_type = '$type' ORDER BY id DESC";
-	return get($sql, "_poker_session", true); 
+	return get($sql, "_poker_session", true);
 }
 
 function get_craps_session_by_player($pid, $open = true){

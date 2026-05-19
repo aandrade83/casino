@@ -1,5 +1,5 @@
 //Set game vars
-var core_url = 'https://play.casinogamesonline.com/utilities/games/caribbean/action.php?gid='+gid+'&';
+var core_url = '/utilities/games/caribbean/action.php?gid='+gid+'&';
 
 //general vars
 var is_dealed = false;
@@ -652,8 +652,8 @@ function place_rebet(deal){
 
 
 function deal(){
-	
-	
+	console.log("deal() called. is_dealed:", is_dealed, "current_bet:", current_bet, "current_balance:", current_balance);
+
 	if(!is_dealed){
 		if(current_bet <= current_balance){
 			
@@ -692,14 +692,16 @@ function deal(){
 
 					
 				}else{
-					alert("There was a problem: " + data.msg);
+					console.error("Deal error:", data);
+					show_message("Error: " + data.msg);
+					setTimeout("hide_message();", 3000);
 				}
-			});	
-				
+			});
+
 		}else{
-			fire_not_enough_balance("Not enough balance");	
+			fire_not_enough_balance("Not enough balance");
 		}
-		
+
 	}
 }
 

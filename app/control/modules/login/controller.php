@@ -3,7 +3,7 @@
 session_set_cookie_params([
     'lifetime' => 0,
     'path' => '/',
-    'domain' => 'casino.vrbmarketing.com',
+    'domain' => 'casino.zytom-studios.com',
     'secure' => true,
     'httponly' => true,
     'samesite' => 'None'

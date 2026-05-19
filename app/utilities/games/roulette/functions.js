@@ -1,6 +1,6 @@
 
 //Set game vars
-var core_url = 'https://play.casinogamesonline.com/utilities/games/roulette/action.php?gid='+gid+'&';
+var core_url = '/utilities/games/roulette/action.php?gid='+gid+'&';
 
 //general vars
 var current_bet = 0;
@@ -730,8 +730,9 @@ function spin(){
 		previous_bets = bet_detail.bets;
 		
 		//Provably fair
-		if($("#pf_player_num").val()){var player_number = $("#pf_player_num").val().replace(/[^\d,-]/g,'');}
-		
+		var player_number = 0;
+		if($("#pf_player_num").val()){ player_number = $("#pf_player_num").val().replace(/[^\d,-]/g,''); }
+
 		$.getJSON(core_url + "action=spin&bets=" + bet_detail.bets + "&pnr="+player_number + "&oskr=" + Math.random()  ,function(data){
 				
 			if(!data.error){ //change the way to check error

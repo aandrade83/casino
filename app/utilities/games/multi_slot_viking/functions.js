@@ -1,5 +1,5 @@
 //Set game vars
-var core_url = 'https://play.casinogamesonline.com/utilities/games/multi_slot_viking/action.php?gid='+gid+'&';
+var core_url = '/utilities/games/multi_slot_viking/action.php?gid='+gid+'&';
 
 //general vars
 var reel1 = null;
@@ -547,7 +547,8 @@ function spin(){
 			update_balance(current_balance-total_bet);
 			
 			//Provably fair
-			if($("#pf_player_num").val()){var player_number = $("#pf_player_num").val().replace(/[^\d,-]/g,'');}
+			var player_number = 0;
+			if($("#pf_player_num").val()){ player_number = $("#pf_player_num").val().replace(/[^\d,-]/g,''); }
 
 			$.getJSON(core_url + "action=spin&bet=" + current_bet + "&lines=" + current_lines + "&pnr="+player_number+"&oskr=" + Math.random()  ,function(data){
 				

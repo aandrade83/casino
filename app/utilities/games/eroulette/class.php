@@ -181,9 +181,7 @@ class roulette{
 		
 		if(is_numeric($pf_result)){
 			//Rpovably fair
-			$winning_number = $pf_result;
-			if($winning_number > 36){$winning_number -= 37;}
-			$winning_number = intval($winning_number);
+			$winning_number = intval($pf_result) % 37;
 		}else{
 			//Random
 			$winning_number = rc_random(0,36);

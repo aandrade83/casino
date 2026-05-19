@@ -1,5 +1,5 @@
 //Set game vars
-var core_url = 'https://play.casinogamesonline.com/utilities/games/three_card/action.php?gid='+gid+'&';
+var core_url = '/utilities/games/three_card/action.php?gid='+gid+'&';
 
 //general vars
 var is_dealed = false;
