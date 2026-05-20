@@ -9,7 +9,7 @@
  * ---------------------------------------------------------
  * Reference wallet API implementation for third party
  * sportsbook / wallet providers integrating with
- * the VRB Casino platform.
+ * the ZYTOM Casino platform.
  *
  * IMPORTANT:
  * ---------------------------------------------------------

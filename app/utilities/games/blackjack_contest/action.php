@@ -35,7 +35,7 @@ if($_logged){
 				$result["player_hand_value2"] = $logic->get_hand_value("player2");
 				$result["can_split"] = $logic->can_split();
 				$result["splited"] = $logic->splited;
-				$result["finished2"] = $session->vars["finished2"];
+				$result["finished2"] = $session->vars["finished2"] ?? 0;
 				
 				if($logic ->using_pf){
 					$result["pf"]["lxhs"] = $logic->pf_data["xhs"];
@@ -64,9 +64,9 @@ if($_logged){
 				$result["bet_amount"] = $logic->bet_amount;
 				$result["bet_amount2"] = $logic->bet_amount2;
 				$result["status"] = $logic->game_status;
-				$result["finished"] = $session->vars["finished"];	
-				
-				if($session->vars["finished"]){
+				$result["finished"] = $session->vars["finished"] ?? 0;
+
+				if(!empty($session->vars["finished"])){
 					
 					//provably fair
 					if($_company ->vars["prov_fair"]){ 

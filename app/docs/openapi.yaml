@@ -1,13 +1,13 @@
 openapi: 3.0.3
 info:
-  title: VRB Casino Platform API
+  title: ZYTOM Casino Platform API
   version: "1.0"
   description: |
-    Integration specification for the VRB Casino Platform.
+    Integration specification for the ZYTOM Casino Platform.
 
     ## Architecture
 
-    The VRB Casino is a **stateless game-execution layer**. All wallet state
+    The ZYTOM Casino is a **stateless game-execution layer**. All wallet state
     (real-money balances, free-play balances, transaction ledger) is owned by
     the third-party sportsbook **Provider**. Communication follows two directions:
 
@@ -50,7 +50,7 @@ info:
     ```
 
   contact:
-    name: VRB Marketing
+    name: ZYTOM Marketing
     url: https://casino.zytom-studios.com
 
 servers:

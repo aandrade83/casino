@@ -209,8 +209,9 @@ class blackjack_sh{
 					$total = 21;	
 				}
 			}else{
-				$total = $total."/".($total+10);	
-				if($to_compare){$total = $total+10;}
+				$high = $total + 10;
+				if($to_compare){$total = $high;}
+				else{$total = $total."/".$high;}
 			}
 		}
 		
@@ -222,24 +223,24 @@ class blackjack_sh{
 		$this->session = $session;
 		
 		$this ->player = $session ->vars["player"];
-		$this ->player_hand = array_filter(explode(",",$session ->vars["player_hand"] ?? ""));
-		$this ->player_hand2 = array_filter(explode(",",$session ->vars["player_hand2"] ?? ""));
-		$this ->dealer_hand = array_filter(explode(",",$session ->vars["dealer_hand"] ?? ""));	
+		$this ->player_hand = array_values(array_filter(explode(",",$session ->vars["player_hand"] ?? "")));
+		$this ->player_hand2 = array_values(array_filter(explode(",",$session ->vars["player_hand2"] ?? "")));
+		$this ->dealer_hand = array_values(array_filter(explode(",",$session ->vars["dealer_hand"] ?? "")));	
 		$this ->game_status = $session ->vars["game_status"];
-		$this ->game_status2 = $session ->vars["game_status2"];
+		$this ->game_status2 = $session ->vars["game_status2"] ?? "";
 		$this ->bet_amount = $session ->vars["bet_amount"];
-		$this ->bet_amount2 = $session ->vars["bet_amount2"];
+		$this ->bet_amount2 = $session ->vars["bet_amount2"] ?? 0;
 		if(!is_numeric($this ->bet_amount2)){$this ->bet_amount2 = 0;}
 		$this ->splited = $session ->vars["splited"] ?? 0;
-		$this ->game_finished2 = $session ->vars["finished2"];
-		$this ->win_amount = $session ->vars["win_amount"];
+		$this ->game_finished2 = $session ->vars["finished2"] ?? 0;
+		$this ->win_amount = $session ->vars["win_amount"] ?? 0;
 		if(!is_numeric($this ->win_amount)){$this ->win_amount = 0;}
-		$this ->win_amount2 = $session ->vars["win_amount2"];
+		$this ->win_amount2 = $session ->vars["win_amount2"] ?? 0;
 		if(!is_numeric($this ->win_amount2)){$this ->win_amount2 = 0;}
-		$this ->settle = $session ->vars["settle"];
-		
+		$this ->settle = $session ->vars["settle"] ?? 0;
+
 		//load pf data
-		if($session ->vars["pf"] != '""' && $session ->vars["pf"] != ''){
+		if(($session ->vars["pf"] ?? '') != '""' && ($session ->vars["pf"] ?? '') != ''){
 			$this->pf_data = json_decode($session ->vars["pf"],true);
 			if(!is_null($this->pf_data) && is_numeric($this->pf_data["pos"])){
 				$this->start_pf($this->pf_data["pos"]);
@@ -257,7 +258,7 @@ class blackjack_sh{
 	
 	function close_game(){
 		global $game_id;
-		if($this->session ->vars["finished"] && (!($this->session ->vars["splited"] ?? 0) || $this->session ->vars["finished2"])){
+		if(($this->session ->vars["finished"] ?? 0) && (!($this->session ->vars["splited"] ?? 0) || ($this->session ->vars["finished2"] ?? 0))){
 			$log = new _settle_log();
 			$log ->vars["game"] = $game_id;
 			$log ->vars["player"] = $this ->player;
@@ -292,7 +293,7 @@ class blackjack_sh{
 		$this->session ->vars["end_date"] = date("Y-m-d H:i:s");
 		$this->session ->vars["finished"] = 1;
 		$this->session ->vars["win_amount"] = 0;
-		$this->session ->vars["settle"] += $this->win_amount*-1;
+		$this->session ->vars["settle"] = ($this->session ->vars["settle"] ?? 0) + $this->win_amount*-1;
 		$this->session ->vars["bet_amount"] = $this->win_amount;
 		$this->session->update("game_status,end_date,finished,win_amount,bet_amount,settle");
 		
@@ -378,7 +379,7 @@ class blackjack_sh{
 		$this->session ->vars["finished"] = $this->game_finished;
 		if($this->session ->vars["finished"]){
 			$this->session ->vars["win_amount"] = $this->win_amount;
-			$this->session ->vars["settle"] += $this->settle;
+			$this->session ->vars["settle"] = ($this->session ->vars["settle"] ?? 0) + $this->settle;
 			$this->close_game();
 		}else{
 			$this->session ->vars["win_amount"] = 0;
@@ -406,7 +407,7 @@ class blackjack_sh{
 		if($dealer_total <= 16 && $player_total <= 21){$this->dealer_hit();}
 		$this->grade_game();
 		
-		$this->session ->vars["settle"] += $this->settle;
+		$this->session ->vars["settle"] = ($this->session ->vars["settle"] ?? 0) + $this->settle;
 		$this->session ->vars["finished"] = $this->game_finished;
 		$this->session ->vars["win_amount"] = $this->win_amount;
 		$this->session ->vars["bet_amount"] = $this->bet_amount;
@@ -449,7 +450,7 @@ class blackjack_sh{
 		$this->game_status2 = "dealed";	
 		
 		$this->bet_amount2 = $this->bet_amount;
-		$this->session ->vars["settle"] += $this->settle;
+		$this->session ->vars["settle"] = ($this->session ->vars["settle"] ?? 0) + $this->settle;
 		$this->session ->vars["splited"] = 1;
 		$this->session ->vars["bet_amount2"] = $this->bet_amount;
 		$this->session ->vars["player_hand"] = implode(",",$this->player_hand2);
@@ -472,7 +473,7 @@ class blackjack_sh{
 		if($dealer_total <= 16){$this->dealer_hit();}
 		$this->grade_game();
 		
-		$this->session ->vars["settle"] += $this->settle;
+		$this->session ->vars["settle"] = ($this->session ->vars["settle"] ?? 0) + $this->settle;
 		$this->session ->vars["finished"] = $this->game_finished;
 		$this->session ->vars["win_amount"] = $this->win_amount;
 		$this->session ->vars["end_date"] = date("Y-m-d H:i:s");
@@ -639,7 +640,7 @@ class blackjack_sh{
 			
 			if($this->game_finished ){
 				$this->game_status = $temp_status;
-				$this->session ->vars["settle"] += $this->settle;
+				$this->session ->vars["settle"] = ($this->session ->vars["settle"] ?? 0) + $this->settle;
 			}else{
 				$this->game_status = "dealed";	
 			}

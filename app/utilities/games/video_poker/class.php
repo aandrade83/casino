@@ -42,7 +42,7 @@ class video_poker{
 		$this ->player = $session ->vars["player"];
 		
 		//load pf data
-		if($session ->vars["pf"] != '""' && $session ->vars["pf"] != ''){
+		if(($session ->vars["pf"] ?? '') != '""' && ($session ->vars["pf"] ?? '') != ''){
 			$this->pf_data = json_decode($session ->vars["pf"],true);
 			if(!is_null($this->pf_data) && is_numeric($this->pf_data["pos"])){
 				$this->start_pf($this->pf_data["pos"]);

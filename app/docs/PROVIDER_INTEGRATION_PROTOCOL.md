@@ -2,7 +2,7 @@
 
 **Version:** 1.0
 **Status:** FROZEN — Production Contract
-**Platform:** VRB Casino (PHP)
+**Platform:** ZYTOM Casino (PHP)
 **Last Updated:** 2026-05-11
 
 ---
@@ -11,11 +11,11 @@
 
 ### 1.1 Architecture
 
-The VRB Casino Platform is a PHP-based gaming host that supports third-party sportsbook operators as upstream wallet providers. The casino exposes a JWT-authenticated launch URL; the provider exposes a wallet HTTP API. All real-money state is owned by the provider. The casino acts as a stateless game-execution layer.
+The ZYTOM Casino Platform is a PHP-based gaming host that supports third-party sportsbook operators as upstream wallet providers. The casino exposes a JWT-authenticated launch URL; the provider exposes a wallet HTTP API. All real-money state is owned by the provider. The casino acts as a stateless game-execution layer.
 
 ```
  ┌────────────────────────┐         ┌──────────────────────────┐
- │ Third-Party Sportsbook │         │     VRB Casino           │
+ │ Third-Party Sportsbook │         │     ZYTOM Casino           │
  │  (Provider / Operator) │         │  (Game Execution Layer)  │
  ├────────────────────────┤         ├──────────────────────────┤
  │ - JWT Issuer           │  JWT →  │ - JWT Validator          │

@@ -5,7 +5,7 @@
  * PROVIDER WALLET API — SANITIZED REFERENCE
  * =========================================================
  *
- * This is the endpoint the VRB Casino will POST to in order
+ * This is the endpoint the ZYTOM Casino will POST to in order
  * to query balances, debit bets, and credit prizes.
  *
  * You — the provider — host this file at an HTTPS URL and

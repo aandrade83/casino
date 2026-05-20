@@ -33,7 +33,7 @@ $is_https = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off');
 session_set_cookie_params([
     'lifetime' => 86400,
     'path'     => '/',
-    'domain'   => 'casino.zytom-studios.com',
+    'domain'   => $mock_mode ? '' : 'casino.zytom-studios.com',
     'secure'   => $is_https,
     'httponly' => true,
     'samesite' => $is_https ? 'None' : 'Lax'
@@ -60,6 +60,8 @@ if($cashier_link == ""){ $cashier_code = ""; }
 
 $jwt_login = false;
 $jwt_data  = null;
+$_company  = null;
+$_player   = null;
 
 /*
 echo "<!-- DEBUG_SESSION ";
@@ -78,7 +80,9 @@ if($player_token != "" && is_jwt_token($player_token)){
     $jwt_data = validate_jwt_token($player_token);
 
     if(!$jwt_data){
-        echo "Invalid or expired token.";
+        $_SESSION['error_reason'] = "game_login_tokenInvalid";
+        $_SESSION['error_url'] = $_SERVER['REQUEST_URI'];
+        include($_SERVER['DOCUMENT_ROOT'] . "/utilities/ui/no_session.php");
         exit;
     }
 
@@ -86,11 +90,19 @@ if($player_token != "" && is_jwt_token($player_token)){
     $_company       = get_company($jwt_company_id);
 
     if(is_null($_company)){
-        echo "Invalid company.";
+        $_SESSION['error_reason'] = "game_login_invalidCompany";
+        $_SESSION['error_url'] = $_SERVER['REQUEST_URI'];
+        include($_SERVER['DOCUMENT_ROOT'] . "/utilities/ui/no_session.php");
         exit;
     }
 
-    include($_SERVER['DOCUMENT_ROOT'] . "/utilities/api/" . $_company->vars["path"] . "/connect.php");
+    if ($mock_mode) {
+        include_once($_SERVER['DOCUMENT_ROOT'] . "/utilities/mock/mock_api.php");
+        $_api = new _api_mock();
+    } else {
+        include($_SERVER['DOCUMENT_ROOT'] . "/utilities/api/" . $_company->vars["path"] . "/connect.php");
+        $_api = new _api_connection();
+    }
 
     $jwt_login = true;
 }
@@ -104,7 +116,13 @@ else if(isset($_SESSION['company'])){
     $_company = get_company($_SESSION['company']);
 
     if(!is_null($_company)){
-        include($_SERVER['DOCUMENT_ROOT'] . "/utilities/api/" . $_company->vars["path"] . "/connect.php");
+        if ($mock_mode) {
+            include_once($_SERVER['DOCUMENT_ROOT'] . "/utilities/mock/mock_api.php");
+            $_api = new _api_mock();
+        } else {
+            include($_SERVER['DOCUMENT_ROOT'] . "/utilities/api/" . $_company->vars["path"] . "/connect.php");
+            $_api = new _api_connection();
+        }
     }
 }
 
@@ -128,7 +146,9 @@ if(
     if(!is_null($_company) && !is_null($_player)){
         $_using_free_play = $_player->vars["using_free_play"];
     } else {
-        echo "Session invalid";
+        $_SESSION['error_reason'] = "game_login_sessionInvalid";
+        $_SESSION['error_url'] = $_SERVER['REQUEST_URI'];
+        include($_SERVER['DOCUMENT_ROOT'] . "/utilities/ui/no_session.php");
         exit;
     }
 }
@@ -253,7 +273,9 @@ if(!is_null($_company) && !is_null($_player)){
 
 } else {
 
-    echo "Unable to connect, please verify your connection information.";
+    $_SESSION['error_reason'] = "game_login_unableToConnect";
+    $_SESSION['error_url'] = $_SERVER['REQUEST_URI'];
+    include($_SERVER['DOCUMENT_ROOT'] . "/utilities/ui/no_session.php");
     exit;
 }
 ?>

@@ -6,7 +6,7 @@
  * =========================================================
  *
  * Reference implementation showing how a sportsbook /
- * provider should generate a JWT token and launch the VRB
+ * provider should generate a JWT token and launch the ZYTOM
  * Casino.
  *
  * This file is NON-FUNCTIONAL as shipped — the placeholders

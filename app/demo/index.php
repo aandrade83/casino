@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <script type="text/javascript" src="../utilities/js/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="js/phaser.js"></script>
-<title>VRB Game example</title>
+<title>ZYTOM Game example</title>
 <style type="text/css">
 body {
 	background-color: #000;
