@@ -1,4 +1,5 @@
 app/config.php
+app/utilities/vars.php
 app/sftp-config.json
 **/log.txt
 **/*.log
@@ -7,5 +8,10 @@ app/test.php
 app/test_db.php
 app/test_slot.php
 app/test_wheel.php
-app/*.rar
-app/*.zip
+app/test_*.php
+*.rar
+*.zip
+*.bak
+app/composer-setup.php
+app/vendor/
+app/provider_launch_example.php

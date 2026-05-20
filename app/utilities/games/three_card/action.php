@@ -179,7 +179,7 @@ if($_logged){
 						$balance = $_api->get_player_balance($player_token);
 						if($bet_amount <= $balance["amount"]){				
 												
-							if(!$logic ->session ->vars["finished"]){
+							if(empty($logic ->session ->vars["finished"])){
 								
 								if($logic ->session ->vars["status"] == "dealed"){
 								
@@ -280,7 +280,7 @@ if($_logged){
 						$balance = $_api->get_player_balance($player_token);
 						if(!$bet || $bet_amount <= $balance["amount"]){				
 												
-							if(!$logic ->session ->vars["finished"]){
+							if(empty($logic ->session ->vars["finished"])){
 								
 								if($logic ->session ->vars["status"] == "turned"){
 								
@@ -368,7 +368,7 @@ if($_logged){
 				$session = get_poker_session_by_player($_player ->vars["id"],"three_card");
 				if(!is_null($session)){
 					$logic->load_data($session);					
-					if(!$logic ->session ->vars["finished"]){
+					if(empty($logic ->session ->vars["finished"])){
 						
 						if($logic ->session ->vars["status"] == "dealed"){
 						

@@ -1,7 +1,7 @@
 //Set game vars
 var selected_chip = 1;
 var unselected_chip_alpha = 0.4;
-var core_url = 'https://play.casinogamesonline.com/utilities/games/blackjack_double/action.php?gid='+gid+'&';
+var core_url = "/utilities/games/blackjack_double/action.php?gid=" + gid + "&";
 var table_text_style = { font:"16px Arial", fill: "#f1f400", align: "center" };
 var chip_speed = 2000;
 var card_speed = 2000;

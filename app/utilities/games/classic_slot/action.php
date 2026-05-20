@@ -83,8 +83,11 @@ if($_logged){
 									$result["win_amount"] = $win_amount;
 									if($win_amount > 0){
 										$data = $_api->credit_prize($player_token, $win_amount, $casino_name ." ". $game ->vars["name"], $casino_id_base . $game ->vars["id"]);
+									}else{
+										$balance = $_api->get_player_balance($player_token);
+										$data["balance"] = $balance["amount"];
 									}
-									
+
 									$result["balance"] = $data["balance"];
 									
 									if(!$_api->done){ //error placing something in API

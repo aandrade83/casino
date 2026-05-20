@@ -42,7 +42,7 @@ class video_poker{
 		$this ->player = $session ->vars["player"];
 		
 		//load pf data
-		if($session ->vars["pf"] != '""' && $session ->vars["pf"] != ''){
+		if(($session ->vars["pf"] ?? '') != '""' && ($session ->vars["pf"] ?? '') != ''){
 			$this->pf_data = json_decode($session ->vars["pf"],true);
 			if(!is_null($this->pf_data) && is_numeric($this->pf_data["pos"])){
 				$this->start_pf($this->pf_data["pos"]);
@@ -252,12 +252,12 @@ class video_poker{
 		$is = false;
 		$counts = array_count_values($values);
 		
-		$deuces_count = $counts["2"];
-		if($compare_hand[0] != "2"){$a_count = $counts[$compare_hand[0]];}
-		if($compare_hand[1] != "2"){$b_count = $counts[$compare_hand[1]];}
-		if($compare_hand[2] != "2"){$c_count = $counts[$compare_hand[2]];}
-		if($compare_hand[3] != "2"){$d_count = $counts[$compare_hand[3]];}
-		if($compare_hand[4] != "2"){$e_count = $counts[$compare_hand[4]];}
+		$deuces_count = $counts["2"] ?? 0;
+		if($compare_hand[0] != "2"){$a_count = $counts[$compare_hand[0]] ?? 0;}
+		if($compare_hand[1] != "2"){$b_count = $counts[$compare_hand[1]] ?? 0;}
+		if($compare_hand[2] != "2"){$c_count = $counts[$compare_hand[2]] ?? 0;}
+		if($compare_hand[3] != "2"){$d_count = $counts[$compare_hand[3]] ?? 0;}
+		if($compare_hand[4] != "2"){$e_count = $counts[$compare_hand[4]] ?? 0;}
 		
 		
 		if($a_count < 2 && $b_count < 2 && $c_count < 2 && $d_count < 2 && $e_count < 2){
@@ -306,7 +306,7 @@ class video_poker{
 		$is = false;
 		$counts = array_count_values($hand);		
 		
-		if($counts["2"] == 4){
+		if(($counts["2"] ?? 0) == 4){
 			$is = true;	
 		}		
 		
@@ -316,11 +316,11 @@ class video_poker{
 	function is_full($values){
 		$is = false;
 		$counts = array_count_values($values);	
-		$deuces_count = $counts["2"];
+		$deuces_count = $counts["2"] ?? 0;
 		unset($counts["2"]);
 		rsort($counts);
-		
-		if(($counts[0] == 3 && $counts[1] == 2) || ($counts[0] == 2 && $counts[1] == 2 && $deuces_count == 1)){
+
+		if(($counts[0] == 3 && ($counts[1] ?? 0) == 2) || ($counts[0] == 2 && ($counts[1] ?? 0) == 2 && $deuces_count == 1)){
 			$is = true;
 		}
 		
@@ -331,11 +331,11 @@ class video_poker{
 	function is_n_of_kind($values,$n){
 		$is = false;
 		$counts = array_count_values($values);	
-		$deuces_count = $counts["2"];
+		$deuces_count = $counts["2"] ?? 0;
 		unset($counts["2"]);
 		rsort($counts);
-		
-		$points = $counts[0] + $deuces_count;
+
+		$points = ($counts[0] ?? 0) + $deuces_count;
 		
 		if($points == $n){
 			$is = true;
@@ -357,12 +357,12 @@ class video_poker{
 		$is = false;
 		$counts = array_count_values($values);
 		
-		$deuces_count = $counts["2"];
-		$a_count = $counts["A"];
-		$k_count = $counts["K"];
-		$q_count = $counts["Q"];
-		$j_count = $counts["J"];
-		$t_count = $counts["10"];
+		$deuces_count = $counts["2"] ?? 0;
+		$a_count = $counts["A"] ?? 0;
+		$k_count = $counts["K"] ?? 0;
+		$q_count = $counts["Q"] ?? 0;
+		$j_count = $counts["J"] ?? 0;
+		$t_count = $counts["10"] ?? 0;
 		
 		if($deuces_count >= 1 && $a_count < 2 && $k_count < 2 && $q_count < 2 && $j_count < 2 && $t_count < 2){
 

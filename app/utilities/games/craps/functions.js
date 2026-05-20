@@ -1,6 +1,6 @@
 
 //Set game vars
-var core_url = 'https://play.casinogamesonline.com/utilities/games/craps/action.php?gid='+gid+'&';
+var core_url = '/utilities/games/craps/action.php?gid='+gid+'&';
 
 //general vars
 var current_bet = 0;
@@ -865,8 +865,9 @@ function roll(){
 		show_hide_btns(false);
 		
 		//Provably fair
-		if($("#pf_player_num").val()){var player_number = $("#pf_player_num").val().replace(/[^\d,-]/g,'');}
-		
+		var player_number = "1,1";
+		if($("#pf_player_num").val()){ player_number = $("#pf_player_num").val().replace(/[^\d,-]/g,''); }
+
 		$.getJSON(core_url + "action=roll&bets=" + bet_detail.bets + "&pnr="+player_number + "&oskr=" + Math.random()  ,function(data){
 				
 			if(!data.error){ //change the way to check error
@@ -915,10 +916,17 @@ function roll(){
 				if(data.won_bets != ""){winning_areas = data.won_bets.split(",");}
 				if(data.move_bets != ""){moving_areas = data.move_bets.split(",");}
 				
-				if(!data.finished){$("#btn_spin").slideDown(500);}
+				if(data.finished){
+					$("#btn_spin").slideUp(500);
+					setTimeout("$('#btn_clear').slideDown(500);",3000);
+				}else{
+					$("#btn_spin").slideDown(500);
+				}
 				
 			}else{
-				alert("There was a problem: " + data.msg);
+				place_bets = true;
+				show_hide_btns(true);
+				show_message(data.msg);
 			}
 		});	
 		
@@ -1020,7 +1028,7 @@ function place_bet(area){
 					area_bets_amount[area] += selected_chip;
 					new_chips.push({value:selected_chip, area:area});
 					
-					if(current_bet+selected_chip >= min_amount && is_betting_pass_dontpass()){$("#btn_spin").slideDown(500);}
+					if(current_bet >= min_amount){$("#btn_spin").slideDown(500);}
 					
 				}
 			

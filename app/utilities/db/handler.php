@@ -164,10 +164,25 @@ function insert_player_game_limit($pid, $gid, $active, $min, $max){
 }
 
 function get_blackjack_session_by_player($pid, $open = true, $type = "regular"){
+	global $mock_mode;
+	if (!empty($mock_mode)) {
+		$sessions = $_SESSION['mock_db']['blackjack_session'] ?? [];
+		krsort($sessions);
+		foreach ($sessions as $session_data) {
+			if ($session_data['player'] == $pid && ($session_data['bj_type'] ?? 'regular') == $type) {
+				if (!$open || empty($session_data['finished']) || (!empty($session_data['splited']) && empty($session_data['finished2']))) {
+					$session = new _bj_session();
+					$session->vars = $session_data;
+					return $session;
+				}
+			}
+		}
+		return null;
+	}
 	db_connect("main");
 	if($open){$sql_open = "AND (finished = 0 OR (finished2 = 0 AND splited = 1))";}
 	$sql = "select TOP 1 * from blackjack_session where player = '$pid' AND bj_type = '$type' $sql_open ORDER BY id DESC";
-	return get($sql, "_bj_session", true); 
+	return get($sql, "_bj_session", true);
 }
 
 function search_blackjack_session($pid, $from, $to, $type = "bj"){
@@ -244,24 +259,69 @@ function get_craps_rolls_by_session($sid){
 
 
 function get_video_poker_session_by_player($pid, $type, $open = true){
+	global $mock_mode;
+	if (!empty($mock_mode)) {
+		$sessions = $_SESSION['mock_db']['video_poker_session'] ?? [];
+		krsort($sessions);
+		foreach ($sessions as $session_data) {
+			if ($session_data['player'] == $pid && $session_data['vp_type'] == $type) {
+				if (!$open || empty($session_data['finished'])) {
+					$session = new _vp_session();
+					$session->vars = $session_data;
+					return $session;
+				}
+			}
+		}
+		return null;
+	}
 	db_connect("main");
 	if($open){$sql_open = "AND finished = 0";}
 	$sql = "select TOP 1 * from video_poker_session where player = '$pid' $sql_open AND vp_type = '$type' ORDER BY id DESC";
-	return get($sql, "_vp_session", true); 
+	return get($sql, "_vp_session", true);
 }
 
 function get_poker_session_by_player($pid, $type, $open = true){
+	global $mock_mode;
+	if (!empty($mock_mode)) {
+		$sessions = $_SESSION['mock_db']['poker_session'] ?? [];
+		krsort($sessions);
+		foreach ($sessions as $session_data) {
+			if ($session_data['player'] == $pid && $session_data['poker_type'] == $type) {
+				if (!$open || empty($session_data['finished'])) {
+					$session = new _poker_session();
+					$session->vars = $session_data;
+					return $session;
+				}
+			}
+		}
+		return null;
+	}
 	db_connect("main");
 	if($open){$sql_open = "AND finished = 0";}
 	$sql = "select TOP 1 * from poker_session where player = '$pid' $sql_open AND poker_type = '$type' ORDER BY id DESC";
-	return get($sql, "_poker_session", true); 
+	return get($sql, "_poker_session", true);
 }
 
 function get_craps_session_by_player($pid, $open = true){
+	global $mock_mode;
+	if (!empty($mock_mode)) {
+		$sessions = $_SESSION['mock_db']['craps_session'] ?? [];
+		krsort($sessions);
+		foreach ($sessions as $session_data) {
+			if ($session_data['player'] == $pid) {
+				if (!$open || empty($session_data['finished'])) {
+					$session = new _craps_session();
+					$session->vars = $session_data;
+					return $session;
+				}
+			}
+		}
+		return null;
+	}
 	db_connect("main");
 	if($open){$sql_open = "AND finished = 0";}
 	$sql = "select TOP 1 * from craps_session where player = '$pid' $sql_open ORDER BY id DESC";
-	return get($sql, "_craps_session", true); 
+	return get($sql, "_craps_session", true);
 }
 
 function get_pending_craps_bets_by_player($pid){
@@ -475,5 +535,29 @@ function get_company_by_name($name, $password){
 
     return get($sql, "_company", true);
 }
+
+function get_company_by_api_key($api_key){
+	 db_connect("main");
+
+    $sql = "SELECT * FROM company WHERE api_key  = '$api_key'";
+
+    return get($sql, "_company", true);
+}
+
+
+function get_company_by_site($site){
+	 db_connect("main");
+
+    $sql = "SELECT * FROM company WHERE site_url  = '$site'";
+
+    return get($sql, "_company", true);
+}
+
+function get_validated_player($account, $company, $encrypted_password){
+	db_connect("main");
+	$sql = "select * from player where account = '$account' AND company = '$company' AND password = '$encrypted_password'";
+	return get($sql, "_player", true);
+}
+
 
 ?>

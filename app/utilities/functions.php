@@ -253,6 +253,7 @@ function do_post_request($url, $data, $files = false){
 	else{$type = "application/x-www-form-urlencoded";}
 	$opts = array('http'=>array('method'=>'POST','header'  => 'Content-type: '.$type,'content' => $postdata));
 	$context  = stream_context_create($opts);
+	//echo $url;
 	return file_get_contents($url, false, $context);
 }
 
@@ -1266,7 +1267,12 @@ function record_transaction(
     $trans->insert();
 }
 
-
-
+////
+function json_ctrl(array $data, int $status = 200): void
+{
+    http_response_code($status);
+    echo json_encode($data);
+    exit;
+}
 
 ?>

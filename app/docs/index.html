@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ZYTOM Casino — Third-Party Provider Integration</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<style>
+  :root{
+    --bg:#0e1116; --panel:#151a22; --panel-2:#1c2230; --border:#252c39;
+    --text:#e6e8ee; --muted:#9aa3b2; --accent:#5b9cff; --accent-2:#7fd1c1;
+    --code-bg:#0a0d12; --code-border:#222a36;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--text);
+    font:15px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:underline}
+  header{
+    background:linear-gradient(180deg,#11161f,#0e1116);
+    border-bottom:1px solid var(--border);
+    padding:32px 24px;
+  }
+  .wrap{max-width:980px;margin:0 auto;padding:0 24px}
+  header h1{margin:0 0 6px;font-size:24px;letter-spacing:.2px}
+  header p{margin:0;color:var(--muted)}
+  .badge{display:inline-block;background:#1d2533;color:var(--accent-2);
+    border:1px solid #2a384c;padding:2px 8px;border-radius:999px;font-size:12px;
+    margin-left:8px;vertical-align:middle}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:24px 0}
+  @media (max-width:720px){.grid{grid-template-columns:1fr}}
+  .card{background:var(--panel);border:1px solid var(--border);
+    border-radius:10px;padding:16px}
+  .card h3{margin:0 0 6px;font-size:15px}
+  .card p{margin:0 0 12px;color:var(--muted);font-size:13px}
+  .btn{display:inline-block;background:var(--panel-2);color:var(--text);
+    border:1px solid var(--border);padding:8px 12px;border-radius:8px;font-size:13px;
+    margin-right:8px;margin-bottom:6px}
+  .btn:hover{border-color:#3a4658;text-decoration:none}
+  .btn.primary{background:#1a2a44;border-color:#2d4368;color:#cfe0ff}
+  .notice{background:#1a2030;border-left:3px solid var(--accent);
+    padding:10px 14px;border-radius:6px;color:#cbd3e0;font-size:13px;margin:18px 0}
+  main{padding:8px 24px 64px}
+  article{background:var(--panel);border:1px solid var(--border);border-radius:10px;
+    padding:24px 28px;margin:8px 0}
+  article h1{font-size:22px;border-bottom:1px solid var(--border);padding-bottom:8px;margin-top:0}
+  article h2{font-size:18px;margin-top:28px;border-bottom:1px solid var(--border);padding-bottom:6px}
+  article h3{font-size:15px;margin-top:22px;color:#cfe0ff}
+  article p,article li{color:#d8dde6}
+  article code{background:var(--code-bg);border:1px solid var(--code-border);
+    padding:1px 6px;border-radius:4px;font-size:13px;color:#c9e2d8;
+    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+  article pre{background:var(--code-bg);border:1px solid var(--code-border);
+    border-radius:8px;padding:14px 16px;overflow:auto;font-size:13px;line-height:1.55}
+  article pre code{background:none;border:none;padding:0}
+  article table{border-collapse:collapse;width:100%;margin:12px 0;font-size:13.5px}
+  article th,article td{border:1px solid var(--border);padding:8px 10px;text-align:left;vertical-align:top}
+  article th{background:#1a2030}
+  article blockquote{border-left:3px solid var(--accent-2);background:#142025;
+    color:#cfe0d8;margin:14px 0;padding:8px 14px;border-radius:0 6px 6px 0}
+  footer{color:var(--muted);text-align:center;font-size:12px;padding:24px}
+  .loading{color:var(--muted);font-style:italic}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <h1>ZYTOM Casino — Third-Party Provider Integration <span class="badge">v1.1</span></h1>
+    <p>Protocol specification &amp; reference implementations for sportsbook wallet providers.</p>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <div class="notice">
+    <strong>Before you begin:</strong> request the following values from the
+    Casino Provider — JWT shared secret (HS256), your assigned <code>cid</code>,
+    the casino launch URL, and the currency agreed for your <code>cid</code>.
+    These values are <em>not</em> distributed publicly and are <em>not</em>
+    embedded in the demos below.
+  </div>
+
+  <div class="grid">
+
+    <div class="card">
+      <h3>Protocol Specification</h3>
+      <p>Frozen contract: JWT claims, wallet API endpoints, error codes, security and session rules.</p>
+      <a class="btn primary" href="PROVIDER_INTEGRATION_PROTOCOL.md" download>Download .md</a>
+      <a class="btn" href="#spec">Read inline ↓</a>
+    </div>
+
+    <div class="card">
+      <h3>Launch Example <small style="color:var(--muted)">(PHP)</small></h3>
+      <p>How to mint a JWT and redirect a player to the casino. Non-functional template — fill in your onboarding values.</p>
+      <a class="btn primary" href="provider_launch_example.demo.php" download>Download .php</a>
+    </div>
+
+    <div class="card">
+      <h3>Wallet API Reference <small style="color:var(--muted)">(PHP)</small></h3>
+      <p>The endpoint <em>you</em> host. The casino POSTs <code>get_balance</code>, <code>place_bet</code>, <code>place_free_bet</code>, <code>credit_prize</code> to it.</p>
+      <a class="btn primary" href="provider_wallet_api.demo.php" download>Download .php</a>
+    </div>
+
+    <div class="card">
+      <h3>Quick Onboarding Checklist</h3>
+      <p style="color:#d8dde6;font-size:13px">
+        1. Receive <code>cid</code>, JWT secret, launch URL, currency.<br>
+        2. Implement JWT minting (HS256, <code>exp</code> ≤ 1h).<br>
+        3. Host wallet API at an HTTPS URL.<br>
+        4. Send your wallet API URL back to the casino.<br>
+        5. Smoke test: launch → get_balance → place_bet → credit_prize.
+      </p>
+    </div>
+
+  </div>
+
+  <article id="spec">
+    <div id="spec-content" class="loading">Loading specification…</div>
+  </article>
+
+</main>
+
+<footer>
+  © ZYTOM Casino. Protocol v1.1. Questions: contact the Casino Provider.
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script>
+(async function(){
+  var target = document.getElementById('spec-content');
+  try{
+    var res = await fetch('PROVIDER_INTEGRATION_PROTOCOL.md', {cache:'no-store'});
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    var md = await res.text();
+    marked.setOptions({ gfm:true, breaks:false, headerIds:true, mangle:false });
+    target.classList.remove('loading');
+    target.innerHTML = marked.parse(md);
+  }catch(err){
+    target.classList.remove('loading');
+    target.innerHTML =
+      '<p style="color:#ff9b9b">Could not load <code>PROVIDER_INTEGRATION_PROTOCOL.md</code> ('+
+      (err && err.message ? err.message : 'unknown error')+
+      '). Use the download button above to view it.</p>';
+  }
+})();
+</script>
+
+</body>
+</html>

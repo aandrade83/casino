@@ -5,12 +5,24 @@ class _api_connection {
     public $done = true;
     public $error_msg = "";
 
-    private $currency = "USD";
     private $provider = 3;
 
     private function reset_error() {
         $this->done = true;
         $this->error_msg = "";
+    }
+
+    // currency is sourced from company.currency — the single source of truth
+    private function getCurrency() {
+
+        if(isset($_SESSION["company"])){
+            $_company = get_company($_SESSION["company"]);
+            if(!is_null($_company)){
+                return $_company->vars["currency"] ?? "USD";
+            }
+        }
+
+        return "USD";
     }
 
     private function getPlayer() {
@@ -45,7 +57,7 @@ class _api_connection {
         // estos dos siguen disponibles para UI/debug
         "free" => $balance_free,
         "real" => $balance_real,
-        "currency" => $this->currency
+        "currency" => $this->getCurrency()
     ];
 }
 
@@ -97,7 +109,7 @@ public function place_bet($token, $amount, $game_name, $game_id) {
         $game_id,
         null,
         null,
-        $this->currency,
+        $this->getCurrency(),
         $this->provider
     );
 
@@ -109,10 +121,10 @@ public function place_bet($token, $amount, $game_name, $game_id) {
         "free" => floatval($player->vars["balance_free"]),
         "real" => floatval($player->vars["balance_real"]),
 
-        "currency" => $this->currency
+        "currency" => $this->getCurrency()
     ];
 }
-    
+
 public function credit_prize($token, $amount, $game_name, $game_id) {
 
     $this->reset_error();
@@ -135,7 +147,7 @@ public function credit_prize($token, $amount, $game_name, $game_id) {
             "balance" => floatval($player->vars[$wallet_field]),
             "free" => floatval($player->vars["balance_free"]),
             "real" => floatval($player->vars["balance_real"]),
-            "currency" => $this->currency
+            "currency" => $this->getCurrency()
         ];
     }
 
@@ -158,7 +170,7 @@ public function credit_prize($token, $amount, $game_name, $game_id) {
         $game_id,
         null,
         null,
-        $this->currency,
+        $this->getCurrency(),
         $this->provider
     );
 
@@ -170,7 +182,7 @@ public function credit_prize($token, $amount, $game_name, $game_id) {
         "free" => floatval($player->vars["balance_free"]),
         "real" => floatval($player->vars["balance_real"]),
 
-        "currency" => $this->currency
+        "currency" => $this->getCurrency()
     ];
 }
 

@@ -43,14 +43,17 @@ class craps{
 			$this->session ->vars["start_date"] = date("Y-m-d H:i:s");	
 			
 			$last_session_bets = get_pending_craps_bets_by_player($this ->player);
-			
-			$this->session ->vars["current_bets"] = $last_session_bets["pending_bets"];
+
+			$this->session ->vars["current_bets"] = !is_null($last_session_bets) ? $last_session_bets["pending_bets"] : "";
 			$this->session ->insert();		
 		}
 		
 		$bet_list = explode(",",$this->session ->vars["current_bets"]);
 		$total_bet = 0;
-		foreach($bet_list as $bet){$total_bet += $parts[1];}		
+		foreach($bet_list as $bet){
+			$parts = explode("|",$bet);
+			if(isset($parts[1]) && is_numeric($parts[1])){$total_bet += $parts[1];}
+		}		
 		
 		$result["bets"] = $this->session ->vars["current_bets"];
 		$result["point"] = $this->session ->vars["point"];
@@ -96,12 +99,13 @@ class craps{
 	
 	function can_roll($bets){
 		$can = true;
-		$haves = array();
-		$totals = array();
+		$haves  = array();
+		$totals = array("pass"=>0,"dont_pass"=>0,"pass_odds"=>0,"dont_pass_odds"=>0);
 		
 		$bet_list = explode(",",$bets);
 		foreach($bet_list as $bet){
 			$parts = explode("|",$bet);
+			if(!isset($parts[1])){continue;}
 			$bet_area = $parts[0];
 			$bet_amount = $parts[1];
 			
@@ -137,13 +141,13 @@ class craps{
 		
 		
 		if(
-			($this->session ->vars["game_status"] == "come_out" && $haves["come_dont_come"]) ||
-			($this->session ->vars["game_status"] == "come_out" && !$haves["pass_dont_pass"]) ||
-			($this->session ->vars["game_status"] == "come_out" && ($haves["pass_odds"] || $haves["dont_pass_odds"])) ||
-			($haves["pass_odds"] && !$haves["pass"]) ||
-			($haves["dont_pass_odds"] && !$haves["dont_pass"]) ||
-			($haves["pass_odds"] && $totals["pass_odds"] > ($totals["pass"]*2)) ||
-			($haves["dont_pass_odds"] && $totals["dont_pass_odds"] > ($totals["dont_pass"]*2))
+			($this->session ->vars["game_status"] == "come_out" && !empty($haves["come_dont_come"])) ||
+			($this->session ->vars["game_status"] == "come_out" && empty($haves["pass_dont_pass"])) ||
+			($this->session ->vars["game_status"] == "come_out" && (!empty($haves["pass_odds"]) || !empty($haves["dont_pass_odds"]))) ||
+			(!empty($haves["pass_odds"]) && empty($haves["pass"])) ||
+			(!empty($haves["dont_pass_odds"]) && empty($haves["dont_pass"])) ||
+			(!empty($haves["pass_odds"]) && $totals["pass_odds"] > ($totals["pass"]*2)) ||
+			(!empty($haves["dont_pass_odds"]) && $totals["dont_pass_odds"] > ($totals["dont_pass"]*2))
 		){
 			$can = false;
 		}

@@ -13,6 +13,7 @@ canvas {
 }
 #spacer{
 	position:absolute;
+	pointer-events:none;
 }
 
 

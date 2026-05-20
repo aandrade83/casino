@@ -1,0 +1,440 @@
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: url(../images/lobby_back.jpg) no-repeat center center fixed;
+  background-size: cover;
+  background-color: #0a0a0f;
+  color: #e0e0e0;
+  font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+  min-height: 100vh;
+}
+
+/* dark overlay over background image */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: rgba(5, 5, 12, 0.72);
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ============================================================
+   TOP BAR
+   ============================================================ */
+.top_bar {
+  position: relative;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 30px;
+  height: 62px;
+  background: rgba(0, 0, 0, 0.88);
+  border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.top_bar_left,
+.top_bar_right {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.top_logo {
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #d4af37;
+  text-shadow: 0 0 18px rgba(212, 175, 55, 0.5);
+}
+
+.player_info,
+.balance_box {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  line-height: 1.3;
+}
+
+.player_label,
+.balance_label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: #666;
+}
+
+.player_name {
+  font-size: 14px;
+  font-weight: 600;
+  color: #ccc;
+}
+
+.balance_amount {
+  font-size: 16px;
+  font-weight: 700;
+  color: #d4af37;
+  letter-spacing: 1px;
+}
+
+/* ============================================================
+   GAMES WRAPPER
+   ============================================================ */
+.games {
+  position: relative;
+  z-index: 1;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 40px 24px 80px;
+}
+
+/* ============================================================
+   CATEGORY GROUP
+   ============================================================ */
+.cat_grp {
+  margin-bottom: 56px;
+}
+
+.cat_title {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+/* gold bar before title */
+.cat_title::before {
+  content: '';
+  display: block;
+  width: 4px;
+  height: 22px;
+  background: linear-gradient(180deg, #d4af37 0%, #7a5c10 100%);
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+/* trailing separator line */
+.cat_title::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(212, 175, 55, 0.35) 0%, transparent 80%);
+}
+
+.cat_title_text {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 3.5px;
+  text-transform: uppercase;
+  color: #d4af37;
+  white-space: nowrap;
+}
+
+/* ============================================================
+   GRID
+   ============================================================ */
+.games_grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 18px;
+}
+
+/* ============================================================
+   GAME CARD
+   ============================================================ */
+.game_card {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  aspect-ratio: 3 / 4;
+  background: #141420;
+
+  /* entrance: start invisible, JS adds .visible */
+  opacity: 0;
+
+  /* transitions: opacity for entrance, transform+shadow for hover */
+  transition:
+    opacity 0.45s ease,
+    transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    box-shadow 0.35s ease;
+
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(255, 255, 255, 0.04);
+}
+
+.game_card.visible {
+  opacity: 1;
+}
+
+.game_card:hover {
+  transform: translateY(-7px) scale(1.03);
+  box-shadow:
+    0 16px 48px rgba(0, 0, 0, 0.7),
+    0 0 0 1px rgba(212, 175, 55, 0.3),
+    0 0 24px rgba(212, 175, 55, 0.18);
+  z-index: 2;
+}
+
+/* ---- GAME IMAGE ---- */
+.game_image {
+  position: absolute;
+  inset: 0;
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
+  /* dark gradient behind image so empty areas look intentional */
+  background-color: #0d0d1a;
+  transition: transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: transform;
+}
+
+/* subtle ambient glow behind image */
+.game_image::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, rgba(30,20,60,0.0) 40%, rgba(0,0,0,0.55) 100%);
+  pointer-events: none;
+}
+
+/* no zoom on hover — card lift is enough, zooming would re-crop text */
+.game_card:hover .game_image {
+  transform: scale(1.0);
+}
+
+/* ---- PERMANENT BOTTOM GRADIENT (so name is always readable) ---- */
+.game_card::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 90px;
+  background: linear-gradient(transparent 0%, rgba(0, 0, 0, 0.78) 100%);
+  pointer-events: none;
+  z-index: 1;
+  transition: opacity 0.3s ease;
+}
+
+.game_card:hover::after {
+  opacity: 0;
+}
+
+/* ---- GAME NAME (always visible, hides on hover) ---- */
+.game_name_static {
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  padding: 0 12px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+  text-align: center;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.9);
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.game_card:hover .game_name_static {
+  opacity: 0;
+}
+
+/* ---- HOVER OVERLAY ---- */
+.game_overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 20px 16px 22px;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0) 20%,
+    rgba(0, 0, 0, 0.94) 100%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.game_card:hover .game_overlay {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.game_overlay h3 {
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+  text-align: center;
+  margin-bottom: 6px;
+  letter-spacing: 0.4px;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
+}
+
+.game_limits {
+  font-size: 11px;
+  color: rgba(212, 175, 55, 0.8);
+  text-align: center;
+  margin-bottom: 16px;
+  letter-spacing: 0.5px;
+}
+
+/* ---- PLAY BUTTON ---- */
+.play_btn {
+  display: block;
+  width: 100%;
+  padding: 11px 0;
+  background: linear-gradient(135deg, #d4af37 0%, #9a7318 100%);
+  color: #000;
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 7px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: filter 0.2s ease, transform 0.2s ease;
+}
+
+/* shimmer sweep on button */
+.play_btn::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -110%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.35),
+    transparent
+  );
+  transition: left 0.45s ease;
+}
+
+.game_card:hover .play_btn::after {
+  left: 150%;
+}
+
+.play_btn:hover {
+  filter: brightness(1.18);
+  transform: translateY(-1px);
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 900px) {
+  .games_grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 14px;
+  }
+
+  .top_bar {
+    padding: 0 16px;
+    height: 54px;
+  }
+
+  .top_logo {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 540px) {
+  .games_grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .games {
+    padding: 24px 12px 60px;
+  }
+
+  .cat_title_text {
+    font-size: 10px;
+    letter-spacing: 2px;
+  }
+
+  .player_info {
+    display: none;
+  }
+}
+
+/* ============================================================
+   MISC BUTTONS (preserved from original)
+   ============================================================ */
+.balance_box_old {
+  float: right;
+  color: #999;
+}
+
+.selected_balance {
+  color: #090;
+  font-weight: bold;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.red-btn {
+  color: white;
+  font-weight: bold;
+  border: 2px solid #8b0000;
+  border-radius: 10px;
+  background-image: linear-gradient(to bottom, #ff6347, #8b0000);
+  padding: 10px 20px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin-left: 30px;
+  text-transform: uppercase;
+}
+
+.red-btn:hover {
+  background-image: linear-gradient(to bottom, #dc143c, #b22222);
+}
+
+.blue-btn {
+  color: white;
+  font-weight: bold;
+  border: 2px solid #0d364e;
+  border-radius: 10px;
+  background-image: linear-gradient(to bottom, #15618c, #1e87c4);
+  padding: 10px 20px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin-left: 30px;
+  text-transform: uppercase;
+}
+
+.blue-btn:hover {
+  background-image: linear-gradient(to bottom, #4da0d0, #3781ac);
+}

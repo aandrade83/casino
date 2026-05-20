@@ -1,5 +1,5 @@
 //Set game vars
-var core_url = 'https://play.casinogamesonline.com/utilities/games/keno/action.php?gid='+gid+'&';
+var core_url = '/utilities/games/keno/action.php?gid='+gid+'&';
 
 //general vars
 var current_bet = 0;
@@ -512,7 +512,8 @@ function spin(auto_spin){
 				
 				
 				//Provably fair
-				if($("#pf_player_num").val()){var player_number = $("#pf_player_num").val().replace(/[^\d,-]/g,'');}
+				var player_number = "0";
+				if($("#pf_player_num").val()){player_number = $("#pf_player_num").val().replace(/[^\d,-]/g,'');}
 	
 				$.getJSON(core_url + "action=spin&bet=" + current_bet +  "&nums="+str_nums+"&pnr="+player_number+"&oskr=" + Math.random()  ,function(data){
 					

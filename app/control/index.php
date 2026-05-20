@@ -18,14 +18,17 @@ $company_name = $parts[0] ?? null;
 $company_pass = $parts[1] ?? null;
 
 // 🔥 SI YA HAY SESSION, USARLA
-if(isset($_SESSION['company'])){
+if(isset($_SESSION['company']) && !$company_name){
     
     $_company = get_company($_SESSION['company']);
 
     // 🔥 fallback por si la session es inválida
     if(!$_company){
         session_destroy();
-        echo "Session expired";
+        session_start();
+        $_SESSION['error_reason'] = "index_session_expired";
+        $_SESSION['error_url'] = $_SERVER['REQUEST_URI'];
+        include($_SERVER['DOCUMENT_ROOT'] . "/utilities/ui/no_session.php");
         exit;
     }
 
@@ -35,7 +38,9 @@ if(isset($_SESSION['company'])){
     $_company = get_company_by_name($company_name, $company_pass);
 
     if(!$_company || $_company->vars['provider_system_id'] != 3){
-        echo "Invalid company";
+        $_SESSION['error_reason'] = "index_invalid_company";
+        $_SESSION['error_url'] = $_SERVER['REQUEST_URI'];
+        include($_SERVER['DOCUMENT_ROOT'] . "/utilities/ui/no_session.php");
         exit;
     }
 

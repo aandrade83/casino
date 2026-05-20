@@ -15,6 +15,8 @@ class _holdem_poker{
 	var $player_best_hand = array();
 	var $dealer_best_hand = array();
 	
+	var $cards = array();
+
 	//SETTINGS
 	var $number_of_decks = 1;
 	
@@ -47,7 +49,7 @@ class _holdem_poker{
 		$this ->player = $session ->vars["player"];
 		
 		//load pf data
-		if($session ->vars["pf"] != '""' && $session ->vars["pf"] != ''){
+		if(($session ->vars["pf"] ?? '') != '""' && ($session ->vars["pf"] ?? '') != ''){
 			$this->pf_data = json_decode($session ->vars["pf"],true);
 			if(!is_null($this->pf_data) && is_numeric($this->pf_data["pos"])){
 				$this->start_pf($this->pf_data["pos"]);
@@ -55,7 +57,7 @@ class _holdem_poker{
 		}
 		
 		
-		$removing_cards = explode(",",$session ->vars["player_hand"].",".$session ->vars["dealer_hand"].",".$session ->vars["table_cards"]);
+		$removing_cards = explode(",",$session ->vars["player_hand"].",".$session ->vars["dealer_hand"].",".($session ->vars["table_cards"] ?? ""));
 		foreach($removing_cards as $rcard){
 			$position = array_search($rcard,$this ->cards);
 			if(is_numeric($position)){array_splice($this ->cards, $position, 1);}
@@ -625,8 +627,8 @@ class _holdem_poker{
 		$log = new _settle_log();
 		$log ->vars["game"] = $game_id;
 		$log ->vars["player"] = $this ->player;
-		$log ->vars["bet_amount"] = ($this->session ->vars["ante_bet"]+$this->session ->vars["call_bet"]+$this->session ->vars["turn_bet"]+$this->session ->vars["river_bet"]);
-		$log ->vars["win_amount"] = $this->session ->vars["win_amount"];
+		$log ->vars["bet_amount"] = (($this->session ->vars["ante_bet"] ?? 0)+($this->session ->vars["call_bet"] ?? 0)+($this->session ->vars["turn_bet"] ?? 0)+($this->session ->vars["river_bet"] ?? 0));
+		$log ->vars["win_amount"] = $this->session ->vars["win_amount"] ?? 0;
 		$log ->vars["settle"] = $this->session ->vars["settle"];
 		$log ->vars["ldate"] = date("Y-m-d H:i:s");
 		$log ->insert();

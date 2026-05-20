@@ -2,7 +2,7 @@
 $pf_use_session = $pf_use_session ?? false;
 if($_company ->vars["prov_fair"]){ ?>
     
-    <? if($sword == ""){$sword = "Spin";} ?>
+    <? if(empty($sword)){$sword = "Spin";} ?>
     
     <div class="pfbox" id="pfbox" style="display:none;">
     

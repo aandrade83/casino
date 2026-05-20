@@ -39,7 +39,7 @@ if($_logged){
 				$player_nums = explode(",",param("pnr")); 
 				$valid_player_nums = array();
 				foreach($player_nums as $pnum){
-					if(!is_numeric($pnum) || $pnum > 119 || $player_num < 0){$pnum = 0;} //change 109 in case of amount of figures in the reel change
+					if(!is_numeric($pnum) || $pnum > 119 || $pnum < 0){$pnum = 0;} //change 109 in case of amount of figures in the reel change
 					$valid_player_nums[] = $pnum;
 				}
 				$player_num = implode(",",$valid_player_nums);

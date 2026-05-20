@@ -91,7 +91,7 @@ function call_bitbet(string $username, string $password): array
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_TIMEOUT        => 15,
         CURLOPT_SSL_VERIFYPEER => true,
-        CURLOPT_USERAGENT      => 'Mozilla/5.0 (compatible; VRB-Validator/1.0)',
+        CURLOPT_USERAGENT      => 'Mozilla/5.0 (compatible; ZYTOM-Validator/1.0)',
         CURLOPT_HTTPHEADER     => [
             'Accept: application/json',
             'Authorization: Bearer ',

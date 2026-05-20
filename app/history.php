@@ -3,7 +3,7 @@
 <?
 $game = get_game(param("gid"));	
 
-if(/*!is_null($game) && */!is_null($_player)){
+if(!is_null($game) && !is_null($_player)){
 ?>
 
 <div class="row">

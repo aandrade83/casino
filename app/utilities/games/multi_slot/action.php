@@ -39,7 +39,7 @@ if($_logged){
 				$player_nums = explode(",",param("pnr")); 
 				$valid_player_nums = array();
 				foreach($player_nums as $pnum){
-					if(!is_numeric($pnum) || $pnum > 109 || $player_num < 0){$pnum = 0;} //change 109 in case of amount of figures in the reel change
+					if(!is_numeric($pnum) || $pnum > 109 || $pnum < 0){$pnum = 0;} //change 109 in case of amount of figures in the reel change
 					$valid_player_nums[] = $pnum;
 				}
 				$player_num = implode(",",$valid_player_nums);
@@ -101,8 +101,11 @@ if($_logged){
 									$result["winning_lines"] = implode(",",$logic->winning_lines);
 									if($win_amount > 0){
 										$data = $_api->credit_prize($player_token, $win_amount, $casino_name ." ". $game ->vars["name"], $casino_id_base . $game ->vars["id"]);
+									}else{
+										$balance = $_api->get_player_balance($player_token);
+										$data["balance"] = $balance["amount"];
 									}
-									
+
 									$result["balance"] = $data["balance"];
 									
 									if(!$_api->done){ //error placing something in API

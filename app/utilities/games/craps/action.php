@@ -31,7 +31,7 @@ if($_logged){
 				}else{
 					$result["has_started_game"]	= 0;
 					$last_session_bets = get_pending_craps_bets_by_player($_player ->vars["id"]);
-					$result["bets"] = $last_session_bets["pending_bets"]."";
+					$result["bets"] = !is_null($last_session_bets) ? $last_session_bets["pending_bets"]."" : "";
 				}
 			break;
 			
@@ -181,7 +181,7 @@ if($_logged){
 				
 				}else{
 					$result["error"] = 978;
-					$result["msg"] = "Incorrect bets found";
+					$result["msg"] = "To start the game you must place a bet on the Pass Line or Don't Pass Line.";
 				}
 			
 			break;

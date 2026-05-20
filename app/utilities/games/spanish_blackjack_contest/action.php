@@ -35,7 +35,7 @@ if($_logged){
 				$result["player_hand_value2"] = $logic->get_hand_value("player2");
 				$result["can_split"] = $logic->can_split();
 				$result["splited"] = $logic->splited;
-				$result["finished2"] = $session->vars["finished2"];
+				$result["finished2"] = $session->vars["finished2"] ?? 0;
 				
 				if($logic ->using_pf){
 					$result["pf"]["lxhs"] = $logic->pf_data["xhs"];
@@ -174,8 +174,9 @@ if($_logged){
 				$logic->load_data($session);
 				if($session ->vars["game_status"] == "dealed" || $session ->vars["game_status"] == "hitted"){
 					
+					$double_error = 0;
 					if($action == "double"){
-						
+
 						$balance = $_api->get_player_balance($player_token);
 						if($session ->vars["bet_amount"] <= $balance["amount"]){
 							

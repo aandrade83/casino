@@ -128,7 +128,7 @@ if($_logged){
 				$session = get_video_poker_session_by_player($_player ->vars["id"],"afs");
 				if(!is_null($session)){
 					$logic->load_data($session);					
-					if(!$logic ->session ->vars["finished"]){
+					if(empty($logic ->session ->vars["finished"])){
 						
 						$hands = $logic->draw($holds);
 						$win_amount = $logic->win_amount;
@@ -182,6 +182,16 @@ if($_logged){
 			break;
 			
 			
+			case "abandon":
+				$session = get_video_poker_session_by_player($_player ->vars["id"],"afs");
+				if(!is_null($session)){
+					$session ->vars["finished"] = 1;
+					$session ->vars["end_date"] = date("Y-m-d H:i:s");
+					$session ->update();
+				}
+				$result["abandoned"] = 1;
+			break;
+
 			default :
 				$result["error"] = 300;
 				$result["msg"] = "Action not found.";

@@ -1,0 +1,703 @@
+openapi: 3.0.3
+info:
+  title: ZYTOM Casino Platform API
+  version: "1.0"
+  description: |
+    Integration specification for the ZYTOM Casino Platform.
+
+    ## Architecture
+
+    The ZYTOM Casino is a **stateless game-execution layer**. All wallet state
+    (real-money balances, free-play balances, transaction ledger) is owned by
+    the third-party sportsbook **Provider**. Communication follows two directions:
+
+    - **Provider → Casino**: JWT-authenticated launch redirect
+    - **Casino → Provider**: Server-to-server wallet API calls (POST)
+
+    ## Authentication
+
+    Every casino launch requires a signed **HS256 JWT** issued by the Provider.
+    The token is passed as a query parameter (`?token=<JWT>`) on the launch URL.
+    The same token is replayed on every wallet call so the Provider can re-validate
+    the session.
+
+    ### JWT Payload Claims
+
+    | Claim | Type | Required | Description |
+    |---|---|---|---|
+    | `cid` | integer | YES | Company ID assigned by casino |
+    | `player_id` | int/string | YES | Provider-side unique player ID |
+    | `username` | string | YES | Player account (casino uppercases it) |
+    | `iat` | integer (unix) | YES | Issued-at timestamp |
+    | `exp` | integer (unix) | YES | Expiration (max `iat + 3600`) |
+    | `agent_id` | integer | NO | Affiliate ID (0 if not applicable) |
+    | `agent_account` | string | NO | Agent username |
+
+    > `currency` is **not** in the JWT — it is resolved from the company record.
+
+    ### Sample JWT Payload
+    ```json
+    {
+      "iss": "casino.zytom-studios.com",
+      "iat": 1746979200,
+      "exp": 1746982800,
+      "cid": 12,
+      "player_id": 884112,
+      "username": "MACTEST",
+      "agent_id": 4501,
+      "agent_account": "AGENT01"
+    }
+    ```
+
+  contact:
+    name: ZYTOM Marketing
+    url: https://casino.zytom-studios.com
+
+servers:
+  - url: https://casino.zytom-studios.com
+    description: Production
+
+tags:
+  - name: Launch
+    description: Casino entry point — JWT-authenticated redirect
+  - name: Session
+    description: Internal session creation (X-API-Key protected)
+  - name: Limits
+    description: Player and agent bet-limit management
+  - name: Bets
+    description: Bet history queries
+  - name: Games
+    description: Game action endpoints (balance, spin, play, hit, etc.)
+  - name: Provider Wallet API
+    description: |
+      Endpoints **hosted by the Provider** and called **by the Casino** via
+      server-to-server POST. The Provider must implement all four actions at
+      their own base URL.
+
+# ---------------------------------------------------------------------------
+# PATHS
+# ---------------------------------------------------------------------------
+paths:
+
+  # --- Launch ---------------------------------------------------------------
+  /:
+    get:
+      tags: [Launch]
+      summary: Casino launch URL
+      description: |
+        Player entry point. The Provider redirects the player here with a signed
+        JWT. The casino validates the token, provisions the player on first visit,
+        and establishes a PHP session before serving the game lobby.
+
+        **Full flow:**
+        1. Provider mints HS256 JWT with player + agent + company claims.
+        2. Provider redirects player to `https://casino.zytom-studios.com/?token=<JWT>`.
+        3. Casino validates signature and `exp`.
+        4. Casino resolves company by `cid`; auto-provisions player/agent if first launch.
+        5. Casino stores raw JWT in PHP session for downstream wallet calls.
+        6. Game lobby is served.
+      parameters:
+        - name: token
+          in: query
+          required: true
+          schema:
+            type: string
+          description: HS256 signed JWT issued by the Provider
+        - name: cshcd
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Optional cashier code for deep-linking to deposit flow
+      responses:
+        "200":
+          description: Game lobby HTML page rendered successfully
+        "302":
+          description: Redirect to error page (invalid or expired token)
+
+  # --- Session --------------------------------------------------------------
+  /api/create-session/:
+    post:
+      tags: [Session]
+      summary: Create a player session token
+      description: |
+        Generates a signed HS256 JWT for a given player. This endpoint is called
+        by the **Provider backend** (not the player browser) before launching the
+        casino.
+
+        Requires the `X-API-Key` header with the shared API key assigned by the
+        casino during onboarding.
+      security:
+        - ApiKeyAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateSessionRequest"
+            example:
+              player_id: 884112
+              username: "mactest"
+              agent_id: 4501
+              agent_account: "agent01"
+      responses:
+        "200":
+          description: JWT created or error details
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/CreateSessionSuccess"
+                  - $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                success:
+                  summary: Token created
+                  value:
+                    success: true
+                    token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9..."
+                    company_id: 12
+                    username: "MACTEST"
+                    currency: "USD"
+                    expires_at: "2026-05-19 15:00:00"
+                missing_key:
+                  summary: Missing API key
+                  value:
+                    success: false
+                    msg: "Missing API key"
+                invalid_key:
+                  summary: Invalid API key
+                  value:
+                    success: false
+                    msg: "Invalid API key"
+                missing_player:
+                  summary: Missing player info
+                  value:
+                    success: false
+                    msg: "Missing player information"
+
+  # --- Limits ---------------------------------------------------------------
+  /api/get_limits.php:
+    get:
+      tags: [Limits]
+      summary: Get bet limits
+      description: Returns daily and weekly win/loss limits for a player or agent.
+      parameters:
+        - name: type
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [agent, player]
+          description: Whether to query agent or player limits
+        - name: account
+          in: query
+          required: true
+          schema:
+            type: string
+          description: Account username (uppercase)
+        - name: company
+          in: query
+          required: true
+          schema:
+            type: integer
+          description: Company ID
+        - name: ttoken
+          in: query
+          schema:
+            type: string
+          description: Player JWT — required when `type=player`
+      responses:
+        "200":
+          description: Limits object
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Limits"
+              example:
+                day_max_win: "500.00"
+                day_max_loss: "200.00"
+                week_max_win: "2000.00"
+                week_max_loss: "800.00"
+
+  /api/update_limits.php:
+    post:
+      tags: [Limits]
+      summary: Update bet limits
+      description: Updates daily and weekly win/loss limits for a player or agent.
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/UpdateLimitsRequest"
+      responses:
+        "200":
+          description: Limits updated successfully
+
+  # --- Bets -----------------------------------------------------------------
+  /api/get_latest_bets.php:
+    get:
+      tags: [Bets]
+      summary: Get latest bets
+      description: Returns recent bet records for the active session.
+      responses:
+        "200":
+          description: Array of bet records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/BetRecord"
+
+  # --- Games ----------------------------------------------------------------
+  /utilities/games/{game}/action.php:
+    post:
+      tags: [Games]
+      summary: Game action
+      description: |
+        Unified handler for all 30+ games. The `action` parameter selects the
+        operation. Authentication is via the active PHP session (player must have
+        launched via the JWT flow).
+
+        **Supported games:** blackjack, blackjack_new, blackjack_europe,
+        blackjack_double, blackjack_contest, spanish_blackjack_contest,
+        roulette, eroulette, baccarat, caribbean, three_card, holdem,
+        video_poker, video_poker_af, video_poker_deuces, keno, craps,
+        wheel_of_fortune, classic_slot, multi_slot (and theme variants:
+        alien, crypto, dragon, FS, giants, sweet, viking, west, zeus).
+
+        ### Game Error Codes
+
+        | Code | Meaning |
+        |---|---|
+        | `0` | Success |
+        | `3` | Invalid authentication |
+        | `300` | Action not found |
+        | `345` | Game not available |
+        | `500` | Insufficient balance |
+        | `600` | Invalid amount |
+        | `700` | Amount outside game limits |
+        | `800` | Communication error with provider |
+        | `900` | Provider API error |
+      parameters:
+        - name: game
+          in: path
+          required: true
+          schema:
+            type: string
+          example: blackjack
+          description: Game identifier (matches directory name under `utilities/games/`)
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/GameActionRequest"
+            examples:
+              balance:
+                summary: Get balance
+                value:
+                  gid: "42"
+                  action: "balance"
+              spin:
+                summary: Spin a slot
+                value:
+                  gid: "42"
+                  action: "spin"
+                  bets: "10,0,0,0,0"
+                  pnr: "7"
+              hit:
+                summary: Blackjack hit
+                value:
+                  gid: "42"
+                  action: "hit"
+      responses:
+        "200":
+          description: Game action result
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GameActionResponse"
+              examples:
+                success:
+                  summary: Winning spin
+                  value:
+                    error: 0
+                    balance: 5489.50
+                    win_amount: 150.00
+                    winning_number: 17
+                    pf:
+                      lxhs: "a3f9c2b1..."
+                      lxnr: 17
+                      lpnr: 5
+                      lpos: 22
+                insufficient:
+                  summary: Insufficient balance
+                  value:
+                    error: 500
+                    msg: "Insufficient balance"
+
+  # --- Provider Wallet API --------------------------------------------------
+  /provider_wallet_api.php:
+    post:
+      tags: [Provider Wallet API]
+      summary: Wallet operations (Provider-hosted)
+      description: |
+        This endpoint is **implemented and hosted by the Provider** at their own
+        base URL. The Casino calls it server-to-server for every wallet operation
+        during a game session.
+
+        **Request format:** `application/x-www-form-urlencoded`
+        **Response format:** `application/json`
+
+        ### Actions
+
+        | Action | Description | Required extra fields |
+        |---|---|---|
+        | `get_balance` | Read-only balance fetch | — |
+        | `place_bet` | Debit real-money wallet | `bet_amount` |
+        | `place_free_bet` | Debit freeplay wallet | `bet_amount` |
+        | `credit_prize` | Credit winnings | `win_amount`, `wallet` |
+
+        ### Error Codes
+
+        | Code | Category | Meaning |
+        |---|---|---|
+        | `0` | Success | Operation completed |
+        | `100` | Auth | Missing token |
+        | `101` | Auth | Invalid / unknown `cid` |
+        | `201` | Bet (real) | Invalid bet amount (≤ 0) |
+        | `202` | Bet (real) | Insufficient real balance |
+        | `211` | Bet (free) | Invalid freeplay amount (≤ 0) |
+        | `212` | Bet (free) | Insufficient freeplay balance |
+        | `301` | Prize | Invalid win amount (< 0) |
+        | `999` | Routing | Unknown / missing action |
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/WalletRequest"
+            examples:
+              get_balance:
+                summary: Get balance
+                value:
+                  action: get_balance
+                  token: "eyJ0eXAiOiJKV1Qi..."
+              place_bet:
+                summary: Place real bet ($10.50)
+                value:
+                  action: place_bet
+                  token: "eyJ0eXAiOiJKV1Qi..."
+                  bet_amount: "10.50"
+                  game_id: "42"
+                  game_name: "blackjack"
+              place_free_bet:
+                summary: Place freeplay bet ($5.00)
+                value:
+                  action: place_free_bet
+                  token: "eyJ0eXAiOiJKV1Qi..."
+                  bet_amount: "5.00"
+                  game_id: "42"
+                  game_name: "classic_slot"
+              credit_prize:
+                summary: Credit winnings to real wallet
+                value:
+                  action: credit_prize
+                  token: "eyJ0eXAiOiJKV1Qi..."
+                  win_amount: "150.00"
+                  wallet: real
+                  game_id: "42"
+                  game_name: "blackjack"
+      responses:
+        "200":
+          description: Wallet operation result
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WalletResponse"
+              examples:
+                success:
+                  summary: Success
+                  value:
+                    error: 0
+                    msg: ""
+                    balance: 5500.00
+                    free: 200.00
+                    currency: "USD"
+                    account: "MACTEST"
+                missing_token:
+                  summary: Missing token (100)
+                  value:
+                    error: 100
+                    msg: "Missing token"
+                    balance: 0
+                    free: 0
+                    currency: ""
+                    account: ""
+                insufficient:
+                  summary: Insufficient real balance (202)
+                  value:
+                    error: 202
+                    msg: "Insufficient balance"
+                    balance: 45.00
+                    free: 0
+                    currency: "USD"
+                    account: "MACTEST"
+
+# ---------------------------------------------------------------------------
+# COMPONENTS
+# ---------------------------------------------------------------------------
+components:
+
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+      description: Shared API key for the internal session creation endpoint
+
+  schemas:
+
+    # Session ----------------------------------------------------------------
+    CreateSessionRequest:
+      type: object
+      required: [player_id, username]
+      properties:
+        player_id:
+          oneOf:
+            - type: integer
+            - type: string
+          description: Provider-side player unique identifier
+          example: 884112
+        username:
+          type: string
+          description: Player account name (casino will uppercase)
+          example: "mactest"
+        agent_id:
+          type: integer
+          description: Affiliate agent ID — omit or pass 0 if not applicable
+          example: 4501
+        agent_account:
+          type: string
+          description: Agent account name
+          example: "agent01"
+
+    CreateSessionSuccess:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        token:
+          type: string
+          description: Signed HS256 JWT ready for use as launch `?token=` parameter
+        company_id:
+          type: integer
+          example: 12
+        username:
+          type: string
+          description: Uppercased player username as stored by casino
+          example: "MACTEST"
+        currency:
+          type: string
+          description: ISO 4217 currency code from company record
+          example: "USD"
+        expires_at:
+          type: string
+          description: Token expiry timestamp (UTC)
+          example: "2026-05-19 15:00:00"
+
+    ErrorResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: false
+        msg:
+          type: string
+          example: "Invalid API key"
+
+    # Limits -----------------------------------------------------------------
+    Limits:
+      type: object
+      properties:
+        day_max_win:
+          type: string
+          description: Maximum daily winnings allowed
+          example: "500.00"
+        day_max_loss:
+          type: string
+          description: Maximum daily loss allowed
+          example: "200.00"
+        week_max_win:
+          type: string
+          description: Maximum weekly winnings allowed
+          example: "2000.00"
+        week_max_loss:
+          type: string
+          description: Maximum weekly loss allowed
+          example: "800.00"
+
+    UpdateLimitsRequest:
+      type: object
+      required: [type, account, company]
+      properties:
+        type:
+          type: string
+          enum: [agent, player]
+        account:
+          type: string
+          description: Account username
+        company:
+          type: integer
+          description: Company ID
+        day_win:
+          type: number
+          format: float
+        day_loss:
+          type: number
+          format: float
+        week_win:
+          type: number
+          format: float
+        week_loss:
+          type: number
+          format: float
+
+    # Bets -------------------------------------------------------------------
+    BetRecord:
+      type: object
+      properties:
+        id:
+          type: integer
+        game:
+          type: string
+        bet_amount:
+          type: number
+          format: float
+        win_amount:
+          type: number
+          format: float
+        created_at:
+          type: string
+          format: date-time
+
+    # Games ------------------------------------------------------------------
+    GameActionRequest:
+      type: object
+      required: [gid, action]
+      properties:
+        gid:
+          type: string
+          description: Game session ID
+        action:
+          type: string
+          description: "Operation: balance | spin | play | start | hit | stand | split | double | …"
+          example: spin
+        bets:
+          type: string
+          description: Comma-separated bet encoding (game-specific format)
+          example: "10,0,0,0,0"
+        pnr:
+          type: number
+          description: Provably-fair player seed number
+
+    GameActionResponse:
+      type: object
+      properties:
+        error:
+          type: integer
+          description: 0 = success; non-zero = error (see error code table)
+          example: 0
+        msg:
+          type: string
+          description: Error description when error ≠ 0
+        balance:
+          type: number
+          format: float
+          description: Player balance after action
+          example: 5489.50
+        win_amount:
+          type: number
+          format: float
+          description: Amount won this round
+          example: 150.00
+        pf:
+          type: object
+          description: Provably-fair audit record
+          properties:
+            lxhs:
+              type: string
+              description: Server-side hash
+            lxnr:
+              type: integer
+              description: Winning number / outcome
+            lpnr:
+              type: integer
+              description: Player number used
+            lpos:
+              type: integer
+              description: Combined position value
+
+    # Provider Wallet API ----------------------------------------------------
+    WalletRequest:
+      type: object
+      required: [action, token]
+      properties:
+        action:
+          type: string
+          enum: [get_balance, place_bet, place_free_bet, credit_prize]
+        token:
+          type: string
+          description: HS256 JWT from the casino session (originally issued by Provider)
+        bet_amount:
+          type: string
+          description: Bet amount — required for `place_bet` and `place_free_bet`
+          example: "10.50"
+        win_amount:
+          type: string
+          description: Win amount — required for `credit_prize`
+          example: "150.00"
+        wallet:
+          type: string
+          enum: [real, free]
+          description: Target wallet — required for `credit_prize`
+        game_id:
+          type: string
+          description: Game identifier (recommended for Provider audit trail)
+        game_name:
+          type: string
+          description: Game name (recommended for Provider audit trail)
+
+    WalletResponse:
+      type: object
+      required: [error, msg, balance, free, currency, account]
+      properties:
+        error:
+          type: integer
+          description: 0 = success; non-zero = error code (see error table in description)
+          example: 0
+        msg:
+          type: string
+          description: Human-readable error when error ≠ 0
+          example: ""
+        balance:
+          type: number
+          format: float
+          description: Real-money balance after the operation
+          example: 5500.00
+        free:
+          type: number
+          format: float
+          description: Freeplay balance after the operation
+          example: 200.00
+        currency:
+          type: string
+          description: ISO 4217 currency code
+          example: "USD"
+        account:
+          type: string
+          description: Player username (uppercase)
+          example: "MACTEST"
